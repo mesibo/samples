@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.mesibo.firstsample.MainActivity">
+
+    <Button
+        android:id="@+id/launch_demo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Basic API Demo"
+        android:layout_marginTop="@dimen/_50sdp"
+        android:layout_marginLeft="@dimen/_50sdp"
+     />
+
+    <Button
+        android:id="@+id/launch_ui"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Launch Mesibo UI"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginLeft="@dimen/_50sdp"
+        />
+
+</LinearLayout>
