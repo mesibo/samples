@@ -11,7 +11,7 @@ Sample backend source code and database schema is available in [php](../php/) fo
 
 For running backend on your own server, following steps are required
 * Create your own mesibo account to get mesibo API key and App token. You may also read [tutorial](https://mesibo.com/documentation/tutorials.html) on how to get mesibo API key and App token. 
-* Create database and table using schema in [../php/SampleApp.sql](../php/sampleapp.sql)
+* Create database and table using schema in [../php/SampleApp.sql](https://github.com/mesibo/samples/blob/master/php/sample-app.sql)
 * edit config.php and enter API Key, App token, and database credentials.
 * change apiUrl in respective application configuration classes.
 
@@ -39,7 +39,6 @@ Like this sample app, Mesibo demo app is also built using mesibo chat API & SDK.
 - [Twitter](https://twitter.com/mesiboapi)
 - [LinkedIn](https://www.linkedin.com/company/mesiboM)
 - [YouTube](https://www.youtube.com/channel/UCxpcg-RSf2-lK4uyysWSsKQ)
-- [Reddit](https://www.reddit.com/r/Boostnote/)
 
 ### Want to contribute or need to see some improvements?
 We would love that, please create an issue or send a PR.
