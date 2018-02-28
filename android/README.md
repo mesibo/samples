@@ -7,11 +7,11 @@ This repository contains Mesibo Sample App Source Code for Android. The sample c
 * Latest Android Studio or Gradle if you prefer CLI.
 
 ### Backend Setup
-Sample backend source code and database schema is available in [php](php/) folder. We recommend you to run it on your own server. However, in case you decide to use the demo API link provided in the source code (SampleAppConfiguration.java or SampleAppConfiguration.m), select a unique namespace in application configuration class to avoid conflict with other testers. 
+Sample backend source code and database schema is available in [php](../php/) folder. We recommend you to run it on your own server. However, in case you decide to use the demo API link provided in the source code (SampleAppConfiguration.java or SampleAppConfiguration.m), select a unique namespace in application configuration class to avoid conflict with other testers. 
 
 For running backend on your own server, following steps are required
 * Create your own mesibo account to get mesibo API key and App token. You may also read [tutorial](https://mesibo.com/documentation/tutorials.html) on how to get mesibo API key and App token. 
-* Create database and table using schema in [php/SampleApp.sql](php/sampleapp.sql)
+* Create database and table using schema in [../php/SampleApp.sql](../php/sampleapp.sql)
 * edit config.php and enter API Key, App token, and database credentials.
 * change apiUrl in respective application configuration classes.
 
