@@ -7,7 +7,7 @@ This repository has samples that demonstrate various aspects of the mesibo SDK f
   - Adding real-time video calling in your apps
 
 Please check out mesibo introduction video
-[![Play Video](https://img.youtube.com/vi/imHA4kBRSH0/0.jpg)](https://www.youtube.com/watch?v=imHA4kBRSH0)
+[![Play Video](https://img.youtube.com/vi/imHA4kBRSH0/0.jpg)](https://www.youtube.com/watch?v=imHA4kBRSH0){:target="_blank"}
 
 Please refer to README file in each folder for more specific instructions. For general issues and help, check the FAQs section
 
