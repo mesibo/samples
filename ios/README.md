@@ -37,7 +37,7 @@ Like this sample app, Mesibo demo app is also built using mesibo chat API & SDK.
 ## Community
 - [Facebook](https://www.facebook.com/mesiboapi)
 - [Twitter](https://twitter.com/mesiboapi)
-- [LinkedIn](https://www.linkedin.com/company/mesiboM)
+- [LinkedIn](https://www.linkedin.com/company/mesibo)
 - [YouTube](https://www.youtube.com/channel/UCxpcg-RSf2-lK4uyysWSsKQ)
 
 ### Want to contribute or need to see some improvements?
