@@ -1,10 +1,10 @@
-# Mesibo Sample Apps Source Code - iOS
-This repository contains Mesibo Sample App Source Code for iOS. The sample code is reasonably well-documented and we suggest you to read comments to quickly understand the code. The entire documentation for the mesibo SDK is available [here](https://mesibo.com/documentation/introduction.html).
+# Mesibo Sample Apps Source Code - Android
+This repository contains Mesibo Sample App Source Code for Android. The sample code is reasonably well-documented and we suggest you to read comments to quickly understand the code. The entire documentation for the mesibo SDK is available [here](https://mesibo.com/documentation/introduction.html).
 
 ### Compiling sample code and setup
 #### Requirements
 * [mesibo account](https://mesibo.com) to get your own API KEY.
-* Latest xCode (9.x or later)
+* Latest Android Studio or Gradle if you prefer CLI.
 
 ### Backend Setup
 Sample backend source code and database schema is available in [php](php/) folder. We recommend you to run it on your own server. However, in case you decide to use the demo API link provided in the source code (SampleAppConfiguration.java or SampleAppConfiguration.m), select a unique namespace in application configuration class to avoid conflict with other testers. 

@@ -1,5 +1,5 @@
 # Mesibo Sample Apps Source Code
-This repository has samples that demonstrate various aspects of the mesibo SDK for for Android and iOS. The sample code is reasonably well-documented and we suggest you to read comments to quickly understand the code. The entire documentation for the mesibo SDK is available [here](https://mesibo.com/documentation/introduction.html).
+This repository has samples that demonstrate various aspects of the mesibo SDK for Android and iOS. The sample code is reasonably well-documented and we suggest you to read comments to quickly understand the code. The entire documentation for the mesibo SDK is available [here](https://mesibo.com/documentation/introduction.html).
 
 [mesibo](https://mesibo.com) allows you to quickly add real-time messaging, voice and video calling into your mobile Apps, and Websites.
   - Enable 1-to-1 messaging, group chat, or add a chatbot in your apps or website
