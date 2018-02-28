@@ -4,22 +4,84 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.support.v4.view.MenuItemCompat;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.gson.Gson;
 import com.mesibo.api.Mesibo;
 import com.mesibo.calls.MesiboCall;
 
 import java.util.ArrayList;
 
 /**
- * Created by root on 2/22/18.
+ * Mesibo listener
  */
 
-public class MesiboListener implements Mesibo.UIHelperListner{
+public class MesiboListener implements Mesibo.UIHelperListner, Mesibo.MessageFilter {
+
+    private static Gson mGson = new Gson();
+    public static class MesiboNotification {
+        public String subject;
+        public String msg;
+        public String type;
+        public String action;
+        public String name;
+        public long gid;
+        public String phone;
+        public String status;
+        public String members;
+        public String photo;
+        public long ts;
+        public String tn;
+
+        MesiboNotification() {
+        }
+    }
+
+    /** Message filtering
+     * This function is called every time a message received. This function should return true if
+     * message to be acceped or false to drop it
+     *
+     * In this example, we are using it to get contact and real-time notifications from the server (refer
+     * php example). PHP sanmple code sends a special message with type '1' when new contact signs up
+     * or need to send any push notification. All such messages are processed and filtered here.
+     */
+
+    @Override
+    public boolean Mesibo_onMessageFilter(Mesibo.MessageParams messageParams, int i, byte[] data) {
+        // using it for notifications
+        if(1 != messageParams.type)
+            return true;
+
+        String message = "";
+        try {
+            message = new String(data, "UTF-8");
+        } catch (Exception e) {
+            return false;
+        }
+
+        if(TextUtils.isEmpty(message))
+            return false;
+
+        MesiboNotification n = null;
+
+        try {
+            n = mGson.fromJson(message, MesiboNotification.class);
+        } catch (Exception e) {
+            return false;
+        }
+
+        if(null == n)
+            return false;
+
+        SampleAppWebApi.addContact(n.name, n.phone);
+        return false;
+    }
+
     /* [OPTIONAL] implement these methods if Mesibo UI is used
-    * Refer to API documentation for more details
-    * */
+        * Refer to API documentation for more details
+        * */
     @Override
     public void Mesibo_onForeground(Context context, int i, boolean b) {
 
@@ -59,6 +121,8 @@ public class MesiboListener implements Mesibo.UIHelperListner{
         return 0;
     }
 
+    /** Mesibo UI calls this function to get menu buttons to be shown on corresponding screens
+     * */
     @Override
     public boolean Mesibo_onMenuItemSelected(Context context, int type, Mesibo.MessageParams params, int item) {
         if (type == 0) { // from userlist

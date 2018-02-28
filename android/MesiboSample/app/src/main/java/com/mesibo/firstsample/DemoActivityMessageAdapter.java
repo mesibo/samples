@@ -9,10 +9,6 @@ import com.mesibo.firstsample.databinding.LayoutMessageShowBinding;
 
 import java.util.ArrayList;
 
-/**
- * Created by root on 1/29/18.
- */
-
 public class DemoActivityMessageAdapter extends RecyclerView.Adapter<DemoActivityMessageAdapter.ViewHolder> {
 
     private ArrayList<DemoActivityMessageHolder> demoActivityMessageHolderList = null;

@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -12,6 +12,12 @@
 
     <style name="ToolbarColored" parent="AppTheme">
         <item name="android:textColorSecondary">#fff</item>
+    </style>
+    <style name="MyButton" parent="Base.Widget.AppCompat.Button">
+        <item name="android:colorButtonNormal" tools:ignore="NewApi"> @color/colorPrimary</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">#fff</item>
+
     </style>
     <style name="ToolbarTitle" parent="AppTheme">
         <item name="android:textColor">@color/colorWhite</item>

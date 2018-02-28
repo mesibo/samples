@@ -5,9 +5,23 @@ import android.os.Bundle;
 import com.google.gson.Gson;
 import com.mesibo.api.Mesibo;
 
+/** Mesibo allows you to used your own servers for file transfer so that there are no arbitrary limitations
+ *
+ * All you have to do is to
+ * 1) create a listner and register with mesibo which will assist mesibo in uploading and downloading file.
+ * 2) Mesibo will invoke listener with file path every time it need to upload a file. This listener will upload
+ * and let mesibo know about the URL it was uploaded to so that it can be downloaded by recipients as
+ * and when requires
+ * 3) In case of download, mesibo will invoke listener with URL of the file.
+ *
+ * We are using Mesibo HTTP API in this example. You can use any HTTP API but you will find many
+ * advantage in using Mesibo HTTP API, especially transfer speed, simplicity and cross-platform (same API for
+ * both Android and iOS)
+ */
+
 public class MesiboFileTransferHelper implements Mesibo.FileTransferHandler {
 
-     private static Gson mGson = new Gson();
+    private static Gson mGson = new Gson();
     private static Mesibo.HttpQueue mQueue = new Mesibo.HttpQueue(4, 0);
 
 
@@ -15,18 +29,16 @@ public class MesiboFileTransferHelper implements Mesibo.FileTransferHandler {
         public String op;
         public String file;
         public String result;
-        public String xxx;
 
         UploadResponse() {
             result = null;
             op = null;
-            xxx = null;
             file = null;
         }
     }
 
     MesiboFileTransferHelper() {
-        	Mesibo.addListener(this);
+        Mesibo.addListener(this);
     }
 
 
@@ -41,13 +53,13 @@ public class MesiboFileTransferHelper implements Mesibo.FileTransferHandler {
         /* [OPTIONAL] any POST data to send with the file */
         Bundle b = new Bundle();
         b.putString("op", "upload");
-        b.putString("token", "some token to authenticate upload");
+        b.putString("token", SampleAppWebApi.getToken());
         b.putLong("mid", mid);
         /* end of post data */
 
         Mesibo.Http http = new Mesibo.Http();
 
-        http.url = SampleAppConfiguration.uploadUrl;
+        http.url = SampleAppConfiguration.apiUrl;
         http.postBundle = b;
         http.uploadFile = file.getPath();
         http.uploadFileField = "photo";
@@ -63,7 +75,10 @@ public class MesiboFileTransferHelper implements Mesibo.FileTransferHandler {
 
                     //parse response
                     String response = config.getDataString();
-                    UploadResponse uploadResponse = mGson.fromJson(response, UploadResponse.class);
+                    UploadResponse uploadResponse = null;
+                    try {
+                        uploadResponse = mGson.fromJson(response, UploadResponse.class);
+                    } catch (Exception e) {}
 
                     if(null == uploadResponse || null == uploadResponse.file) {
                         Mesibo.updateFileTransferProgress(f, -1, Mesibo.FileInfo.STATUS_FAILED);
@@ -97,7 +112,6 @@ public class MesiboFileTransferHelper implements Mesibo.FileTransferHandler {
     }
 
     public boolean downloadFile(final Mesibo.MessageParams params, final Mesibo.FileInfo file) {
-        final long mid = file.mid;
 
         String url = file.getUrl();
         if(!url.toLowerCase().startsWith("http://") && !url.toLowerCase().startsWith("https://")) {
@@ -118,26 +132,14 @@ public class MesiboFileTransferHelper implements Mesibo.FileTransferHandler {
             public boolean Mesibo_onHttpProgress(Mesibo.Http http, int state, int percent) {
                 Mesibo.FileInfo f = (Mesibo.FileInfo)http.other;
 
-                int status = Mesibo.FileInfo.STATUS_INPROGRESS;
-
-                //TBD, we can simplify this now, don't need separate handling
-                if(Mesibo.FileInfo.SOURCE_PROFILE == f.source) {
-                    if(100 == percent) {
-                        //Mesibo.UserProfile profile = Mesibo.getUserProfile(params);
-                        Mesibo.updateFileTransferProgress(f, percent, Mesibo.FileInfo.STATUS_INPROGRESS);
-                    }
-                } else {
-
-                    status = f.getStatus();
-                    if(100 == percent || status != Mesibo.FileInfo.STATUS_RETRYLATER) {
-                        status = Mesibo.FileInfo.STATUS_INPROGRESS;
-                        if(percent < 0)
-                            status = Mesibo.FileInfo.STATUS_RETRYLATER;
-                    }
-
-                    Mesibo.updateFileTransferProgress(f, percent, status);
-
+                int status = f.getStatus();
+                if(100 == percent || status != Mesibo.FileInfo.STATUS_RETRYLATER) {
+                    status = Mesibo.FileInfo.STATUS_INPROGRESS;
+                    if(percent < 0)
+                        status = Mesibo.FileInfo.STATUS_RETRYLATER;
                 }
+
+                Mesibo.updateFileTransferProgress(f, percent, status);
 
                 return (100 == percent  || status != Mesibo.FileInfo.STATUS_RETRYLATER);
             }
@@ -152,9 +154,11 @@ public class MesiboFileTransferHelper implements Mesibo.FileTransferHandler {
         return true;
     }
 
-    /* This is called when mesibo need to upload file. All you have to do is to
-     1) upload file
-     2) If upload is successful, set the URL of the uploaded file which will be sent to receiver
+    /** This function is called when mesibo need to transfer (upload or download) a file.
+     * All you have to do is to
+     * 1) upload or download file as requested in file.mode
+     * 2) In case of upload, if upload is successful, set the URL of the uploaded file which will
+     * be sent to receiver
      */
     @Override
     public boolean Mesibo_onStartFileTransfer(Mesibo.FileInfo file) {
@@ -164,6 +168,8 @@ public class MesiboFileTransferHelper implements Mesibo.FileTransferHandler {
         return uploadFile(file.getParams(), file);
     }
 
+    /** This function is called when mesibo need to abort a file transfer.
+     */
     @Override
     public boolean Mesibo_onStopFileTransfer(Mesibo.FileInfo file) {
         Mesibo.Http http = (Mesibo.Http) file.getFileTransferContext();

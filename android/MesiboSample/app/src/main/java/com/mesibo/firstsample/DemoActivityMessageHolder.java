@@ -2,9 +2,6 @@ package com.mesibo.firstsample;
 
 import java.util.HashMap;
 
-/**
- * Created by root on 1/29/18.
- */
 
 public class DemoActivityMessageHolder {
     private String mMessage;

@@ -12,6 +12,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * This code sample demonstrates how to send and receive messages using mesibo API and making your
+ * own user interface
+ *
+ * Note: charge the destination in code below as required
+ */
+
 public class DemoActivity extends AppCompatActivity implements View.OnClickListener, Mesibo.MessageListener {
 
     private ActivityDemoBinding mBinding = null;
@@ -21,7 +28,6 @@ public class DemoActivity extends AppCompatActivity implements View.OnClickListe
     private Mesibo mesibo = null;
 
 
-    private final String tag = "errors";
     private String destination = "919999970001";
     Mesibo.MessageParams messageParams = null;
 

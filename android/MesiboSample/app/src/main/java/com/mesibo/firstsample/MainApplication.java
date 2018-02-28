@@ -9,7 +9,8 @@ import com.mesibo.mediapicker.MediaPicker;
 import com.mesibo.messaging.MesiboUI;
 
 /**
- * Created by root on 2/22/18.
+ * Here is basic mesibo initialization. Depending on application need, you can do it at other places
+ * too. However, Application is an ideal place for one time initialization
  */
 
 public class MainApplication extends Application {
@@ -23,9 +24,10 @@ public class MainApplication extends Application {
         super.onCreate();
         mContext = getApplicationContext();
 
+        /** Mesibo one-time initialization */
         mesiboInit();
 
-
+        /** [OPTIONAL] Customize look and feel of Mesibo UI */
         MesiboUI.Config opt = MesiboUI.getConfig();
         opt.mToolbarColor = 0xff00868b;
         opt.emptyUserListMessage = "Ask your family and friends to download so that you can try out Mesibo functionalities";
@@ -38,42 +40,48 @@ public class MainApplication extends Application {
 
         mesibo.init(getApplicationContext());
 
-        //config.listener = this;
+        /** [OPTIONAL] Initializa calls if used  */
         mCall = MesiboCall.getInstance();
         mCall.init(this);
 
 
-        /* set user access token  */
-        Mesibo.setAccessToken(SampleAppConfiguration.mesiboAuthToken);
-
-        /* [Optional] set up database to save and restore messages */
-        Mesibo.setDatabase("myAppDb.db", 0);
-
-        /* [Optional] add listener for file transfer handler */
+        /** [Optional] add listener for file transfer handler
+         * you only need if you plan to send and receive files using mesibo
+         * */
         MesiboFileTransferHelper fileTransferHelper = new MesiboFileTransferHelper();
         Mesibo.addListener(fileTransferHelper);
 
-        /* add listener for UI helper functions */
+        /** add other listener - you can add any number of listeners */
         Mesibo.addListener(new MesiboListener());
 
-        /* [Optional] enable to disable secure connection */
+        /** [Optional] enable to disable secure connection */
         Mesibo.setSecureConnection(true);
 
-        /* start mesibo */
+        /** Initialize web api to communicate with your own backend servers */
+        SampleAppWebApi.init();
+
+    }
+
+    /**
+     * Start mesibo only after you have a user access token
+     */
+    public static void startMesibo() {
+        /** set user access token  */
+        Mesibo.setAccessToken(SampleAppWebApi.getToken());
+
+        /** [OPTIONAL] set up database to save and restore messages
+         * Note: if you call this API before setting an access token, mesibo will
+         * create a database exactly as you named it. However, if you call it
+         * after setting Access Token like in this example, it will be uniquely
+         * named for each user [Preferred].
+         * */
+        Mesibo.setDatabase("myAppDb.db", 0);
+
+        /** start mesibo */
         Mesibo.start();
+    }
 
-        /* add Some contacts - usually you fetch matching contacts from your server */
-        /* Note: ensure that contacts are valid for your app in mesibo network */
-        Mesibo.UserProfile u1 = new Mesibo.UserProfile();
-        u1.name = "Joe";
-        u1.address = "18005551234";
-        u1.status = "Joe's Status";
-        Mesibo.setUserProfile(u1, false);
-
-        Mesibo.UserProfile u2 = new Mesibo.UserProfile();
-        u2.name = "Angel";
-        u2.address = "18005552345";
-        u2.status = "Angel's Status";
-        Mesibo.setUserProfile(u2, false);
+    public static Context getContext() {
+        return mContext;
     }
 }
