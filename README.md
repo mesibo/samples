@@ -13,7 +13,7 @@ Please refer to README file in each folder for more specific instructions. For g
 
 ### List of Samples
 
-* [MesiboSample](MesiboSample/) This is a sample mobile application that demonstrates how to use mesibo SDK to:
+* **MesiboSample** This is a sample mobile application that demonstrates how to use mesibo SDK to:
   + send and receive 1-to-1 messaging, group chat
   + make high quality voice and video calls
   
