@@ -3,7 +3,7 @@ This repository has samples that demonstrate various aspects of the mesibo SDK f
 
 [mesibo](https://mesibo.com) allows you to quickly add real-time messaging, voice and video calling into your mobile Apps, and Websites.
   - Enable 1-to-1 messaging, group chat, or add a chatbot in your apps or website
-  - Add high quality voice chat between users.
+  - Add high quality voice chat between users
   - Adding real-time video calling in your apps
 
 Please check out mesibo introduction video
@@ -33,9 +33,9 @@ For running backend on your own server, following steps are required
 * change apiUrl in respective application configuration classes.
 
 # Mesibo Demo App
-You can also try mesibo demo app from Google or Apple store to quickly assese some of the mesibo functionalities without compiling or setting up the sample app source code. 
+You can also try mesibo demo app from Google or Apple app store to quickly evaluate some of the mesibo functionalities without compiling or setting up the sample app source code. 
 
-Like this sample app, Mesibo demo app is also built using mesibo chat API & SDK. All the key features of the demo app is present in this sample source code. However, the demo app on app-store has some more goodies and the source of the demo app is separately available, please [contact mesibo](https://mesibo.com/contact.html). 
+Like this sample app, Mesibo demo app is also built using mesibo chat API & SDK. All the key features of the demo app is present in this sample source code. However, the demo app on app store has some more goodies and the source of the demo app is separately available, please [contact mesibo](https://mesibo.com/contact.html). 
 
  
 
