@@ -35,7 +35,7 @@ For running backend on your own server, following steps are required
 # Mesibo Demo App
 You can also try mesibo demo app from Google or Apple app store to quickly evaluate some of the mesibo functionalities without compiling or setting up the sample app source code. 
 
-Like this sample app, Mesibo demo app is also built using mesibo chat API & SDK. All the key features of the demo app is present in this sample source code. However, the demo app on app store has some more goodies and the source of the demo app is separately available, please [contact mesibo](https://mesibo.com/contact.html). 
+Mesibo demo app is also built using the same sample code posted on GitHub here. However, the demo app on the app store has some more goodies and the source of the demo app is separately available as part of our custom solutions, please [contact mesibo sales team](https://mesibo.com/contact.html). 
 
  
 
