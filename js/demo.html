@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html lang="en-EN">
+  <head>
+    <meta charset="UTF-8">
+    <title>Mesibo javascript API demo</title>
+    <!--SCRIPTINCLUDESTART-->
+    <script type="text/javascript" src="https://mesibo.com/mesiboapi.js"></script>
+    <!--SCRIPTINCLUDEEND-->
+
+    <img src="https://mesibo.com/assets/images/mesibo-bg-white.png" style="height: 60px;">
+    <h3>Mesibo javascript API demo</h3>
+  </head>
+
+  <body>
+    <pre id="mesibo"></pre>
+
+    <script type="text/javascript">
+
+    	function TestNotify() {
+
+    	}
+
+	TestNotify.prototype.Mesibo_OnConnectionStatus = function(status, value) {
+		console.log("TestNotify.prototype.Mesibo_OnConnectionStatus: "  + status);
+	}
+
+	TestNotify.prototype.Mesibo_OnMessageStatus = function(m) {
+		console.log("TestNotify.prototype.Mesibo_OnMessageStatus: from "  + m.peer + " status: " + m.status);
+	}
+
+	TestNotify.prototype.Mesibo_OnMessage = function(m, data) {
+		console.log("TestNotify.prototype.Mesibo_OnMessage: from "  + m.peer);
+		console.log(data);
+	}
+
+
+     var accessToken = 'xyz'; //use admin api to get token - refer documentation at https://mesibo.com
+     	  
+     var api = new Mesibo();
+     api.setAppName("console");
+     api.setListener(new TestNotify());
+     api.setCredentials(accessToken);
+     api.start();
+
+     function sendMessage() {
+		var p = {};
+	       	p.peer = "18005551234";	
+		var id = parseInt(Math.random()*10000);
+		api.sendMessage(p, id, "Hello From Mesibo JavaScript API");
+
+     }
+    </script>
+
+    <button id="btn1" onclick="sendMessage()">Send a Message</button>
+
+  </body>
+</html>

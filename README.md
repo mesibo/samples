@@ -21,7 +21,8 @@ Please refer to README file in each folder for more specific instructions. For g
 #### Requirements
 * [mesibo account](https://mesibo.com) to get your own API KEY.
 * For Android App - latest Android Studio or Gradle if you prefer CLI.
-* For iOS App - latest xCode (9.x or later)
+* For iOS App - latest xCode (10.x or later)
+* For JavaScript Apps - [https://mesibo.com/mesiboapi.js](https://mesibo.com/mesiboapi.js)
 
 ### Backend Setup
 Sample backend source code and database schema is available in [php](php/) folder. We recommend you to run it on your own server. However, in case you decide to use the demo API link provided in the source code (SampleAppConfiguration.java or SampleAppConfiguration.m), select a unique namespace in application configuration class to avoid conflict with other testers. 
