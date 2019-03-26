@@ -19,7 +19,7 @@ if ($err) {
             http://api.tringme.com/api.php?  which is invoked to perform the operation.
 *********************************************************************************/
 $host = $_SERVER['HTTP_HOST'];
-$mesibobaseurl  = "https://mesibo.com/api/api.php?";
+$mesibobaseurl  = "https://api.mesibo.com/api.php?";
 
 /********************************************************************************
 Descripton: Performs the requested API operation 
