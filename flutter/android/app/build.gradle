@@ -1,0 +1,104 @@
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+}
+
+def flutterRoot = localProperties.getProperty('flutter.sdk')
+if (flutterRoot == null) {
+    throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
+}
+
+def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
+if (flutterVersionCode == null) {
+    flutterVersionCode = '1'
+}
+
+def flutterVersionName = localProperties.getProperty('flutter.versionName')
+if (flutterVersionName == null) {
+    flutterVersionName = '1.0'
+}
+
+apply plugin: 'com.android.application'
+apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+apply from: "https://api.mesibo.com/mesibo-devel.gradle"
+
+ext {
+    PUBLISH_VERSION = "1.0.0"
+    PUBLISH_VERSION_CODE = 1
+}
+
+android {
+    compileSdkVersion project.Mesibo_compileSdkVersion
+
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+
+    defaultConfig {
+        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        applicationId "com.mesibo.mesibo_flutter_app"
+        minSdkVersion project.Mesibo_minSdkVersion
+        targetSdkVersion project.Mesibo_targetSdkVersion
+        versionCode project.PUBLISH_VERSION_CODE
+        versionName project.PUBLISH_VERSION
+        buildConfigField "String", "BUILD_VERSION", "\"${project.PUBLISH_VERSION}\""
+        buildConfigField "String", "BUILD_TIMESTAMP", "\"${project.Mesibo_buildDate}\""
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+
+
+    lintOptions {
+        disable 'MissingTranslation'
+    }
+
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+
+
+    buildTypes {
+        release {
+            // TODO: Add your own signing config for the release build.
+            // Signing with the debug keys for now, so `flutter run --release` works.
+            signingConfig signingConfigs.debug
+            minifyEnabled false
+            debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            debuggable true
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+    }
+
+}
+
+flutter {
+    source '../..'
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    testImplementation 'junit:junit:4.12'
+
+    implementation "com.android.support:appcompat-v7:${project.Mesibo_supportLibVersion}"
+    implementation "com.android.support:support-v4:${project.Mesibo_supportLibVersion}"
+    implementation "com.android.support:support-annotations:${project.Mesibo_supportLibVersion}"
+    implementation "com.android.support:design:${project.Mesibo_supportLibVersion}"
+    implementation "com.android.support:preference-v7:${project.Mesibo_supportLibVersion}"
+
+    implementation "com.mesibo.api:mesibo:${project.MesiboVersion_Api}"
+    implementation "com.mesibo.api:ui:${project.MesiboVersion_Ui}"
+    implementation "com.mesibo.api:calls:${project.MesiboVersion_Calls}"
+}

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/chat_root_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:theme="@style/MesiboAppTheme"
+    >
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:contentInsetLeft="-20dp"
+            app:contentInsetStart="-20dp"
+
+             >
+
+            <ImageView
+                android:id="@+id/chat_profile_pic"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="5dp"
+                />
+            <RelativeLayout
+                android:id="@+id/name_tite_layout"
+                android:layout_width="match_parent"
+                android:minHeight="30dp"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+
+                >
+
+
+                <TextView
+                    android:id="@+id/chat_profile_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@android:color/white"
+                    android:text="John Player"
+                />
+                <TextView
+                    android:id="@+id/chat_profile_subtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:layout_below="@+id/chat_profile_title"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@android:color/white"
+                    android:text="This is user status"
+                    android:visibility="gone"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:maxLines="1"
+                    />
+
+            </RelativeLayout>
+
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <!-- https://stackoverflow.com/questions/32956071/add-views-below-toolbar-in-coordinatorlayout
+     layout_behavior is important
+    -->
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+
+        />
+
+    <!-- <include layout="@layout/chat_box_new" /> -->
+
+
+
+</android.support.design.widget.CoordinatorLayout>
