@@ -25,7 +25,7 @@ const MESIBO_MSGSTATUS_EXPIRED = 0x84
 const MESIBO_MSGSTATUS_BLOCKED = 0x88
 
 const MESIBO_MSG_ORIGIN_SENT = 0
-const MESIBO_MSG_ORIGIN_RECIEVED = 3 
+const MESIBO_MSG_ORIGIN_RECIEVED = 1
 
 class Mesibo_AppUtils {
 
@@ -83,7 +83,7 @@ class Mesibo_AppUtils {
     mylist.appendChild(msgBodyDiv);
 
   }
-	
+
   static createImageRecievedBubble(msg_data) {
 
     var msgBodyDiv = document.createElement('div');
@@ -92,8 +92,11 @@ class Mesibo_AppUtils {
     topReceiverDiv.className = 'col-sm-12 message-main-receiver'; //top sender-div-class
     var receiverDiv = document.createElement('div');
     receiverDiv.className = 'receiver';
-    var imgDiv = document.createElement('img');
-    imgDiv.setAttribute('src',msg_data['fileurl']);
+    var imgDiv = document.createElement('div');
+    imgDiv.className = 'image_container_recieved';
+    var imgSrc = document.createElement('img');
+    imgSrc.className = 'resize_fit_center';
+    imgSrc.setAttribute('src', msg_data['fileurl']);
     var textDiv = document.createElement('div');
     textDiv.className = 'message-text';
     var timeSpan = document.createElement('span');
@@ -104,6 +107,7 @@ class Mesibo_AppUtils {
 
     textDiv.append(msgcontent);
     timeSpan.append(timecontent);
+    imgDiv.append(imgSrc);
     receiverDiv.append(imgDiv);
     receiverDiv.append(textDiv);
     receiverDiv.append(timeSpan);
@@ -150,9 +154,9 @@ class Mesibo_AppUtils {
     mylist.appendChild(msgBodyDiv);
 
   }
-    
 
-    static createImageSentBubble(msg_data) {
+
+  static createImageSentBubble(msg_data) {
 
     var msgBodyDiv = document.createElement('div');
     msgBodyDiv.className = "row message-body";
@@ -160,8 +164,15 @@ class Mesibo_AppUtils {
     topSenderDiv.className = 'col-sm-12 message-main-sender'; //top sender-div-class
     var senderDiv = document.createElement('div');
     senderDiv.className = 'sender';
+
+    var imgCont = document.createElement('div');
+    imgCont.className = 'image_container';
+
     var imgDiv = document.createElement('img');
-    imgDiv.setAttribute('src',msg_data['file']);
+    imgDiv.className = 'resize_fit_center';
+    imgDiv.setAttribute('src', msg_data['fileurl']);
+    imgDiv.setAttribute('display',"max-width: 200px;");
+    
     var textDiv = document.createElement('div');
     textDiv.className = 'message-text';
     var timeSpan = document.createElement('span');
@@ -265,30 +276,30 @@ class Mesibo_AppUtils {
 
   }
 
-  static updateReadPrevious(pMsgArray,pMsgId){
+  static updateReadPrevious(pMsgArray, pMsgId) {
     console.log("===>utils:updateReadPrevious called ");
     var MsgIdPos = -1;
-    for(var i=pMsgArray.length - 1;i>=0;i--){
-      if(pMsgArray[i]['id'] == pMsgId){
+    for (var i = pMsgArray.length - 1; i >= 0; i--) {
+      if (pMsgArray[i]['id'] == pMsgId) {
         MsgIdPos = i;
         break;
       }
     }
 
-    if(MsgIdPos == -1){
+    if (MsgIdPos == -1) {
       console.log("Error:utils:updateReadPrevious:MsgId not found in array of sent Messages");
       return -1;
     }
 
     //Update read receipt for all previously delievered messages
     //TBD: Maybe have a lastMsgRead pos in ls,to make iterate faster and stop it there
-    
-    console.log(pMsgArray);
 
-    for(var i=MsgIdPos-1;i>=0; i--){
-      if(pMsgArray[i]['status'] == MESIBO_MSGSTATUS_DELIVERED|MESIBO_MSGSTATUS_READ){
+    // console.log(pMsgArray);
+
+    for (var i = MsgIdPos - 1; i >= 0; i--) {
+      if (pMsgArray[i]['status'] == MESIBO_MSGSTATUS_DELIVERED | MESIBO_MSGSTATUS_READ) {
         pMsgArray[i]['data'];
-        Mesibo_AppUtils.updateStatusTick(document.getElementById(pMsgArray[i]['id']),MESIBO_MSGSTATUS_READ);
+        Mesibo_AppUtils.updateStatusTick(document.getElementById(pMsgArray[i]['id']), MESIBO_MSGSTATUS_READ);
       }
     }
 
@@ -372,7 +383,7 @@ class Mesibo_AppUtils {
 
   static createContactsListDisplay(contactsArray) {
     console.log("===>utils:createContactsListDisplay called ");
-    console.log(contactsArray);
+    // console.log(contactsArray);
     if (contactsArray) {
       for (var i = 0; i < contactsArray.length; i++)
         Mesibo_AppUtils.createProfileBlock(contactsArray[i]);
@@ -390,18 +401,18 @@ class Mesibo_AppUtils {
         "name": "contact_name",
         "phone": "phone_number"
       },
-      
-    //For example	    
-	"91xxxxxxxxxx": {
+
+      //For example     
+      "91xxxxxxxxxx": {
         "name": "Test User",
         "phone": "91xxxxxxxxxx"
       },
     };
-    
-    console.log(contactsArray);	  
+
+    console.log(contactsArray);
     var NewPhoneBook = {};
 
-	  
+
     if (contactsArray && SyncPhoneBook) {
       for (var i = 0; i < contactsArray.length; i++) {
         if (Object.keys(SyncPhoneBook).includes(contactsArray[i]['phone'])) {
@@ -410,18 +421,18 @@ class Mesibo_AppUtils {
         }
       }
     }
-   
-      return NewPhoneBook;
+
+    return NewPhoneBook;
 
   }
-  
+
   static getPhoneBookFromContacts(contactsArray) {
-	   
-      var NewPhoneBook = {};
-      for (var i = 0; i < contactsArray.length; i++) {
-          NewPhoneBook[contactsArray[i]['name']] = contactsArray[i];
-        }
-      return NewPhoneBook
+
+    var NewPhoneBook = {};
+    for (var i = 0; i < contactsArray.length; i++) {
+      NewPhoneBook[contactsArray[i]['name']] = contactsArray[i];
+    }
+    return NewPhoneBook
   }
 
   static createProfileBlock(profileDetails) {
@@ -592,10 +603,10 @@ async function fetchContacts(usrToken) {
   Mesibo_AppUtils.createContactsListDisplay(Object.values(PhoneBook));
 }
 
-async function uploadAndSendFile(msg_payload, usrToken) {
+async function uploadAndSendFile(msg_payload, usrToken,AppStorage) {
   console.log("===> uploadAndSendFile called");
   $('#imagePreviewHolder').hide();
-  
+
   const fileInput = document.querySelector('#imgupload');
   const formData = new FormData();
 
@@ -609,23 +620,37 @@ async function uploadAndSendFile(msg_payload, usrToken) {
     method: 'POST',
     body: formData,
 
-      // If you add this, upload won't work
-  // headers: {
-  //   'Content-Type': 'multipart/form-data',
-  // }
+    // If you add this, upload won't work
+    // headers: {
+    //   'Content-Type': 'multipart/form-data',
+    // }
 
   };
 
-  const response = await fetch('https://s3.mesibo.com/api.php?op=upload&token='+ usrToken, options);
+  const response = await fetch('https://s3.mesibo.com/api.php?op=upload&token=' + usrToken, options);
   console.log(response);
   const image_url = await response.json();
-  console.log(image_url['file'])
+  console.log(image_url['file']);
 
-  msg_payload['file'] = image_url['file'];
+  msg_payload['fileurl'] = image_url['file'];
+  AppStorage.updateFileUrl(msg_payload['id'],msg_payload['peer'],image_url['file']);
   Mesibo_AppUtils.createImageSentBubble(msg_payload);
-  sendFiletoPeer( msg_payload['peer'],msg_payload['id'],image_url['file']);
+  resize(fileInput.files[0],200,200,'base64',msg_payload,image_url['file']);
 
 }
+
+function sendWithThumbnail(imgFile,msg_payload,imgUrl) {
+  var reader = new FileReader();
+  reader.onloadend = function() {
+    console.log('RESULT', reader.result);
+    var tn_array = new Uint8Array(reader.result); //reader.result from base64
+    sendFiletoPeer(msg_payload['peer'], msg_payload['id'], imgUrl,tn_array,msg_payload['data']);
+  }
+  reader.readAsArrayBuffer(imgFile);
+}
+
+
+
 
 
 
@@ -644,4 +669,104 @@ Array.prototype.unique = function() {
     }
   }
   return arr;
+}
+
+function resize(file, max_width, max_height, imageEncoding , msg_payload, imgUrl){
+    var fileLoader = new FileReader(),
+    canvas = document.createElement('canvas'),
+    context = null,
+    imageObj = new Image(),
+    blob = null;            
+
+    //create a hidden canvas object we can use to create the new resized image data
+    canvas.id     = "hiddenCanvas";
+    canvas.width  = max_width;
+    canvas.height = max_height;
+    canvas.style.visibility   = "hidden";   
+    document.body.appendChild(canvas);  
+
+    //get the context to use 
+    context = canvas.getContext('2d');  
+
+    // check for an image then
+    //trigger the file loader to get the data from the image         
+    if (file.type.match('image.*')) {
+        fileLoader.readAsDataURL(file);
+    } else {
+        alert('File is not an image');
+    }
+
+    // setup the file loader onload function
+    // once the file loader has the data it passes it to the 
+    // image object which, once the image has loaded, 
+    // triggers the images onload function
+    fileLoader.onload = function() {
+        var data = this.result; 
+        imageObj.src = data;
+    };
+
+    fileLoader.onabort = function() {
+        alert("The upload was aborted.");
+    };
+
+    fileLoader.onerror = function() {
+        alert("An error occured while reading the file.");
+    };  
+
+
+    // set up the images onload function which clears the hidden canvas context, 
+    // draws the new image then gets the blob data from it
+    imageObj.onload = function() {  
+
+        // Check for empty images
+        if(this.width == 0 || this.height == 0){
+            alert('Image is empty');
+        } else {                
+
+            context.clearRect(0,0,max_width,max_height);
+            context.drawImage(imageObj, 0, 0, this.width, this.height, 0, 0, max_width, max_height);
+
+
+            blob = dataURItoBlob(canvas.toDataURL(imageEncoding));
+
+            //pass this blob to your upload function
+            // upload(blob);
+            sendWithThumbnail(blob,msg_payload,imgUrl)
+            
+        }       
+    };
+
+    imageObj.onabort = function() {
+        alert("Image load was aborted.");
+    };
+
+    imageObj.onerror = function() {
+        alert("An error occured while loading image.");
+    };
+
+}
+
+function dataURItoBlob(dataURI) {
+  // convert base64 to raw binary data held in a string
+  // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
+  var byteString = atob(dataURI.split(',')[1]);
+
+  // separate out the mime component
+  var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+
+  // write the bytes of the string to an ArrayBuffer
+  var ab = new ArrayBuffer(byteString.length);
+
+  // create a view into the buffer
+  var ia = new Uint8Array(ab);
+
+  // set the bytes of the buffer to the correct values
+  for (var i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+  }
+
+  // write the ArrayBuffer to a blob, and you're done
+  var blob = new Blob([ab], {type: mimeString});
+  return blob;
+
 }

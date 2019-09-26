@@ -5,7 +5,7 @@ class Mesibo_LocalStorage {
   get activeUsers() {
     console.log("===>LocalStorage_GetActiveUsers called");
     var activeUserList = localStorage.getItem("Mesibo_MsgUsr_Hash");
-    console.log(activeUserList);
+    // console.log(activeUserList);
     if (activeUserList) {
       activeUserList = Object.values(JSON.parse(activeUserList));
       activeUserList = activeUserList.filter(onlyUnique); 
@@ -13,7 +13,7 @@ class Mesibo_LocalStorage {
     else
       activeUserList = [];
 
-    console.log(activeUserList);
+    // console.log(activeUserList);
     return activeUserList;
   }
 
@@ -23,7 +23,7 @@ class Mesibo_LocalStorage {
       localPhoneBook = {};
     else
       localPhoneBook = JSON.parse(localPhoneBook);
-    console.log(localPhoneBook);
+    // console.log(localPhoneBook);
     return localPhoneBook;
   }
 
@@ -75,10 +75,18 @@ class Mesibo_LocalStorage {
         var msg_data = msg_hist_data[i];
         previous_date = Mesibo_AppUtils.createDateHeaderForHistory(msg_data, previous_date);
 
-        if (msg_data['flag'] == 0)
-          Mesibo_AppUtils.createSentBubble(msg_data);
-        else
+        if (msg_data['flag'] == 0){
+          if(msg_data['filetype'])
+            Mesibo_AppUtils.createImageSentBubble(msg_data);
+          else
+            Mesibo_AppUtils.createSentBubble(msg_data);
+        }
+        else {
+          if(msg_data['filetype'])
+            Mesibo_AppUtils.createImageRecievedBubble(msg_data);
+          else
           Mesibo_AppUtils.createRecievedBubble(msg_data);
+      }
       }
 
     }
@@ -95,7 +103,7 @@ class Mesibo_LocalStorage {
 
     var msgIdPos = -1;
 
-    console.log(jsonMsgArray,m.id);
+    // console.log(jsonMsgArray,m.id);
     
     for (var i = jsonMsgArray.length - 1; i >= 0; i--) {
       if (jsonMsgArray[i]['id'] == m.id) {
@@ -116,7 +124,7 @@ class Mesibo_LocalStorage {
     if(m.status == MESIBO_MSGSTATUS_READ){
 
       for(var i = msgIdPos ; i >= 0; i--){
-        console.log(jsonMsgArray[i]['data']);
+        // console.log(jsonMsgArray[i]['data']);
         if(jsonMsgArray[i]['status'] == MESIBO_MSGSTATUS_DELIVERED){
           jsonMsgArray[i]['status'] = MESIBO_MSGSTATUS_READ;
           jsonMsgArray[i]['params']['status'] = MESIBO_MSGSTATUS_READ;
@@ -124,11 +132,36 @@ class Mesibo_LocalStorage {
       }
     }
 
-    console.log("After updateItemSent",jsonMsgArray);
+    // console.log("After updateItemSent",jsonMsgArray);
 
     localStorage.setItem(m.peer, JSON.stringify(jsonMsgArray));
 
-    console.log("After updateItemSent localstorage",JSON.parse(localStorage.getItem(m.peer)));
+    // console.log("After updateItemSent localstorage",JSON.parse(localStorage.getItem(m.peer)));
+
+  }
+
+  updateFileUrl(id,peer,fileUrl){
+     var retrievedMsgArray = localStorage.getItem(peer);
+    //MsgList Entry Will always exist if msg sent.No need to check
+    var jsonMsgArray = JSON.parse(retrievedMsgArray);
+    // console.log(jsonMsgArray);
+
+    var msgIdPos = -1;
+
+    
+    for (var i = jsonMsgArray.length - 1; i >= 0; i--) {
+      if (jsonMsgArray[i]['id'] == id) {
+        jsonMsgArray[i]['fileurl'] = fileUrl;
+        msgIdPos = i ;
+        break;
+      }
+    }
+
+    if(msgIdPos == -1){
+      console.log("Error:localstorage.js:updateItemSent: Message ID not found");
+    }
+
+    localStorage.setItem(peer, JSON.stringify(jsonMsgArray));
 
   }
 

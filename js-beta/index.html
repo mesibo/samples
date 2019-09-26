@@ -89,7 +89,7 @@
           <span id="closePreviewButton" class="og-close"></span>
           <div class="og-fullimg" >
            <div class="og-loading" style="display: none;"></div>
-           <img id ="imagePreview"src="" style="display: block;">
+           <img id ="imagePreview" src="" style="display: block;">
          </div>
        </div>
      </div>
@@ -104,7 +104,7 @@
       <div class="col-sm-8 col-xs-7 heading-name">
         <a class="heading-name-meta" id="SelectedUserName">Mesibo
         </a>
-        <span class="heading-online">Online</span>
+        <span id="onlineStatus" class="heading-online"></span>
       </div>
       <div class="col-sm-1 col-xs-1  heading-dot pull-right">
         <i class="fa fa-ellipsis-v fa-2x  pull-right" aria-hidden="true"></i>
@@ -182,8 +182,13 @@
 <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 
-const MESIBO_FLAG_DELIVERYRECEIPT = 1
-const MESIBO_FLAG_READRECEIPT     = 2
+const MESIBO_FLAG_DELIVERYRECEIPT    =  1
+const MESIBO_FLAG_READRECEIPT        =  2
+
+const MESIBO_ACTIVITY_ONLINE         =  1
+const MESIBO_ACTIVITY_TYPING         =  3
+const MESIBO_ACTIVITY_TYPINGCLEARED  =  4
+const MESIBO_ACTIVITY_LEFT           =  11
 
 //GLOBAL SCOPE
 AppStorage = new Mesibo_LocalStorage();
@@ -251,9 +256,10 @@ TestNotify.prototype.Mesibo_OnMessage = function(m, data) {
     var string = new TextDecoder("utf-8").decode(data);
   msgRecievedTimeStamp = +new Date;
 
-  if (!m.presence) { // Not activity but actual message
+  if (!m.presence) { // Not activity but actual message but user Online
+    document.getElementById("onlineStatus").textContent="Online";
 
-    if (selected_user == m.peer) {
+    if ((selected_user == m.peer )&& (m.flag == MESIBO_FLAG_READRECEIPT | MESIBO_FLAG_DELIVERYRECEIPT)) {
       //Send RR
       sendReadReceipt(m.peer,m.id);
 
@@ -288,24 +294,34 @@ TestNotify.prototype.Mesibo_OnMessage = function(m, data) {
     Mesibo_AppUtils.updateLastMsg(Mesibo_AppUtils.getUserFromPhone(m.peer, PhoneBook), m.peer);
 
   }
+
+  if(m.presence){
+    if(m.presence == MESIBO_ACTIVITY_ONLINE)
+      document.getElementById("onlineStatus").textContent="Online";
+    else if(m.presence == MESIBO_ACTIVITY_TYPING)
+      document.getElementById("onlineStatus").textContent="Typing...";
+    else if(m.presence == MESIBO_ACTIVITY_LEFT)
+      document.getElementById("onlineStatus").textContent="";
+  }
 }
 
 
 
-function sendFiletoPeer(pPeerId,pMsgId,fileURL){
+function sendFiletoPeer(pPeerId,pMsgId,fileURL,thumbnail,message){
   var p={};
   p.peer = pPeerId; 
   p.flag = MESIBO_FLAG_DELIVERYRECEIPT | MESIBO_FLAG_READRECEIPT;
 
   var msg = {};
   msg.type = 1;
-  msg.size = 1023;
+  // msg.size = 0;
   msg.url = fileURL;
   console.log(msg.url)
-  msg.title = "Test Image";
-  msg.message = " Test image JS";
+  // msg.title = "Test Image";
+  msg.message = message;
+  msg.tn = thumbnail;
+  console.log("------Sending File------");
   console.log(p)
-  
   console.log(msg)
   api.sendFile(p,pMsgId,msg);
 
@@ -325,18 +341,20 @@ function sendImageFile() {
 
   if (!selected_user) return;
 
-  // var id = api.random();
-  var id = parseInt(Math.random()*1000);
+  var id = api.random();
+  // var id = parseInt(Math.random()*1000);
     msg_payload = {
       'id': id,
       'peer': p.peer,
       'params': p,
-      'data': "<image>",
+      'data': document.getElementById("comment").value,
+
       'groupid': 0,
       'ts': +new Date,
       'flag': 0,
       'status': MESIBO_MSGSTATUS_OUTBOX,
-      'origin': MESIBO_MSG_ORIGIN_SENT  // TBD
+      'origin': MESIBO_MSG_ORIGIN_SENT , // TBD
+      'filetype':1 , // 1 for image
     };
 
     if (!Mesibo_AppUtils.getLastTs(p.peer, PhoneBook) || (!(Mesibo_AppUtils.dateNow(Mesibo_AppUtils.getLastTs(p.peer, PhoneBook)) == Mesibo_AppUtils.dateNow(msg_payload['ts'])))) {
@@ -354,7 +372,7 @@ function sendImageFile() {
       retrievedMsgHash = JSON.parse(retrievedMsgHash);
 
 
-    uploadAndSendFile(msg_payload,accessToken);
+    uploadAndSendFile(msg_payload,accessToken,AppStorage);
 
     Mesibo_AppUtils.updateLastMsg(Mesibo_AppUtils.getUserFromPhone(p.peer, PhoneBook), p.peer);
     Mesibo_AppUtils.updateScroll();
@@ -372,9 +390,11 @@ function sendReadReceipt(pPeerId,pMsgId) {
 function sendMessage() {
   var p = {};
   p.peer = selected_user;
+  p.flag = MESIBO_FLAG_DELIVERYRECEIPT | MESIBO_FLAG_READRECEIPT;
   if (!selected_user) return;
-  // var id = api.random();
-  var id = parseInt(Math.random()*10000);
+  var id = api.random();
+  console.log("RANDOM ID",id);
+	//var id = parseInt(Math.random()*10000);
   var msgdata = "Hello from Mesibo Javascript API!";
   msgdata = document.getElementById("comment").value;
   if (msgdata) {

@@ -89,6 +89,10 @@
 .og-fullimg {
 	display:block;
     margin:auto;
+    /*width: 100px;*/
+    /*height: 100px;*/
+    /*line-height: 115px;*/
+    text-align: center;
 }
 .og-details {
 	width: 50%;

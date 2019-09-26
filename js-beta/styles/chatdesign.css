@@ -123,7 +123,7 @@
     display: block;
   }
   .heading-online {
-    display: none;
+    display: block;
     padding: 0 5px;
     font-size: 12px;
     color: #93918f;
@@ -654,4 +654,25 @@
   left: 300px;
   top: 300px; /* Or perhaps different coordinates */
   display: none;
+}
+
+.image_container {
+    margin: 10px;
+    width: 100px;
+    height: 100px;
+    line-height: 115px;
+    text-align: center;
+}
+.resize_fit_center {
+    max-width:100%;
+    max-height:100%;
+    vertical-align: middle;
+}
+
+.image_container_recieved {
+    margin: 10px;
+    width: 300px;
+    height: 300px;
+    line-height: 115px;
+    text-align: center;
 }
