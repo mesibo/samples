@@ -139,6 +139,20 @@
     cursor: pointer;
   }
 
+  .heading-call {
+    padding: 0;
+    margin-left: 10px;
+    margin-top: 5px;
+
+  }
+
+  .heading-call i {
+    text-align: right;
+    padding: 5px;
+    color: #93918f;
+    cursor: pointer;
+  }
+
   .heading-dot {
     padding: 0;
     margin-left: 10px;
