@@ -81,13 +81,15 @@ MesiboStorage.prototype._syncContactList = function(c) {
 
 MesiboStorage.prototype._getContactsFromStorage = function() {
 	var cl = JSON.parse(localStorage.getItem("Mesibo_Contacts_Local_Storage")) || {};
-	MesiboLog(cl, Object.keys(cl).length);
 
 	if (0 !== Object.keys(cl).length) {
 		/** 
 		The stored  contacts object will also contain details of the profile logged in currently.
 		Extract the profile details and store it in context
 		**/
+		this.downloadUrl = cl['urls']['download'];
+                this.uploadUrl = cl['urls']['upload'];
+
 		var u = cl['u'];
 		var selfUser = {
 			id: 0, //Main User
@@ -189,6 +191,7 @@ MesiboStorage.prototype.updateContacts = function(cl) {
 }
 
 MesiboStorage.prototype.updateContactsInStorage = function(c) {
+	
 	localStorage.setItem("Mesibo_Contacts_Local_Storage", JSON.stringify(c));
 }
 

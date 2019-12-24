@@ -683,10 +683,12 @@ async function fetchContacts(usrToken, ts) {
 	const response =
 		await fetch(MESIBO_API_URL + '?op=getcontacts&token=' + usrToken + '&ts=' + ts);
 
-	const contactsData = await response.json(); //extract JSON from the HTTP response
-	MesiboDemoApp.storeContacts(contactsData); //Store contacts object in storage
+	const result = await response.json(); //extract JSON from the HTTP response
+	
+	MesiboDemoApp.storeContacts(result); //Store contacts result in storage
+	MesiboDemoApp.updateSelfProfile();
 
-	//Update profile UI
+	//Update Self Profile UI
 	DOM.username.innerHTML = MesiboDemoApp.getSelfUser().name;
 	DOM.displayPic.src = MesiboDemoApp.getSelfUser().pic;
 	MesiboDemoApp.readSummary();

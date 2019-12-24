@@ -110,26 +110,31 @@ MesiboAppCore.prototype._syncContactList = function(c) {
 	return cl;
 }
 
+MesiboAppCore.prototype.updateSelfProfile = function(){
+		var u = this.mesiboStorage. user; 
+		//Self profile details of logged in user, stored
+		var selfUser = {
+			id: 0, //Main User
+			name: u['name']
+			, number: u['phone']
+			, pic: u['pic']
+			, };
+		this.selfUser = selfUser;
+}
+
 MesiboAppCore.prototype.storeContacts = function(c) {
+	if("FAIL" == c.result)
+                MesiboLog("Fetching Contacts failed");
+	else{   
+		this.mesiboStorage.updateContactsInStorage(c);
+		this.mesiboStorage.downloadUrl = c['urls']['download'];
+		this.mesiboStorage.uploadUrl = c['urls']['upload'];
 
-	this.mesiboStorage.updateContactsInStorage(c);
-	this.mesiboStorage.downloadUrl = c['urls']['download'];
-	this.mesiboStorage.uploadUrl = c['urls']['upload'];
+		// Syncing with Local Contacts
+		var cl = this._syncContactList(c['contacts']);
 
-	//Self profile details of logged in user, stored
-	var u = c['u'];
-	var selfUser = {
-		id: 0, //Main User
-		name: u['name']
-		, number: u['phone']
-		, pic: this.mesiboStorage.downloadUrl + u['photo']
-	, };
-	this.selfUser = selfUser;
-
-	// Syncing with Local Contacts
-	var cl = this._syncContactList(c['contacts']);
-
-	this.mesiboStorage.updateContacts(cl);
+		this.mesiboStorage.updateContacts(cl);
+	}
 }
 
 MesiboAppCore.prototype.getContacts = function(c) {

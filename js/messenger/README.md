@@ -45,3 +45,6 @@ Message history is retrieved and loaded from local storage through `read` API
 ## UI
 `app_ui.js` provides a set of functions to modify and update the application UI.
 
+## Syncing Contacts
+For a better experience of using this demo, it is recommended to login using the [Mesibo Messenger Mobile App](https://github.com/mesibo/messenger-app-android) and then generate the token for the Web app from [Mesibo Demo App Token Geneartor](https://app.mesibo.com/gentoken/). This way your user access token will be linked with to your phone number and you will be able to synchronizecontacts. Other Mesibo Users in your contact list will appear as users whom you can select and send a message to.
+

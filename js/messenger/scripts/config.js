@@ -42,8 +42,8 @@
  *
  */
 
-const MESIBO_ACCESS_TOKEN = "3add0f7b0192d544aaa81dd752a748460b47757edee2210cff0";
-const MESIBO_APP_ID = "web";
+const MESIBO_ACCESS_TOKEN = "xxxxxxxxx";
+const MESIBO_APP_ID = "xxxxx";
 
 //If you are hosting Mesibo backend on your own server, change this accordingly.
 //Refer https://github.com/mesibo/messenger-app-backend
