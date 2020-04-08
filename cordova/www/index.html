@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' gap:; style-src 'self' 'unsafe-inline'; media-src *" />
+
+    <!-- Good default declaration:
+	    * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+	    * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+	    * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+	    * Enable inline JS: add 'unsafe-inline' to default-src
+	    * Enable eval(): add 'unsafe-eval' to default-src
+	    * Create your own at http://cspisawesome.com
+    -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <script src="js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+    <script type="text/javascript" src="https://api.mesibo.com/mesibo.js"></script>
+    <script src="js/demo.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <title>mesibo - Messaging, Voice and Video Call API Demo</title>
+    <!--SCRIPTINCLUDEEND-->
+</head>
+
+<body>
+	<script type="text/javascript" src="cordova.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+	<script type="text/javascript">
+		app.initialize();
+	</script>
+	<div class="container" style="padding: 10px;">
+		<div class="border-bottom my-3">
+			<h2><span style="color: #00868b;">mesibo</span> - Messaging, Voice and Video Call API Demo</h2>
+		</div>
+		<h3>Instructions</h3>
+		<p>Before using this demo, you need to create a user token, edit <strong>mesibo-demo.js</strong>, set the token and other required parameters.</p><p>Refer <a href="https://mesibo.com/documentation/tutorials/first-app/">First Tutorial</a> to know how to create a user token.</p>
+
+		<h3>Connection Status</h3>
+		<p>
+		The button below shows you the mesibo connection status. Refer function <span style="color: #00868b;">DemoNotify.prototype.Mesibo_OnConnectionStatus</span> in <strong>mesibo-demo.js</strong> to learn how Mesibo informs your app about the connection status.
+		<p/>
+		<button type="button" class="btn btn-danger" id="cstatus">You are offline</button>
+
+		<div style="marging-top: 20px;">
+			<h3>Messaging Demo</h3>
+			<p>The buttons below demonstrate how to send a message, file or read-receipt to the destination configured in <strong>mesibo-demo.js</strong>. Refer <span style="color: #00868b;">sendMessage</span>, <span style="color: #00868b;">sendFile</span> and <span style="color: #00868b;">sendReadReceipt</span> functions in <strong>mesibo-demo.js</strong> to learn more about the mesibo messaging APIs.<p/>
+			<p><strong>Note:</strong> Open your web-browser console to see all the incoming messages, message status, etc.</p>
+
+			<button type="button" id="btn1" class="btn btn-primary" onclick="sendMessage()">Send a Message</button>
+			<button type="button" id="btn2" class="btn btn-success" onclick="sendFile()">Send a File</button>
+			<button type="button" id="btn3" class="btn btn-info" onclick="sendReadReceipt()">Send Read Receipt</button>
+		</div>
+
+		<p/>
+		<h3 style="marging-top: 20px; important">Video Call Demo</h3>
+		<p>The buttons below demonstrate how to make a video call to the destination configured in <strong>mesibo-demo.js</strong>.</p>
+		<p>Refer <span style="color: #00868b;">video_call</span>,  <span style="color: #00868b;">DemoNotify.prototype.Mesibo_OnCall</span>, and  <span style="color: #00868b;">DemoNotify.prototype.Mesibo_OnCallStatus</span> functions in <strong>mesibo-demo.js</strong> to learn more about the mesibo video call APIs.<p/>
+
+		<div class="row" style="background-color: #f1f1f1;">
+			<div class="col-6" style="padding: 10px;">
+				<video id="localVideo" playsinline autoplay muted></video>
+
+
+			</div>
+			<div class="col-6" style="padding: 10px;">
+				<video id="remoteVideo" playsinline autoplay></video>
+			</div>
+		</div>
+		<div style="padding-top: 30px;">
+			<button type="button" class="btn btn-primary" onclick="video_call()">Call</button>
+			<button type="button" class="btn btn-danger" onclick="hangup()">Hangup</button>
+			<button type="button" class="btn btn-info" id="vcstatus" style="float:right;">Call Status: </button>
+		</div>
+
+		<p/>
+		<h3 style="marging-top: 20px; important">Voice Call</h3>
+		<p>The buttons below demonstrate how to make a voice call to the destination configured in <strong>mesibo-demo.js</strong>.</p>
+		<p>Refer <span style="color: #00868b;">voice_call</span>,  <span style="color: #00868b;">DemoNotify.prototype.Mesibo_OnCall</span>, and  <span style="color: #00868b;">DemoNotify.prototype.Mesibo_OnCallStatus</span> functions in <strong>mesibo-demo.js</strong> to learn more about the mesibo video call APIs.<p/>
+
+		<div style="padding-top: 30px;">
+			<button type="button" class="btn btn-primary" onclick="voice_call()">Call</button>
+			<button type="button" class="btn btn-danger" onclick="hangup()">Hangup</button>
+			<button type="button" class="btn btn-info" id="acstatus" style="float:right;">Call Status: </button>
+		</div>
+		<audio id="audioPlayer" autoplay="autoplay" controls="controls" style="visibility:hidden; height:5px;"></audio>
+		<p/>
+		<h3 style="marging-top: 20px; important">On-Premise</h3>
+		<p>If you prefer, you can run the entire Mesibo platform in your own premise OR private cloud. All the messages and calls go through your own data center and stay in your own database. Refer to Mesibo on-premise documentation to download Mesibo On-Premise and run it in your own data center!</strong>.</p>
+
+		<div style="padding-top: 10px;">
+			<a href="https://mesibo.com/on-premise/" class="btn btn-info" role="button">Run Mesibo in your own premise</a>
+		</div>
+		<p/>
+		<p/>
+		<div class="container">
+
+			<!-- Modal -->
+			<div class="modal fade" id="answerModal" tabindex="-1" role="dialog" aria-labelledby="answerModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="answerModalLabel">Incoming Call</h5>
+							<button type="button" class="close" data-dismiss="modal" onclick="hangup();" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body" id="ansBody">
+							Incoming Call From
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="hangup();">Hang-up</button>
+							<button type="button" class="btn btn-success" data-dismiss="modal" onclick="answer();">Answer</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</body>
+
+</html>
