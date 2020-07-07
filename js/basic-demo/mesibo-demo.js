@@ -77,7 +77,7 @@ DemoNotify.prototype.Mesibo_OnCallStatus = function(callid, status) {
 	var a = document.getElementById("acstatus");
 
 	var s = "Complete"; 
-	if(status&MESIBO_CALLSTATUS_COMPLETE) {
+	if(status & MESIBO_CALLSTATUS_COMPLETE) {
 		console.log("closing");
 		$('#answerModal').modal("hide");
 	}
@@ -120,6 +120,7 @@ var api = new Mesibo();
 api.setAppName(demo_appid);
 api.setListener(new DemoNotify(api));
 api.setCredentials(demo_user_token);
+api.setDatabase("mesibo");
 api.start();
 
 var message_index = 0;
@@ -143,11 +144,12 @@ function sendFile() {
 	p.flag = MESIBO_FLAG_DELIVERYRECEIPT|MESIBO_FLAG_READRECEIPT;
 	
 	var msg = {}; //create a rich message
-	msg.type = 1;	// 2 for video, 3 audio, 10 other
+	msg.filetype = 1;	// 1 for image 2 for video, 3 audio, 10 other
 	msg.size = 1023;	
-	msg.url = 'https://cdn.pixabay.com/photo/2019/08/02/09/39/mugunghwa-4379251_1280.jpg'
+	msg.fileurl = 'https://cdn.pixabay.com/photo/2019/08/02/09/39/mugunghwa-4379251_1280.jpg'
 	msg.title = 'Himalaya';
 	msg.message = 'Hello from js';
+	
 	api.sendFile(p, api.random(), msg);
 }
 
