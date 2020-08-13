@@ -60,9 +60,11 @@ public class DemoActivity extends AppCompatActivity implements View.OnClickListe
         /* add Mesibo.MessageListener listener to get real-time & DB messages and status updates */
         Mesibo.addListener(this);
 
-        Mesibo.setReadingSession(destination, Mesibo.READFLAG_READRECEIPT, null);
         /* read stored messages from database */
-        Mesibo.read(100, this);
+        Mesibo.ReadDbSession mReadSession = new Mesibo.ReadDbSession(destination, 0, null, this);
+        mReadSession.enableReadReceipt(true);
+        mReadSession.read(100);
+
     }
 
     @Override

@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: com.mesibo.api:emojiview:0.1.8@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/def746e0f00a548954f254a81b174e36/emojiview-0.1.8/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/def746e0f00a548954f254a81b174e36/emojiview-0.1.8/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/def746e0f00a548954f254a81b174e36/emojiview-0.1.8/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mesibo.api/emojiview/0.1.8/82a48a9368daa42b7ba9961e2cf1305b1c23107/emojiview-0.1.8-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mesibo.api/emojiview/0.1.8/b3367a9802b2bfa2b643c2f7dc9b5998b65c2c1f/emojiview-0.1.8-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
