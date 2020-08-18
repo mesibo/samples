@@ -1,0 +1,406 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8806236B24EBFE9E00A470F1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8806236A24EBFE9E00A470F1 /* AppDelegate.m */; };
+		8806236E24EBFE9E00A470F1 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8806236D24EBFE9E00A470F1 /* SceneDelegate.m */; };
+		8806237124EBFE9E00A470F1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8806237024EBFE9E00A470F1 /* ViewController.m */; };
+		8806237424EBFE9E00A470F1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8806237224EBFE9E00A470F1 /* Main.storyboard */; };
+		8806237624EBFEA400A470F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8806237524EBFEA400A470F1 /* Assets.xcassets */; };
+		8806237924EBFEA400A470F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8806237724EBFEA400A470F1 /* LaunchScreen.storyboard */; };
+		8806237C24EBFEA400A470F1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8806237B24EBFEA400A470F1 /* main.m */; };
+		8806238324EC009400A470F1 /* MesiboSample.m in Sources */ = {isa = PBXBuildFile; fileRef = 8806238224EC009400A470F1 /* MesiboSample.m */; };
+		C87577AF91C1BB2CF2730BE4 /* libPods-MesiboObjCSample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F6477E60A6FDA9B314372008 /* libPods-MesiboObjCSample.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		8806236624EBFE9E00A470F1 /* MesiboObjCSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MesiboObjCSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8806236924EBFE9E00A470F1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		8806236A24EBFE9E00A470F1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		8806236C24EBFE9E00A470F1 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		8806236D24EBFE9E00A470F1 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
+		8806236F24EBFE9E00A470F1 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		8806237024EBFE9E00A470F1 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		8806237324EBFE9E00A470F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		8806237524EBFEA400A470F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8806237824EBFEA400A470F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8806237A24EBFEA400A470F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8806237B24EBFEA400A470F1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8806238224EC009400A470F1 /* MesiboSample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MesiboSample.m; sourceTree = "<group>"; };
+		8806238424EC01BC00A470F1 /* MesiboSample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MesiboSample.h; sourceTree = "<group>"; };
+		D78D159C0342E5D05F318851 /* Pods-MesiboObjCSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MesiboObjCSample.release.xcconfig"; path = "Target Support Files/Pods-MesiboObjCSample/Pods-MesiboObjCSample.release.xcconfig"; sourceTree = "<group>"; };
+		D893DD426DE2F60F3670C11E /* Pods-MesiboObjCSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MesiboObjCSample.debug.xcconfig"; path = "Target Support Files/Pods-MesiboObjCSample/Pods-MesiboObjCSample.debug.xcconfig"; sourceTree = "<group>"; };
+		F6477E60A6FDA9B314372008 /* libPods-MesiboObjCSample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MesiboObjCSample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8806236324EBFE9E00A470F1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C87577AF91C1BB2CF2730BE4 /* libPods-MesiboObjCSample.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		603339EC1267721AB05778B7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F6477E60A6FDA9B314372008 /* libPods-MesiboObjCSample.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7F6F625C54A288ED0DB94B0F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D893DD426DE2F60F3670C11E /* Pods-MesiboObjCSample.debug.xcconfig */,
+				D78D159C0342E5D05F318851 /* Pods-MesiboObjCSample.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		8806235D24EBFE9E00A470F1 = {
+			isa = PBXGroup;
+			children = (
+				8806236824EBFE9E00A470F1 /* MesiboObjCSample */,
+				8806236724EBFE9E00A470F1 /* Products */,
+				7F6F625C54A288ED0DB94B0F /* Pods */,
+				603339EC1267721AB05778B7 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		8806236724EBFE9E00A470F1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8806236624EBFE9E00A470F1 /* MesiboObjCSample.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8806236824EBFE9E00A470F1 /* MesiboObjCSample */ = {
+			isa = PBXGroup;
+			children = (
+				8806238424EC01BC00A470F1 /* MesiboSample.h */,
+				8806238224EC009400A470F1 /* MesiboSample.m */,
+				8806236924EBFE9E00A470F1 /* AppDelegate.h */,
+				8806236A24EBFE9E00A470F1 /* AppDelegate.m */,
+				8806236C24EBFE9E00A470F1 /* SceneDelegate.h */,
+				8806236D24EBFE9E00A470F1 /* SceneDelegate.m */,
+				8806236F24EBFE9E00A470F1 /* ViewController.h */,
+				8806237024EBFE9E00A470F1 /* ViewController.m */,
+				8806237224EBFE9E00A470F1 /* Main.storyboard */,
+				8806237524EBFEA400A470F1 /* Assets.xcassets */,
+				8806237724EBFEA400A470F1 /* LaunchScreen.storyboard */,
+				8806237A24EBFEA400A470F1 /* Info.plist */,
+				8806237B24EBFEA400A470F1 /* main.m */,
+			);
+			path = MesiboObjCSample;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8806236524EBFE9E00A470F1 /* MesiboObjCSample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8806237F24EBFEA400A470F1 /* Build configuration list for PBXNativeTarget "MesiboObjCSample" */;
+			buildPhases = (
+				9948F233251FAE01F44184D3 /* [CP] Check Pods Manifest.lock */,
+				8806236224EBFE9E00A470F1 /* Sources */,
+				8806236324EBFE9E00A470F1 /* Frameworks */,
+				8806236424EBFE9E00A470F1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MesiboObjCSample;
+			productName = MesiboObjCSample;
+			productReference = 8806236624EBFE9E00A470F1 /* MesiboObjCSample.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8806235E24EBFE9E00A470F1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1140;
+				ORGANIZATIONNAME = Mesibo;
+				TargetAttributes = {
+					8806236524EBFE9E00A470F1 = {
+						CreatedOnToolsVersion = 11.4;
+					};
+				};
+			};
+			buildConfigurationList = 8806236124EBFE9E00A470F1 /* Build configuration list for PBXProject "MesiboObjCSample" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8806235D24EBFE9E00A470F1;
+			productRefGroup = 8806236724EBFE9E00A470F1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8806236524EBFE9E00A470F1 /* MesiboObjCSample */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8806236424EBFE9E00A470F1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8806237924EBFEA400A470F1 /* LaunchScreen.storyboard in Resources */,
+				8806237624EBFEA400A470F1 /* Assets.xcassets in Resources */,
+				8806237424EBFE9E00A470F1 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9948F233251FAE01F44184D3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MesiboObjCSample-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8806236224EBFE9E00A470F1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8806237124EBFE9E00A470F1 /* ViewController.m in Sources */,
+				8806238324EC009400A470F1 /* MesiboSample.m in Sources */,
+				8806236B24EBFE9E00A470F1 /* AppDelegate.m in Sources */,
+				8806237C24EBFEA400A470F1 /* main.m in Sources */,
+				8806236E24EBFE9E00A470F1 /* SceneDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		8806237224EBFE9E00A470F1 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8806237324EBFE9E00A470F1 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		8806237724EBFEA400A470F1 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8806237824EBFEA400A470F1 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8806237D24EBFEA400A470F1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		8806237E24EBFEA400A470F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8806238024EBFEA400A470F1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D893DD426DE2F60F3670C11E /* Pods-MesiboObjCSample.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HXKDD24ZQ6;
+				INFOPLIST_FILE = MesiboObjCSample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mesibo.firstapp.MesiboObjCSample;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8806238124EBFEA400A470F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D78D159C0342E5D05F318851 /* Pods-MesiboObjCSample.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HXKDD24ZQ6;
+				INFOPLIST_FILE = MesiboObjCSample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mesibo.firstapp.MesiboObjCSample;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8806236124EBFE9E00A470F1 /* Build configuration list for PBXProject "MesiboObjCSample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8806237D24EBFEA400A470F1 /* Debug */,
+				8806237E24EBFEA400A470F1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8806237F24EBFEA400A470F1 /* Build configuration list for PBXNativeTarget "MesiboObjCSample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8806238024EBFEA400A470F1 /* Debug */,
+				8806238124EBFEA400A470F1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8806235E24EBFE9E00A470F1 /* Project object */;
+}

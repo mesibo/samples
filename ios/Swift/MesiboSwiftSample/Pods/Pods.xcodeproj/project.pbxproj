@@ -1,0 +1,456 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		0CEFF2D421D73DBFD4B88DB2894CFE57 /* mesibo */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = FA3888E71965B0A34785B99B78B7998D /* Build configuration list for PBXAggregateTarget "mesibo" */;
+			buildPhases = (
+			);
+			dependencies = (
+			);
+			name = mesibo;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		E3478B32FC812A7E2BB91F06414168F7 /* Pods-MesiboSwiftSample-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EB0C1AFCE19B195B2DCAFBF1D4385CE /* Pods-MesiboSwiftSample-dummy.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3D5E82DFFA46B9469C796AF7415CDE31 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0CEFF2D421D73DBFD4B88DB2894CFE57;
+			remoteInfo = mesibo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		17D1248C59EC04F4C59FEFE3B8E54657 /* Pods-MesiboSwiftSample-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-MesiboSwiftSample-acknowledgements.plist"; sourceTree = "<group>"; };
+		1F177CF181A1C7321F99982A1A328634 /* Pods-MesiboSwiftSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MesiboSwiftSample.debug.xcconfig"; sourceTree = "<group>"; };
+		3EB0C1AFCE19B195B2DCAFBF1D4385CE /* Pods-MesiboSwiftSample-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-MesiboSwiftSample-dummy.m"; sourceTree = "<group>"; };
+		41A1F2A16FB56046657CE1BB2449FFD5 /* mesibo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = mesibo.framework; sourceTree = "<group>"; };
+		68501BD974C31216288DDEBB53391D17 /* libPods-MesiboSwiftSample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-MesiboSwiftSample.a"; path = "libPods-MesiboSwiftSample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A5A3BFB66549C8696E47DE666DFFED32 /* Pods-MesiboSwiftSample-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-MesiboSwiftSample-acknowledgements.markdown"; sourceTree = "<group>"; };
+		D154198DA4980C7D7BA719C63FE27C71 /* Pods-MesiboSwiftSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MesiboSwiftSample.release.xcconfig"; sourceTree = "<group>"; };
+		D929617B5BCE057A551F25AA13651691 /* mesibo.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = mesibo.xcconfig; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D378C883FD8435472EF7029EF6E510B6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0EAB60625A2AF93028DB61488B919543 /* mesibo */ = {
+			isa = PBXGroup;
+			children = (
+				E4D21E04A43A9F850BCFFEA3EF73AA8B /* Frameworks */,
+				9BB5499A0F5304015C1B7D97C0E059E6 /* Support Files */,
+			);
+			name = mesibo;
+			path = mesibo;
+			sourceTree = "<group>";
+		};
+		3F974EB04FA8C6287785A7370BB35C91 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				530B44BB68219A9335FFF10EE625B880 /* Pods-MesiboSwiftSample */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		530B44BB68219A9335FFF10EE625B880 /* Pods-MesiboSwiftSample */ = {
+			isa = PBXGroup;
+			children = (
+				A5A3BFB66549C8696E47DE666DFFED32 /* Pods-MesiboSwiftSample-acknowledgements.markdown */,
+				17D1248C59EC04F4C59FEFE3B8E54657 /* Pods-MesiboSwiftSample-acknowledgements.plist */,
+				3EB0C1AFCE19B195B2DCAFBF1D4385CE /* Pods-MesiboSwiftSample-dummy.m */,
+				1F177CF181A1C7321F99982A1A328634 /* Pods-MesiboSwiftSample.debug.xcconfig */,
+				D154198DA4980C7D7BA719C63FE27C71 /* Pods-MesiboSwiftSample.release.xcconfig */,
+			);
+			name = "Pods-MesiboSwiftSample";
+			path = "Target Support Files/Pods-MesiboSwiftSample";
+			sourceTree = "<group>";
+		};
+		9BB5499A0F5304015C1B7D97C0E059E6 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				D929617B5BCE057A551F25AA13651691 /* mesibo.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/mesibo";
+			sourceTree = "<group>";
+		};
+		B02681ACA9211ED562E7F5C5F1FB2954 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				68501BD974C31216288DDEBB53391D17 /* libPods-MesiboSwiftSample.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CF1408CF629C7361332E53B88F7BD30C = {
+			isa = PBXGroup;
+			children = (
+				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				D89477F20FB1DE18A04690586D7808C4 /* Frameworks */,
+				E402361BB6697D42365C7E17FE394A25 /* Pods */,
+				B02681ACA9211ED562E7F5C5F1FB2954 /* Products */,
+				3F974EB04FA8C6287785A7370BB35C91 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		D89477F20FB1DE18A04690586D7808C4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E402361BB6697D42365C7E17FE394A25 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0EAB60625A2AF93028DB61488B919543 /* mesibo */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		E4D21E04A43A9F850BCFFEA3EF73AA8B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				41A1F2A16FB56046657CE1BB2449FFD5 /* mesibo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		CA099E88A950AD392BE78F78037ECE6F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		83E37268038F4CBAC59B4863CFCB10C4 /* Pods-MesiboSwiftSample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE1D5230F5340CFD5009C80FC0923EA1 /* Build configuration list for PBXNativeTarget "Pods-MesiboSwiftSample" */;
+			buildPhases = (
+				CA099E88A950AD392BE78F78037ECE6F /* Headers */,
+				EBB564C9AE3D18039FF6B9A11551F8F9 /* Sources */,
+				D378C883FD8435472EF7029EF6E510B6 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C045F05426D2ACE60C95FF9FE1A82B77 /* PBXTargetDependency */,
+			);
+			name = "Pods-MesiboSwiftSample";
+			productName = "Pods-MesiboSwiftSample";
+			productReference = 68501BD974C31216288DDEBB53391D17 /* libPods-MesiboSwiftSample.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1100;
+				LastUpgradeCheck = 1100;
+			};
+			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			productRefGroup = B02681ACA9211ED562E7F5C5F1FB2954 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0CEFF2D421D73DBFD4B88DB2894CFE57 /* mesibo */,
+				83E37268038F4CBAC59B4863CFCB10C4 /* Pods-MesiboSwiftSample */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EBB564C9AE3D18039FF6B9A11551F8F9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E3478B32FC812A7E2BB91F06414168F7 /* Pods-MesiboSwiftSample-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C045F05426D2ACE60C95FF9FE1A82B77 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = mesibo;
+			target = 0CEFF2D421D73DBFD4B88DB2894CFE57 /* mesibo */;
+			targetProxy = 3D5E82DFFA46B9469C796AF7415CDE31 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		2F4EB8469E4362132446246925FFC978 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D929617B5BCE057A551F25AA13651691 /* mesibo.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6C61D818ACD3C2C116FED6A9C67E91B4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		7DC5F11AFBEAE473E8D3C24A2D11338D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		97909014B6C1DEBD72D71650EEE53685 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1F177CF181A1C7321F99982A1A328634 /* Pods-MesiboSwiftSample.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EC25AD1A2E7CDF7AF0104AB42CF1BA35 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D154198DA4980C7D7BA719C63FE27C71 /* Pods-MesiboSwiftSample.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EFA39193C50DF4F2FE8EB95BC770744A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D929617B5BCE057A551F25AA13651691 /* mesibo.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6C61D818ACD3C2C116FED6A9C67E91B4 /* Debug */,
+				7DC5F11AFBEAE473E8D3C24A2D11338D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CE1D5230F5340CFD5009C80FC0923EA1 /* Build configuration list for PBXNativeTarget "Pods-MesiboSwiftSample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				97909014B6C1DEBD72D71650EEE53685 /* Debug */,
+				EC25AD1A2E7CDF7AF0104AB42CF1BA35 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FA3888E71965B0A34785B99B78B7998D /* Build configuration list for PBXAggregateTarget "mesibo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F4EB8469E4362132446246925FFC978 /* Debug */,
+				EFA39193C50DF4F2FE8EB95BC770744A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+}

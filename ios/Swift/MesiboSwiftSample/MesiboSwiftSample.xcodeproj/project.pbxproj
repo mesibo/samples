@@ -1,0 +1,399 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1649E831A14276C1DF89C74D /* libPods-MesiboSwiftSample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B4F36A587B5F381F3833710 /* libPods-MesiboSwiftSample.a */; };
+		8806235B24EBF32900A470F1 /* MesiboSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8806235A24EBF32900A470F1 /* MesiboSample.swift */; };
+		88E2034E24E67B0600988516 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E2034D24E67B0600988516 /* AppDelegate.swift */; };
+		88E2035024E67B0600988516 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E2034F24E67B0600988516 /* SceneDelegate.swift */; };
+		88E2035224E67B0600988516 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E2035124E67B0600988516 /* ViewController.swift */; };
+		88E2035524E67B0600988516 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88E2035324E67B0600988516 /* Main.storyboard */; };
+		88E2035724E67B0B00988516 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88E2035624E67B0B00988516 /* Assets.xcassets */; };
+		88E2035A24E67B0B00988516 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88E2035824E67B0B00988516 /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		4B4F36A587B5F381F3833710 /* libPods-MesiboSwiftSample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MesiboSwiftSample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8806235A24EBF32900A470F1 /* MesiboSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MesiboSample.swift; sourceTree = "<group>"; };
+		88E2034A24E67B0600988516 /* MesiboSwiftSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MesiboSwiftSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		88E2034D24E67B0600988516 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		88E2034F24E67B0600988516 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		88E2035124E67B0600988516 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		88E2035424E67B0600988516 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		88E2035624E67B0B00988516 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		88E2035924E67B0B00988516 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		88E2035B24E67B0B00988516 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AE4FB7F1B6FE63BB7197F5C7 /* Pods-MesiboSwiftSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MesiboSwiftSample.debug.xcconfig"; path = "Target Support Files/Pods-MesiboSwiftSample/Pods-MesiboSwiftSample.debug.xcconfig"; sourceTree = "<group>"; };
+		D094F1C4B43B43117B263956 /* Pods-MesiboSwiftSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MesiboSwiftSample.release.xcconfig"; path = "Target Support Files/Pods-MesiboSwiftSample/Pods-MesiboSwiftSample.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		88E2034724E67B0600988516 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1649E831A14276C1DF89C74D /* libPods-MesiboSwiftSample.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		88E2034124E67B0600988516 = {
+			isa = PBXGroup;
+			children = (
+				88E2034C24E67B0600988516 /* MesiboSwiftSample */,
+				88E2034B24E67B0600988516 /* Products */,
+				B45A921092185E5725C4DAFB /* Pods */,
+				D5295494ECBD889764D7FE26 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		88E2034B24E67B0600988516 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				88E2034A24E67B0600988516 /* MesiboSwiftSample.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		88E2034C24E67B0600988516 /* MesiboSwiftSample */ = {
+			isa = PBXGroup;
+			children = (
+				88E2034D24E67B0600988516 /* AppDelegate.swift */,
+				88E2034F24E67B0600988516 /* SceneDelegate.swift */,
+				88E2035124E67B0600988516 /* ViewController.swift */,
+				88E2035324E67B0600988516 /* Main.storyboard */,
+				88E2035624E67B0B00988516 /* Assets.xcassets */,
+				88E2035824E67B0B00988516 /* LaunchScreen.storyboard */,
+				88E2035B24E67B0B00988516 /* Info.plist */,
+				8806235A24EBF32900A470F1 /* MesiboSample.swift */,
+			);
+			path = MesiboSwiftSample;
+			sourceTree = "<group>";
+		};
+		B45A921092185E5725C4DAFB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AE4FB7F1B6FE63BB7197F5C7 /* Pods-MesiboSwiftSample.debug.xcconfig */,
+				D094F1C4B43B43117B263956 /* Pods-MesiboSwiftSample.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		D5295494ECBD889764D7FE26 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4B4F36A587B5F381F3833710 /* libPods-MesiboSwiftSample.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		88E2034924E67B0600988516 /* MesiboSwiftSample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 88E2035E24E67B0B00988516 /* Build configuration list for PBXNativeTarget "MesiboSwiftSample" */;
+			buildPhases = (
+				E0E0F206A818519025D26FCF /* [CP] Check Pods Manifest.lock */,
+				88E2034624E67B0600988516 /* Sources */,
+				88E2034724E67B0600988516 /* Frameworks */,
+				88E2034824E67B0600988516 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MesiboSwiftSample;
+			productName = MesiboSwiftSample;
+			productReference = 88E2034A24E67B0600988516 /* MesiboSwiftSample.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		88E2034224E67B0600988516 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1140;
+				LastUpgradeCheck = 1140;
+				ORGANIZATIONNAME = Mesibo;
+				TargetAttributes = {
+					88E2034924E67B0600988516 = {
+						CreatedOnToolsVersion = 11.4;
+					};
+				};
+			};
+			buildConfigurationList = 88E2034524E67B0600988516 /* Build configuration list for PBXProject "MesiboSwiftSample" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 88E2034124E67B0600988516;
+			productRefGroup = 88E2034B24E67B0600988516 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				88E2034924E67B0600988516 /* MesiboSwiftSample */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		88E2034824E67B0600988516 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				88E2035A24E67B0B00988516 /* LaunchScreen.storyboard in Resources */,
+				88E2035724E67B0B00988516 /* Assets.xcassets in Resources */,
+				88E2035524E67B0600988516 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E0E0F206A818519025D26FCF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MesiboSwiftSample-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		88E2034624E67B0600988516 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				88E2035224E67B0600988516 /* ViewController.swift in Sources */,
+				88E2034E24E67B0600988516 /* AppDelegate.swift in Sources */,
+				8806235B24EBF32900A470F1 /* MesiboSample.swift in Sources */,
+				88E2035024E67B0600988516 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		88E2035324E67B0600988516 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				88E2035424E67B0600988516 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		88E2035824E67B0B00988516 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				88E2035924E67B0B00988516 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		88E2035C24E67B0B00988516 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		88E2035D24E67B0B00988516 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		88E2035F24E67B0B00988516 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AE4FB7F1B6FE63BB7197F5C7 /* Pods-MesiboSwiftSample.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HXKDD24ZQ6;
+				INFOPLIST_FILE = MesiboSwiftSample/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mesibo.firstapp.MesiboSwiftSample;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		88E2036024E67B0B00988516 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D094F1C4B43B43117B263956 /* Pods-MesiboSwiftSample.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HXKDD24ZQ6;
+				INFOPLIST_FILE = MesiboSwiftSample/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mesibo.firstapp.MesiboSwiftSample;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		88E2034524E67B0600988516 /* Build configuration list for PBXProject "MesiboSwiftSample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				88E2035C24E67B0B00988516 /* Debug */,
+				88E2035D24E67B0B00988516 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		88E2035E24E67B0B00988516 /* Build configuration list for PBXNativeTarget "MesiboSwiftSample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				88E2035F24E67B0B00988516 /* Debug */,
+				88E2036024E67B0B00988516 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 88E2034224E67B0600988516 /* Project object */;
+}

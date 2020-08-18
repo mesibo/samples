@@ -1,0 +1,4 @@
+target "MesiboSwiftSample" do
+    source 'https://github.com/CocoaPods/Specs.git'
+    pod 'mesibo'
+end
