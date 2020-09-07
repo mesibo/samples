@@ -53,9 +53,9 @@ class ViewController: UIViewController, MesiboDelegate, MesiboCallDelegate {
         Mesibo.getInstance()!.addListener(self)
         
         Mesibo.getInstance()!.setSecureConnection(true)
-        Mesibo.getInstance()!.setDatabase("mydb", resetTables: 0)
         // set user authentication token obtained by creating user
         Mesibo.getInstance()!.setAccessToken(token)
+        Mesibo.getInstance()!.setDatabase("mydb", resetTables: 0)
         Mesibo.getInstance()!.start()
         
         

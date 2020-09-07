@@ -49,9 +49,9 @@
     [MesiboInstance addListener:self];
 
     [MesiboInstance setSecureConnection:YES];
-    [MesiboInstance setDatabase:@"mydb" resetTables:0];
     // set user authentication token obtained by creating user
     [MesiboInstance setAccessToken:token];
+    [MesiboInstance setDatabase:@"mydb" resetTables:0];
     [MesiboInstance start];
     
     
