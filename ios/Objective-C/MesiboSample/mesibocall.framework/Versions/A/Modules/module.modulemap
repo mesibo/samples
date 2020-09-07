@@ -1,7 +1,0 @@
-framework module MesiboCall {
-umbrella header "MesiboCall.h"
-
- module * { export * }
-
- export *
-}

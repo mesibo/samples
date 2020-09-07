@@ -1,0 +1,6 @@
+target "FirstAppSwift" do
+    source 'https://github.com/CocoaPods/Specs.git'
+    pod 'mesibo'
+    pod 'mesibo-ui'
+    pod 'mesibo-calls'
+end

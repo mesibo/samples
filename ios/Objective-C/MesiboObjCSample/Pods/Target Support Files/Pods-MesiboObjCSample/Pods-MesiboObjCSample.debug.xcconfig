@@ -1,7 +1,0 @@
-FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/mesibo"
-GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-OTHER_LDFLAGS = $(inherited) -ObjC -l"c++" -l"sqlite3" -framework "AVFoundation" -framework "AddressBook" -framework "AssetsLibrary" -framework "CoreMedia" -framework "CoreTelephony" -framework "MobileCoreServices" -framework "Photos" -framework "SystemConfiguration" -framework "mesibo"
-PODS_BUILD_DIR = ${BUILD_DIR}
-PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
-PODS_PODFILE_DIR_PATH = ${SRCROOT}/.
-PODS_ROOT = ${SRCROOT}/Pods
