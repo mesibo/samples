@@ -21,8 +21,8 @@ class MainActivity : AppCompatActivity(), Mesibo.ConnectionListener, Mesibo.Mess
     internal inner class DemoUser(var token: String, var name: String, var address: String)
 
     //Refer to the Get-Started guide to create two users and their access tokens
-    internal var mUser1 = DemoUser("a60a2662d12b912171bebf75501595171b7cfa8f9c4b60cfe4415927a", "User-1", "123")
-    internal var mUser2 = DemoUser("pqr", "User-1", "919901172890")
+    internal var mUser1 = DemoUser("xyz", "User-1", "123")
+    internal var mUser2 = DemoUser("pqr", "User-2", "456")
 
     internal var mRemoteUser: DemoUser? = null
 
