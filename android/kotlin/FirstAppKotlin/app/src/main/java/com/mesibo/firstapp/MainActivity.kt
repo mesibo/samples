@@ -10,13 +10,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.mesibo.api.Mesibo
-import com.mesibo.calls.MesiboAudioCallFragment
-import com.mesibo.calls.MesiboCall
-import com.mesibo.calls.MesiboVideoCallFragment
+import com.mesibo.calls.api.MesiboCall
+
 import com.mesibo.messaging.MesiboUI
 
 
-class MainActivity : AppCompatActivity(), Mesibo.ConnectionListener, Mesibo.MessageListener, MesiboCall.MesiboCallListener {
+class MainActivity : AppCompatActivity(), Mesibo.ConnectionListener, Mesibo.MessageListener {
 
     internal inner class DemoUser(var token: String, var name: String, var address: String)
 
@@ -82,7 +81,6 @@ class MainActivity : AppCompatActivity(), Mesibo.ConnectionListener, Mesibo.Mess
         mAudioCallButton!!.isEnabled = true
         mVideoCallButton!!.isEnabled = true
         MesiboCall.getInstance().init(applicationContext)
-        MesiboCall.getInstance().setListener(this)
 
         // Read receipts are enabled only when App is set to be in foreground
         Mesibo.setAppInForeground(this, 0, true)
@@ -112,11 +110,11 @@ class MainActivity : AppCompatActivity(), Mesibo.ConnectionListener, Mesibo.Mess
     }
 
     fun onAudioCall(view: View?) {
-        MesiboCall.getInstance().call(this, 0, mProfile, false)
+        MesiboCall.getInstance().callUi(this, mProfile!!.address, false)
     }
 
     fun onVideoCall(view: View?) {
-        MesiboCall.getInstance().call(this, 0, mProfile, true)
+        MesiboCall.getInstance().callUi(this, mProfile!!.address, true)
     }
 
     override fun Mesibo_onConnectionStatus(status: Int) {
@@ -143,19 +141,5 @@ class MainActivity : AppCompatActivity(), Mesibo.ConnectionListener, Mesibo.Mess
     override fun Mesibo_onActivity(messageParams: Mesibo.MessageParams?, i: Int) {}
     override fun Mesibo_onLocation(messageParams: Mesibo.MessageParams?, location: Mesibo.Location?) {}
     override fun Mesibo_onFile(messageParams: Mesibo.MessageParams?, fileInfo: Mesibo.FileInfo?) {}
-    override fun MesiboCall_onNotify(i: Int, userProfile: Mesibo.UserProfile?, b: Boolean): Boolean {
-        return false
-    }
 
-    override fun MesiboCall_getVideoCallFragment(userProfile: Mesibo.UserProfile?): MesiboVideoCallFragment? {
-        return null
-    }
-
-    override fun MesiboCall_getAudioCallFragment(userProfile: Mesibo.UserProfile?): MesiboAudioCallFragment? {
-        return null
-    }
-
-    override fun MesiboCall_getIncomingAudioCallFragment(userProfile: Mesibo.UserProfile?): Fragment? {
-        return null
-    }
 }

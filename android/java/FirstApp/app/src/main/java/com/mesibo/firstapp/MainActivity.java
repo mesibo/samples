@@ -11,13 +11,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mesibo.api.Mesibo;
-import com.mesibo.calls.MesiboAudioCallFragment;
-import com.mesibo.calls.MesiboCall;
-import com.mesibo.calls.MesiboVideoCallFragment;
+
+import com.mesibo.calls.api.MesiboCall;
 import com.mesibo.messaging.MesiboUI;
 
 
-public class MainActivity extends AppCompatActivity implements Mesibo.ConnectionListener, Mesibo.MessageListener, MesiboCall.MesiboCallListener {
+public class MainActivity extends AppCompatActivity implements Mesibo.ConnectionListener, Mesibo.MessageListener {
 
     class DemoUser {
         public String token;
@@ -93,7 +92,6 @@ public class MainActivity extends AppCompatActivity implements Mesibo.Connection
 
 
         MesiboCall.getInstance().init(getApplicationContext());
-        MesiboCall.getInstance().setListener(this);
 
         // Read receipts are enabled only when App is set to be in foreground
         Mesibo.setAppInForeground(this, 0, true);
@@ -126,11 +124,11 @@ public class MainActivity extends AppCompatActivity implements Mesibo.Connection
     }
 
     public void onAudioCall(View view) {
-        MesiboCall.getInstance().call(this, 0, mProfile, false);
+        MesiboCall.getInstance().callUi(this, mProfile.address, false);
     }
 
     public void onVideoCall(View view) {
-        MesiboCall.getInstance().call(this, 0, mProfile, true);
+        MesiboCall.getInstance().callUi(this, mProfile.address, true);
     }
 
     @Override
@@ -175,26 +173,6 @@ public class MainActivity extends AppCompatActivity implements Mesibo.Connection
     @Override
     public void Mesibo_onFile(Mesibo.MessageParams messageParams, Mesibo.FileInfo fileInfo) {
 
-    }
-
-    @Override
-    public boolean MesiboCall_onNotify(int i, Mesibo.UserProfile userProfile, boolean b) {
-        return false;
-    }
-
-    @Override
-    public MesiboVideoCallFragment MesiboCall_getVideoCallFragment(Mesibo.UserProfile userProfile) {
-        return null;
-    }
-
-    @Override
-    public MesiboAudioCallFragment MesiboCall_getAudioCallFragment(Mesibo.UserProfile userProfile) {
-        return null;
-    }
-
-    @Override
-    public Fragment MesiboCall_getIncomingAudioCallFragment(Mesibo.UserProfile userProfile) {
-        return null;
     }
 
 }
