@@ -10,7 +10,7 @@ import mesibo
 import MesiboUI
 import MesiboCall
 
-class ViewController: UIViewController, MesiboDelegate, MesiboCallDelegate {
+class ViewController: UIViewController, MesiboDelegate {
     
 
     @IBOutlet weak var mMessage: UITextField!
@@ -76,8 +76,7 @@ class ViewController: UIViewController, MesiboDelegate, MesiboCallDelegate {
         Mesibo.getInstance()!.setProfile(mProfile, refresh: false)
         
         //OPTIONAL, initialize calls
-        MesiboCall.sharedInstance()!.setListener(self)
-        MesiboCall.sharedInstance()!.start()
+        MesiboCall.start(with: nil, name: "mesibo first app", icon: nil, callKit: true)
         
         // following code will read messages from the database and
         // will also send read receipts for db and real-time messages
@@ -161,12 +160,12 @@ class ViewController: UIViewController, MesiboDelegate, MesiboCallDelegate {
     }
     
     @IBAction func onAudioCall(_ sender: Any) {
-        MesiboCall.sharedInstance()!.call(self, callid: 0, address: mRemoteUser, video: false, incoming: false)
+        MesiboCall.getInstance().callUi(self, address: mRemoteUser, video: false)
 
     }
     
     @IBAction func onVideoCall(_ sender: Any) {
-        MesiboCall.sharedInstance()!.call(self, callid: 0, address: mRemoteUser, video: true, incoming: false)
+        MesiboCall.getInstance().callUi(self, address: mRemoteUser, video: true)
     }
     
     func mesiboCall_(onNotifyIncoming type: Int32, profile: MesiboUserProfile!, video: Bool) -> Bool {

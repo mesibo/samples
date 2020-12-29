@@ -30,7 +30,6 @@
     NSString *phoneNum = personHandle.value;
     //[CallManager sharedInstance].delegate = self;
     //[[CallManager sharedInstance] startCallWithPhoneNumber:phoneNum];
-    [MesiboCallInstance call:nil callid:0 address:phoneNum video:NO incoming:NO];
     return YES;
 }
 

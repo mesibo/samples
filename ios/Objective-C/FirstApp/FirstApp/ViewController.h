@@ -10,7 +10,7 @@
 #import "MesiboUi/MesiboUi.h"
 #import "MesiboCall/MesiboCall.h"
 
-@interface ViewController : UIViewController <MesiboDelegate, MesiboCallDelegate>
+@interface ViewController : UIViewController <MesiboDelegate, MesiboCallIncomingListener>
 
 @property (weak, nonatomic) IBOutlet UITextField *mMessage;
 @property (weak, nonatomic) IBOutlet UIButton *mLoginUser1;

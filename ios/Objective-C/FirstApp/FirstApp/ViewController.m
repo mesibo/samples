@@ -72,8 +72,7 @@
     [MesiboInstance setProfile:mProfile refresh:NO];
     
     //OPTIONAL, initialize calls
-    [MesiboCallInstance setListener:self];
-    [MesiboCallInstance start];
+    [MesiboCall startWith:nil name:@"mesibo first App" icon:nil callKit:YES];
     
     // following code will read messages from the database and
     // will also send read receipts for db and real-time messages
@@ -150,11 +149,11 @@
 
 /* ensure to grant background mode and microphone permissions */
 - (IBAction)onAudioCall:(id)sender {
-    [MesiboCallInstance call:self callid:0 address:mRemoteUser video:NO incoming:NO];
+    [MesiboCallInstance callUi:self address:mRemoteUser video:NO];
 }
 
 - (IBAction)onVideoCall:(id)sender {
-    [MesiboCallInstance call:self callid:0 address:mRemoteUser video:YES incoming:NO];
+    [MesiboCallInstance callUi:self address:mRemoteUser video:YES];
 }
 
 -(BOOL) MesiboCall_onNotifyIncoming:(int)type profile:(MesiboUserProfile *)profile video:(BOOL)video {
