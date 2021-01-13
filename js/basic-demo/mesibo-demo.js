@@ -111,9 +111,11 @@ DemoNotify.prototype.Mesibo_OnCallStatus = function(callid, status) {
 			s = "Offline";
 			break;
 	}
+	if(v)
+		v.innerText = "Call Status: " + s;
 
-	v.innerText = "Call Status: " + s;
-	a.innerText = "Call Status: " + s;
+	if(a)
+		a.innerText = "Call Status: " + s;
 }
 
 var api = new Mesibo();
