@@ -82,6 +82,7 @@ project.ext.react = [
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
+apply from: "https://api.mesibo.com/mesibo.gradle"
 
 /**
  * Set this to true to create two separate APKs instead of one:
@@ -186,9 +187,9 @@ dependencies {
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
     
-    implementation 'com.mesibo.api:mesibo:1.2.31'
-    implementation 'com.mesibo.api:ui:1.2.31'
-    implementation 'com.mesibo.api:calls:1.2.31'
+    implementation "com.mesibo.api:mesibo:1.2.31"
+    implementation "com.mesibo.api:ui:1.2.31"
+    implementation "com.mesibo.api:calls:1.2.31"
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 

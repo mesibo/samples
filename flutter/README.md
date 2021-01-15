@@ -1,72 +1,239 @@
-# Mesibo Flutter Sample App
-This repo contains the source code for a Mesibo sample App using Flutter
+## Using Flutter with Mesibo 
+You can use mesibo with all the cross-platform tools like Flutter, React-Native, Ionic, etc. mesibo APIs are provided as a Native SDK for Android, iOS, and Web. Since all the cross-platform tools offer a way to access native APIs, you can use mesibo from your chosen platform.
 
-[mesibo](https://mesibo.com) allows you to quickly add real-time messaging, voice and video calling into your mobile Apps, and Websites.
-  - Enable 1-to-1 messaging, group chat, or add a chatbot in your apps or website
-  - Add high quality voice chat between users
-  - Adding real-time video calling in your apps
+This section explains how to use Mesibo with Flutter by creating [Platform Channels](https://flutter.dev/docs/development/platform-integration/platform-channels). A sample project is available for Android, which you can build and run. You can follow similar steps to use method channels for using Mesibo in iOS on Flutter. 
 
-[Flutter](https://flutter.io/) by Google is a new framework that allows us to build beautiful native Apps on iOS and Android from a single codebase. It provides Fast Development, Expressive and Flexible UI, and Native Performance.
+### Prerequisites
 
-Mesibo provides real time APIs for messaging,voice and video call which can be easily integrated into any application on Android or iOS platforms. In this sample app, the user interface is developed using flutter which interacts with Mesibo to send messages and make audio/video calls. To achieve this we have used flutter method channels.
+- Read the [Preparation Guide](/documentation/tutorials/first-app/)
 
-- The Flutter portion of the app sends commands to  its host to perform actions.Here ,the host is Mesibo which controls ,the iOS or Android portion of the app, over a platform channel.For example ,to send a message you just need to enter the access token for your application and the destination user address.
+- Read the [Anatomy of a Mesibo Application](/documentation/tutorials/first-app/anatomy/) 
 
-- Mesibo listens on the platform channel, and recieves the information about the action to be performed. In the case of sending a message, it will recieve a "Send Message" command from flutter ,upon which Mesibo calls into any number of platform-specific APIs—using the native programming language to send a message to the destination user address entered—and sends a response back to the client, the Flutter portion of the app.
+- Basic knowledge of creating applications in Flutter 
 
-![flutter-mesibo-channel](https://flutter.dev/images/PlatformChannels.png)
+### Using Flutter Platform Channels  
 
-For more information about the use  of platform channels you can refer to [flutter documentation](https://flutter.dev/docs/development/platform-integration/platform-channels)
+- The Flutter portion of the app sends commands to its host to perform actions. Here, the host is Mesibo which controls, the iOS or Android portion of the app over a platform channel. 
+
+- Mesibo listens on the platform channel and receives the information about the action to be performed. For example, to send a message, your Android/iOS portion receives a "Send Message" command from Flutter through the method channel. Your app can then invoke mesibo's platform-specific APIs—using the native programming language to send a message to the destination user address entered—and sends a response back to the client, the Flutter portion of the app.
+
+For more information, refer to [Flutter Platform Channels](https://flutter.dev/docs/development/platform-integration/platform-channels)
+
+Follow the steps below to use mesibo in Flutter (For Android):
+
+### 1. Create a new Flutter project
+Create a `New Flutter Project` on Android Studio. Open the Android project of your flutter app in a new window.
+
+### 2. Add Mesibo SDK
+
+   - Add Mesibo SDK to your Android host project by adding Gradle dependency and performing Gradle sync as explained in our [First Android App tutorial] (https://mesibo.com/documentation/tutorials/first-app/android/)
+   - Import mesibo API 
+
+```java
+import com.mesibo.api.mesibo;
+```
+ 
+### 3a. Create the Flutter platform client
+ 
+Create Method channels to connect flutter UI and Mesibo inside `main.dart`
+ 
+ First, construct the channel. Use a MethodChannel with a single platform method that returns the `message` from Mesibo
+```java
+ class _HomeWidgetState extends State<HomeWidget> {
+   static const platform = const MethodChannel("mesibo.flutter.io/messaging");
+   static const EventChannel eventChannel = EventChannel('mesibo.flutter.io/mesiboEvents'); 
+    
+    ...
+```
+Next, invoke the Mesibo API method that you need on the method channel. For example, in the sample App we will be using the following API methods ,which will be called from the Method channel.
+```java
+  Future<void> _sendMessage() async {
+    print("Send Message clicked");
+    await platform.invokeMethod('sendMessage', {"message": messageController.text});
+    messageController.text = "";
+  }
+
+  void _launchMessagingUI() async {
+    print("LaunchMesibo clicked");
+    await platform.invokeMethod("launchMessagingUI");
+  }
+
+  void _loginUser1() async {
+    print("Login As user1");
+    await platform.invokeMethod("loginUser1");
+  }
+
+  void _loginUser2() async {
+    print("Login As user2");
+    await platform.invokeMethod("loginUser2");
+  }
+
+  void _audioCall() async {
+    print("AudioCall clicked");
+    await platform.invokeMethod("audioCall");
+  }
+
+  void _videoCall() async {
+    print("VideoCall clicked");
+    await platform.invokeMethod("videoCall");
+  }
+```
+Finally, replace the build method from the template to contain a small user interface that displays the buttons which perform the required functionality. In the Sample App we have,
+```java
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        InfoTitle(),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            RaisedButton(
+              child: Text("LOGIN AS USER-1"),
+              onPressed: _loginUser1,
+              textTheme: ButtonTextTheme.accent,
+            ),
+            RaisedButton(
+              child: Text("LOGIN AS USER-2"),
+              onPressed: _loginUser2,
+              textTheme: ButtonTextTheme.accent,
+            ),
+          ],
+        ),
 
 
-Please check out mesibo introduction video
-[![Play Video](https://img.youtube.com/vi/imHA4kBRSH0/0.jpg)](https://www.youtube.com/watch?v=imHA4kBRSH0)
+        TextField(
+          controller: messageController,
+          decoration: InputDecoration(
+              border:  const OutlineInputBorder(
+                borderSide: const BorderSide(color: Colors.grey, width: 0.0),
+              ),
+              hintText: 'Enter Message'
+          ),
+        ),
 
-Please refer to README file in each folder for more specific instructions. For general issues and help, check the FAQs section
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            RaisedButton(
+              child: Text("SEND"),
+              onPressed: _sendMessage,
+              textTheme: ButtonTextTheme.accent,
+            ),
+          ],
+        ),
+        RaisedButton(
+          child: Text("LAUNCH MESSAGE UI"),
+          onPressed: _launchMessagingUI,
+          textTheme: ButtonTextTheme.accent,
+        ),
+        RaisedButton(
+          child: Text("AUDIO CALL"),
+          onPressed: _audioCall,
+          textTheme: ButtonTextTheme.accent,
+        ),
+        RaisedButton(
+          child: Text("VIDEO CALL"),
+          onPressed: _videoCall,
+          textTheme: ButtonTextTheme.accent,
+        ),
 
-### List of Samples
 
-* **MesiboSample** This is a sample mobile application that demonstrates how to use mesibo SDK with flutter to:
-  + send and receive 1-to-1 messaging, group chat
-  + make high quality voice and video calls
+        Text(_mesiboStatus),
+      ],
+    );
+  }
 
-### Compiling sample code and setup
-#### Requirements
-* [mesibo account](https://mesibo.com) to get your own API KEY.
-* For Android App - latest Android Studio or Gradle if you prefer CLI.
-* For iOS App - latest xCode (10.x or later)
-* For JavaScript Apps - [https://mesibo.com/mesiboapi.js](https://mesibo.com/mesiboapi.js)
-* To install flutter [refer](https://flutter.dev/docs/get-started/install)
+// Define methods here //
 
-### Backend Setup
-Sample backend source code and database schema is available in [php](php/) folder. We recommend you to run it on your own server. However, in case you decide to use the demo API link provided in the source code (SampleAppConfiguration.java or SampleAppConfiguration.m), select a unique namespace in application configuration class to avoid conflict with other testers.
+```
+### 3b. Add an Android platform-specific implementation 
+Start by opening the Android portion of your Flutter app in Android Studio:
 
-For running backend on your own server, following steps are required
-* Create your own mesibo account to get mesibo API key and App token. You may also read [tutorial](https://mesibo.com/documentation/tutorials.html) on how to get mesibo API key and App token.
-* Create database and table using schema in [php/SampleApp.sql](https://github.com/mesibo/samples/blob/master/php/sample-app.sql)
-* edit config.php and enter API Key, App token, and database credentials.
-* change apiUrl in respective application configuration classes.
+- Start Android Studio
+- Select the menu item File > Open…
+- Navigate to the directory holding your Flutter app, and select the android folder inside it. Click OK.
+- Open the MainActivity.java file located in the java folder in the Project view.
 
-# Mesibo Flutter Sample App Source Code
-This repository has contains the sample app that demonstrate various aspects of the mesibo SDK for Android with FLUTTER. The sample code is reasonably well-documented and we suggest you to read comments to quickly understand the code. The entire documentation for the mesibo SDK is available [here](https://mesibo.com/documentation/introduction.html).
+Extend your MainActivity Class to implement `Mesibo.ConnectionListener`, and `Mesibo.MessageListener``
 
-[![App Store](http://imgur.com/y8PTxr9.png "App Store")](https://itunes.apple.com/us/app/mesibo-realtime-messaging-voice-video/id1222921751)   [![Play Store](http://imgur.com/utWa1co.png "Play Store")](https://play.google.com/store/apps/details?id=com.mesibo.mesiboapplication)
+Next, create a MethodChannel and set a MethodCallHandler inside the `configureFlutterEngine` method. Make sure to use the same channel name as was used on the Flutter client side. Call your API methods in this Method Channel.
 
-# Features!
+ ```java
+    @Override
+    public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine){
+        GeneratedPluginRegistrant.registerWith(flutterEngine);
 
-  - One-on-one messaging and Group chat
-  - High quality voice and video calling
-  - Rich messaging (text, picture, video, audio, other files)
-  - Location sharing
-  - Message status and typing indicators
-  - Online status (presence) and real-time profile update
-  - Push notifications and many more...
+        new EventChannel(flutterEngine.getDartExecutor().getBinaryMessenger(), MESIBO_ACTIVITY_CHANNEL)
+                .setStreamHandler(
+                        new EventChannel.StreamHandler() {
 
-## Community
-- [Facebook](https://www.facebook.com/mesiboapi)
-- [Twitter](https://twitter.com/mesiboapi)
-- [LinkedIn](https://www.linkedin.com/company/mesibo)
-- [YouTube](https://www.youtube.com/channel/UCxpcg-RSf2-lK4uyysWSsKQ)
+                            Mesibo.ConnectionListener messageListener;
 
-### Want to contribute or need to see some improvements?
-We would love that, please create an issue or send a PR.
+                            @Override
+                            public void onListen(Object arguments, EventChannel.EventSink events) {
+                                mEventsSink = events;
+                            }
+
+                            @Override
+                            public void onCancel(Object arguments) {
+
+                            }
+                        }
+                );
+
+        new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(), MESIBO_MESSAGING_CHANNEL)
+                .setMethodCallHandler(
+                        (call, result) -> {
+                            if (call.method.equals("loginUser1")) {
+                                mEventsSink.success("Login As User1");
+                                onLoginUser1(null);
+                            }
+                            else if (call.method.equals("loginUser2")) {
+                                mEventsSink.success("Login As User2");
+                                onLoginUser2(null);
+                            }
+                            else if (call.method.equals("sendMessage")) {
+                                mMessage = call.argument("message");
+                                onSendMessage(null);
+                            }
+                            else if (call.method.equals("audioCall")) {
+                                onAudioCall(null);
+                            }
+                            else if (call.method.equals("videoCall")) {
+                                onVideoCall(null);
+                            }
+                            else if (call.method.equals("launchMessagingUI")) {
+                                onLaunchMessagingUi(null);
+                            }
+
+                            else {
+                                result.notImplemented();
+                            }
+
+                        }
+                );
+
+    } 
+```
+Define mesibo users as follows
+```java
+//Refer to the Get-Started guide to create two users and their access tokens
+DemoUser mUser1 = new DemoUser("deb4b3969975eb6f461f06d047eed647a0a34a2b76ea2e551792de", "User-1", "flutter_demo_1");
+DemoUser mUser2 = new DemoUser("c085e11940ab171b45d2105e345104e5a8dd8a9a1edd8567eff1792df", "User-2", "flutter_demo_2");
+```
+
+### Running the sample application
+From Android Studio, run your application by connecting a mobile device/Emulator. 
+Now, In the Sample Android application 
+1. Click on login as User-1  
+2. Launch Message UI and send a message 
+3. Click on login as User-2 and launch message UI. You should now receive the message from User-1.
+4. You can install the app on multiple devices a try exchanging messages and making calls. 
+
+
+
+
+
