@@ -59,6 +59,8 @@
 		<div style="padding-top: 30px;">
 		<button type="button" class="btn btn-primary" onclick="video_call()">Call</button> 
 		<button type="button" class="btn btn-danger" onclick="hangup()">Hangup</button>
+    		<button type="button" class="btn btn-info" onclick="video_mute_toggle()">Toggle Video Mute</button>
+    		<button type="button" class="btn btn-warning" onclick="audio_mute_toggle()">Toggle Audio Mute</button>
 		<button type="button" class="btn btn-info" id="vcstatus" style="float:right;">Call Status: </button>
 		</div>
 	
@@ -70,6 +72,7 @@
 		<div style="padding-top: 30px;">
 		<button type="button" class="btn btn-primary" onclick="voice_call()">Call</button> 
 		<button type="button" class="btn btn-danger" onclick="hangup()">Hangup</button>
+    		<button type="button" class="btn btn-warning" onclick="audio_mute_toggle()">Toggle Audio Mute</button>
 		<button type="button" class="btn btn-info" id="acstatus" style="float:right;">Call Status: </button>
 		</div>
     <audio id="audioPlayer" autoplay="autoplay" controls="controls" style="visibility:hidden; height:5px;"></audio>

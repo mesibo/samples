@@ -76,8 +76,9 @@ DemoNotify.prototype.Mesibo_OnCallStatus = function(callid, status) {
 	var v = document.getElementById("vcstatus");
 	var a = document.getElementById("acstatus");
 
-	var s = "Complete"; 
-	if(status & MESIBO_CALLSTATUS_COMPLETE) {
+	var s = ""; 
+	if(status&MESIBO_CALLSTATUS_COMPLETE) {
+		s = "Complete"; 
 		console.log("closing");
 		$('#answerModal').modal("hide");
 	}
@@ -168,6 +169,14 @@ function sendReadReceipt() {
 function video_call() {
 	api.setupVideoCall("localVideo", "remoteVideo", true);
 	api.call(demo_destination);
+}
+
+function video_mute_toggle() {
+	api.toggleVideoMute();
+}
+
+function audio_mute_toggle() {
+	api.toggleAudioMute();
 }
 
 function voice_call() {
