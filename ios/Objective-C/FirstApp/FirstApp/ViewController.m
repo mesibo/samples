@@ -2,7 +2,7 @@
 //  ViewController.m
 //  FirstApp
 //
-//  Copyright © 2020 Mesibo. All rights reserved.
+//  Copyright © 2021 Mesibo. All rights reserved.
 //
 
 #import "ViewController.h"
@@ -11,7 +11,7 @@
 
 @interface ViewController () {
     NSString *mRemoteUser;
-    MesiboUserProfile *mProfile;
+    MesiboProfile *mProfile;
     MesiboReadSession *mReadSession;
     
     NSDictionary *mUser1, *mUser2;
@@ -66,10 +66,9 @@
     mRemoteUser = address;
     
     //set profile which is required by UI
-    mProfile = [MesiboUserProfile new];
-    mProfile.name = name;
-    mProfile.address = address;
-    [MesiboInstance setProfile:mProfile refresh:NO];
+    mProfile = [MesiboInstance getProfile:address groupid:0];
+    [mProfile setName:name];
+    [mProfile save];
     
     //OPTIONAL, initialize calls
     [MesiboCall startWith:nil name:@"mesibo first App" icon:nil callKit:YES];
@@ -156,7 +155,7 @@
     [MesiboCallInstance callUi:self address:mRemoteUser video:YES];
 }
 
--(BOOL) MesiboCall_onNotifyIncoming:(int)type profile:(MesiboUserProfile *)profile video:(BOOL)video {
+-(BOOL) MesiboCall_onNotifyIncoming:(int)type profile:(MesiboProfile *)profile video:(BOOL)video {
     return YES;
 }
 

@@ -23,7 +23,7 @@ class ViewController: UIViewController, MesiboDelegate {
     @IBOutlet weak var mVideoCallButton: UIButton!
 
     var mRemoteUser: String!
-    var mProfile: MesiboUserProfile!
+    var mProfile: MesiboProfile!
     var mReadSession: MesiboReadSession!
     
     //Refer to the Get-Started guide to create two users and their access tokens
@@ -70,10 +70,10 @@ class ViewController: UIViewController, MesiboDelegate {
         mRemoteUser = address
         
         //set profile which is required by UI
-        mProfile = MesiboUserProfile()
-        mProfile.name = name
-        mProfile.address = address
-        Mesibo.getInstance()!.setProfile(mProfile, refresh: false)
+        mProfile = Mesibo.getInstance()?.getProfile(address, groupid: 0)
+        mProfile.setName(name)
+        mProfile.save()
+
         
         //OPTIONAL, initialize calls
         MesiboCall.start(with: nil, name: "mesibo first app", icon: nil, callKit: true)
@@ -168,7 +168,7 @@ class ViewController: UIViewController, MesiboDelegate {
         MesiboCall.getInstance().callUi(self, address: mRemoteUser, video: true)
     }
     
-    func mesiboCall_(onNotifyIncoming type: Int32, profile: MesiboUserProfile!, video: Bool) -> Bool {
+    func mesiboCall_(onNotifyIncoming type: Int32, profile: MesiboProfile!, video: Bool) -> Bool {
         return true
     }
     
