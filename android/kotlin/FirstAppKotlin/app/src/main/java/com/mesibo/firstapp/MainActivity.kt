@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.mesibo.api.Mesibo
+import com.mesibo.api.MesiboProfile
 import com.mesibo.calls.api.MesiboCall
 
 import com.mesibo.messaging.MesiboUI
@@ -25,7 +26,7 @@ class MainActivity : AppCompatActivity(), Mesibo.ConnectionListener, Mesibo.Mess
 
     internal var mRemoteUser: DemoUser? = null
 
-    var mProfile: Mesibo.UserProfile? = null
+    var mProfile: MesiboProfile? = null
     var mReadSession: Mesibo.ReadDbSession? = null
     var mLoginButton1: View? = null
     var mLoginButton2: View? = null
@@ -66,10 +67,10 @@ class MainActivity : AppCompatActivity(), Mesibo.ConnectionListener, Mesibo.Mess
         Mesibo.start()
 
         mRemoteUser = remoteUser
-        mProfile = Mesibo.UserProfile()
-        mProfile?.address = remoteUser.address
-        mProfile?.name = remoteUser.name
-        Mesibo.setUserProfile(mProfile, false)
+        mProfile = Mesibo.getProfile(remoteUser.address)
+        mProfile?.setName(remoteUser.name)
+        mProfile?.save()
+
 
         // disable login buttons
         mLoginButton1!!.isEnabled = false

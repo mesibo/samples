@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.mesibo.api.Mesibo;
 
+import com.mesibo.api.MesiboProfile;
 import com.mesibo.calls.api.MesiboCall;
 import com.mesibo.messaging.MesiboUI;
 
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements Mesibo.Connection
     DemoUser mUser2 = new DemoUser("pqr", "User-1", "456");
 
     DemoUser mRemoteUser;
-    Mesibo.UserProfile mProfile;
+    MesiboProfile mProfile;
     Mesibo.ReadDbSession mReadSession;
 
     View mLoginButton1, mLoginButton2, mSendButton, mUiButton, mAudioCallButton, mVideoCallButton;
@@ -75,10 +76,9 @@ public class MainActivity extends AppCompatActivity implements Mesibo.Connection
         Mesibo.start();
 
         mRemoteUser = remoteUser;
-        mProfile = new Mesibo.UserProfile();
-        mProfile.address = remoteUser.address;
-        mProfile.name = remoteUser.name;
-        Mesibo.setUserProfile(mProfile, false);
+        mProfile = Mesibo.getProfile(remoteUser.address);
+        mProfile.setName(remoteUser.name);
+        mProfile.save();
 
         // disable login buttons
         mLoginButton1.setEnabled(false);
