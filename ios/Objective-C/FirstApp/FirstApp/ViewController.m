@@ -67,8 +67,7 @@
     
     //set profile which is required by UI
     mProfile = [MesiboInstance getProfile:address groupid:0];
-    [mProfile setName:name];
-    [mProfile save];
+    
     
     //OPTIONAL, initialize calls
     [MesiboCall startWith:nil name:@"mesibo first App" icon:nil callKit:YES];
@@ -78,8 +77,7 @@
     
     // set app mode in foreground for read-receipt to be sent
     [MesiboInstance setAppInForeground:self screenId:0 foreground:YES];
-    mReadSession = [MesiboReadSession new];
-    [mReadSession initSession:mRemoteUser groupid:0 query:nil delegate:self];
+    mReadSession = [mProfile createReadSession:self];
     [mReadSession enableReadReceipt:YES];
     [mReadSession read:100];
     
@@ -132,12 +130,9 @@
 }
 
 - (IBAction)onSendMessage:(id)sender {
-    MesiboParams *params = [MesiboParams new];
-    params.peer = mRemoteUser;
-    params.flag = MESIBO_FLAG_READRECEIPT | MESIBO_FLAG_DELIVERYRECEIPT;
 
     uint32_t mid = [MesiboInstance random];
-    [MesiboInstance sendMessage:params msgid:mid string:_mMessage.text];
+    [mProfile sendMessage:mid string:_mMessage.text];
     _mMessage.text = @"";
 }
 

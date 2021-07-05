@@ -84,8 +84,7 @@ class ViewController: UIViewController, MesiboDelegate {
         // set app mode in foreground for read-receipt to be sent
         Mesibo.getInstance()!.setAppInForeground(self, screenId: 0, foreground: true)
         
-        mReadSession = MesiboReadSession()
-        mReadSession.initSession(mRemoteUser, groupid: 0, query: nil, delegate: self)
+        mReadSession = mProfile.createReadSession(self)
         mReadSession.enableReadReceipt(true)
         mReadSession.read(100)
     }
@@ -131,12 +130,9 @@ class ViewController: UIViewController, MesiboDelegate {
     }
 
     @IBAction func onSendMessage(_ sender: Any) {
-        let params = MesiboParams()
-        params.peer = mRemoteUser
-        params.flag = (UInt32)(MESIBO_FLAG_READRECEIPT | MESIBO_FLAG_DELIVERYRECEIPT)
 
         let mid = Mesibo.getInstance()!.random()
-        Mesibo.getInstance()!.sendMessage(params, msgid: mid, string: mMessage.text)
+        mProfile!.sendMessage(mid, string: mMessage.text)
         mMessage.text = ""
     }
 
