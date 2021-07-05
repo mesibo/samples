@@ -77,8 +77,7 @@ public class MainActivity extends AppCompatActivity implements Mesibo.Connection
 
         mRemoteUser = remoteUser;
         mProfile = Mesibo.getProfile(remoteUser.address);
-        mProfile.setName(remoteUser.name);
-        mProfile.save();
+
 
         // disable login buttons
         mLoginButton1.setEnabled(false);
@@ -95,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements Mesibo.Connection
 
         // Read receipts are enabled only when App is set to be in foreground
         Mesibo.setAppInForeground(this, 0, true);
-        mReadSession = new Mesibo.ReadDbSession(mRemoteUser.address, this);
+        mReadSession = mProfile.createReadSession(this);
         mReadSession.enableReadReceipt(true);
         mReadSession.read(100);
 
@@ -111,24 +110,22 @@ public class MainActivity extends AppCompatActivity implements Mesibo.Connection
     }
 
     public void onSendMessage(View view) {
-        Mesibo.MessageParams p = new Mesibo.MessageParams();
-        p.peer = mRemoteUser.address;
-        p.flag = Mesibo.FLAG_READRECEIPT | Mesibo.FLAG_DELIVERYRECEIPT;
 
-        Mesibo.sendMessage(p, Mesibo.random(), mMessage.getText().toString().trim());
+        mProfile.sendMessage(Mesibo.random(), mMessage.getText().toString().trim());
+
         mMessage.setText("");
     }
 
     public void onLaunchMessagingUi(View view) {
-        MesiboUI.launchMessageView(this, mRemoteUser.address, 0);
+        MesiboUI.launchMessageView(this, mProfile.getAddress(), 0);
     }
 
     public void onAudioCall(View view) {
-        MesiboCall.getInstance().callUi(this, mProfile.address, false);
+        MesiboCall.getInstance().callUi(this, mProfile.getAddress(), false);
     }
 
     public void onVideoCall(View view) {
-        MesiboCall.getInstance().callUi(this, mProfile.address, true);
+        MesiboCall.getInstance().callUi(this, mProfile.getAddress(), true);
     }
 
     @Override

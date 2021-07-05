@@ -85,7 +85,7 @@ class MainActivity : AppCompatActivity(), Mesibo.ConnectionListener, Mesibo.Mess
 
         // Read receipts are enabled only when App is set to be in foreground
         Mesibo.setAppInForeground(this, 0, true)
-        mReadSession = Mesibo.ReadDbSession(mRemoteUser!!.address, this)
+        mReadSession = mProfile?.createReadSession(this)
         mReadSession?.enableReadReceipt(true)
         mReadSession?.read(100)
     }
@@ -99,10 +99,8 @@ class MainActivity : AppCompatActivity(), Mesibo.ConnectionListener, Mesibo.Mess
     }
 
     fun onSendMessage(view: View?) {
-        val p: Mesibo.MessageParams = Mesibo.MessageParams()
-        p.peer = mRemoteUser!!.address
-        p.flag = Mesibo.FLAG_READRECEIPT or Mesibo.FLAG_DELIVERYRECEIPT
-        Mesibo.sendMessage(p, Mesibo.random(), mMessage!!.text.toString().trim { it <= ' ' })
+
+        mProfile?.sendMessage(Mesibo.random(), mMessage!!.text.toString().trim { it <= ' ' })
         mMessage!!.setText("")
     }
 
@@ -111,11 +109,11 @@ class MainActivity : AppCompatActivity(), Mesibo.ConnectionListener, Mesibo.Mess
     }
 
     fun onAudioCall(view: View?) {
-        MesiboCall.getInstance().callUi(this, mProfile!!.address, false)
+        MesiboCall.getInstance().callUi(this, mProfile!!.getAddress(), false)
     }
 
     fun onVideoCall(view: View?) {
-        MesiboCall.getInstance().callUi(this, mProfile!!.address, true)
+        MesiboCall.getInstance().callUi(this, mProfile!!.getAddress(), true)
     }
 
     override fun Mesibo_onConnectionStatus(status: Int) {
