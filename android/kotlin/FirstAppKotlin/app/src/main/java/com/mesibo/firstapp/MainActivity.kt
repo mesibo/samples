@@ -1,28 +1,30 @@
 package com.mesibo.firstapp
 
 import android.os.Bundle
-import android.view.Gravity
 import android.view.View
-import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.mesibo.api.Mesibo
+import com.mesibo.api.Mesibo.GroupListener
+import com.mesibo.api.Mesibo.ProfileListener
+import com.mesibo.api.MesiboGroupProfile
 import com.mesibo.api.MesiboProfile
 import com.mesibo.calls.api.MesiboCall
-
 import com.mesibo.messaging.MesiboUI
 
 
-class MainActivity : AppCompatActivity(), Mesibo.ConnectionListener, Mesibo.MessageListener {
+class MainActivity : AppCompatActivity(), Mesibo.ConnectionListener, Mesibo.MessageListener,
+    ProfileListener, GroupListener {
 
     internal inner class DemoUser(var token: String, var name: String, var address: String)
 
-    //Refer to the Get-Started guide to create two users and their access tokens
-    internal var mUser1 = DemoUser("xyz", "User-1", "123")
-    internal var mUser2 = DemoUser("pqr", "User-2", "456")
+    /* Refer to the Get-Started guide to create two users and their access tokens
+     * https://mesibo.com/documentation/tutorials/get-started/
+     */
+    internal var mUser1 = DemoUser("<token-1>>", "User-1", "123")
+    internal var mUser2 = DemoUser("<token-2>", "User-2", "456")
 
     internal var mRemoteUser: DemoUser? = null
 
@@ -30,31 +32,23 @@ class MainActivity : AppCompatActivity(), Mesibo.ConnectionListener, Mesibo.Mess
     var mReadSession: Mesibo.ReadDbSession? = null
     var mLoginButton1: View? = null
     var mLoginButton2: View? = null
-    var mSendButton: Button? = null
-    var mUiButton: View? = null
-    var mAudioCallButton: View? = null
-    var mVideoCallButton: View? = null
+
     var mMessageStatus: TextView? = null
     var mConnStatus: TextView? = null
     var mMessage: EditText? = null
+    var mName: EditText? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         mLoginButton1 = findViewById(R.id.login1)
         mLoginButton2 = findViewById(R.id.login2)
-        mSendButton = findViewById(R.id.send)
-        mUiButton = findViewById(R.id.launchUI)
-        mAudioCallButton = findViewById(R.id.audioCall)
-        mVideoCallButton = findViewById(R.id.videoCall)
+
         mMessageStatus = findViewById(R.id.msgStatus)
         mConnStatus = findViewById(R.id.connStatus)
         mMessage = findViewById(R.id.message)
+        mName = findViewById(R.id.name)
 
-        mSendButton?.setEnabled(false)
-        mUiButton?.setEnabled(false)
-        mAudioCallButton?.setEnabled(false)
-        mVideoCallButton?.setEnabled(false)
     }
 
     private fun mesiboInit(user: DemoUser, remoteUser: DemoUser) {
@@ -76,18 +70,19 @@ class MainActivity : AppCompatActivity(), Mesibo.ConnectionListener, Mesibo.Mess
         mLoginButton1!!.isEnabled = false
         mLoginButton2!!.isEnabled = false
 
-        // enable buttons
-        mSendButton!!.isEnabled = true
-        mUiButton!!.isEnabled = true
-        mAudioCallButton!!.isEnabled = true
-        mVideoCallButton!!.isEnabled = true
-        MesiboCall.getInstance().init(applicationContext)
-
         // Read receipts are enabled only when App is set to be in foreground
         Mesibo.setAppInForeground(this, 0, true)
         mReadSession = mProfile?.createReadSession(this)
         mReadSession?.enableReadReceipt(true)
         mReadSession?.read(100)
+
+        /* initialize call with custom title */
+
+        /* initialize call with custom title */
+        MesiboCall.getInstance().init(applicationContext)
+        val cp = MesiboCall.getInstance().createCallProperties(true)
+        cp.ui.title = "First App"
+        MesiboCall.getInstance().setDefaultUiProperties(cp.ui)
     }
 
     fun onLoginUser1(view: View?) {
@@ -99,21 +94,56 @@ class MainActivity : AppCompatActivity(), Mesibo.ConnectionListener, Mesibo.Mess
     }
 
     fun onSendMessage(view: View?) {
-
+        if (!isLoggedIn()) return
         mProfile?.sendMessage(Mesibo.random(), mMessage!!.text.toString().trim { it <= ' ' })
         mMessage!!.setText("")
     }
 
     fun onLaunchMessagingUi(view: View?) {
+        if (!isLoggedIn()) return
         MesiboUI.launchMessageView(this, mRemoteUser!!.address, 0)
     }
 
     fun onAudioCall(view: View?) {
+        if (!isLoggedIn()) return
         MesiboCall.getInstance().callUi(this, mProfile!!.getAddress(), false)
     }
 
     fun onVideoCall(view: View?) {
+        if (!isLoggedIn()) return
         MesiboCall.getInstance().callUi(this, mProfile!!.getAddress(), true)
+    }
+
+    fun onUpdateProfile(view: View?) {
+        if (!isLoggedIn()) return
+        val profile = Mesibo.getSelfProfile() ?: return
+        val name: String = mName?.getText().toString().trim({ it <= ' ' })
+        profile.name = name
+        profile.status = "I am using mesibo"
+        profile.save()
+    }
+
+    fun onCreateGroup(view: View?) {
+        if (!isLoggedIn()) return
+        Mesibo.createGroup("My Group", 0, this)
+    }
+
+    fun addGroupMembers(profile: MesiboProfile) {
+        if (!isLoggedIn()) return
+        val gp = profile.groupProfile
+        val members = arrayOf(mRemoteUser!!.address)
+        gp.addMembers(members, MesiboGroupProfile.MEMBERFLAG_ALL.toLong(), 0)
+    }
+
+    fun isLoggedIn(): Boolean {
+        if (Mesibo.STATUS_ONLINE == Mesibo.getConnectionStatus()) return true
+        toast("Login with a valid token first")
+        return false
+    }
+
+    fun toast(message: String?) {
+        val toast = Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT)
+        toast.show()
     }
 
     override fun Mesibo_onConnectionStatus(status: Int) {
@@ -123,11 +153,7 @@ class MainActivity : AppCompatActivity(), Mesibo.ConnectionListener, Mesibo.Mess
     override fun Mesibo_onMessage(messageParams: Mesibo.MessageParams?, data: ByteArray?): Boolean {
         try {
             val message = String(data!!)
-            val toast = Toast.makeText(applicationContext,
-                    message,
-                    Toast.LENGTH_SHORT)
-            toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0)
-            toast.show()
+            toast(message)
         } catch (e: Exception) {
         }
         return true
@@ -141,4 +167,40 @@ class MainActivity : AppCompatActivity(), Mesibo.ConnectionListener, Mesibo.Mess
     override fun Mesibo_onLocation(messageParams: Mesibo.MessageParams?, location: Mesibo.Location?) {}
     override fun Mesibo_onFile(messageParams: Mesibo.MessageParams?, fileInfo: Mesibo.FileInfo?) {}
 
+    override fun Mesibo_onProfileUpdated(profile: MesiboProfile) {
+        toast(profile.getName() + " has updated profile")
+    }
+
+    override fun Mesibo_onGetProfile(profile: MesiboProfile): Boolean {
+        return false;
+    }
+
+    override fun Mesibo_onGroupCreated(profile: MesiboProfile) {
+        toast("New Group Created: " + profile.name)
+        addGroupMembers(profile)
+    }
+
+    override fun Mesibo_onGroupJoined(profile: MesiboProfile) {
+    }
+
+    override fun Mesibo_onGroupLeft(profile: MesiboProfile) {
+    }
+
+    override fun Mesibo_onGroupMembers(
+        profile: MesiboProfile,
+        members: Array<out MesiboGroupProfile.Member>?
+    ) {
+    }
+
+    override fun Mesibo_onGroupMembersJoined(
+        profile: MesiboProfile,
+        members: Array<out MesiboGroupProfile.Member>?
+    ) {
+    }
+
+    override fun Mesibo_onGroupMembersRemoved(
+        profile: MesiboProfile,
+        members: Array<out MesiboGroupProfile.Member>?
+    ) {
+    }
 }

@@ -30,6 +30,7 @@
             android:layout_height="wrap_content"
             android:text="Login as User1"
             android:onClick="onLoginUser1"
+            android:textSize="10sp"
             ></Button>
 
         <Button
@@ -39,24 +40,25 @@
             android:layout_height="wrap_content"
             android:text="Login as User2"
             android:onClick="onLoginUser2"
+            android:textSize="10sp"
             ></Button>
     </LinearLayout>
-
-    <View
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#c0c0c0"/>
 
     <TextView
         android:id="@+id/connStatus"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Connection Status: -1 "
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:gravity="center_horizontal"
         android:textSize="20sp"
         />
+
+    <View
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#c0c0c0"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -70,6 +72,7 @@
         android:layout_width="250dp"
         android:layout_height="60dp"
         android:layout_marginLeft="10dp"
+        android:hint="Enter Message"
         android:ems="10" />
 
         <Button
@@ -79,6 +82,7 @@
             android:layout_height="wrap_content"
             android:text="Send"
             android:onClick="onSendMessage"
+            android:textSize="10sp"
             ></Button>
 
     </LinearLayout>
@@ -92,34 +96,80 @@
         android:textSize="14sp"
         />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:padding="10dp"
+        >
+
     <Button
         android:id="@+id/launchUI"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Launch Message UI"
+        android:text="Messaging UI"
         android:onClick="onLaunchMessagingUi"
+        android:textSize="10sp"
         ></Button>
 
     <Button
         android:id="@+id/audioCall"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Audio Call"
         android:onClick="onAudioCall"
+        android:textSize="10sp"
         ></Button>
 
     <Button
         android:id="@+id/videoCall"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Video Call"
         android:onClick="onVideoCall"
+        android:textSize="10sp"
+        ></Button>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:padding="10dp"
+        >
+
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="10dp"
+            android:hint="Enter Your Name"
+            />
+
+        <Button
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Profile Update"
+            android:onClick="onUpdateProfile"
+            android:textSize="10sp"
+            ></Button>
+
+    </LinearLayout>
+
+    <Button
+        android:layout_marginLeft="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create a Group"
+        android:onClick="onCreateGroup"
+        android:textSize="10sp"
         ></Button>
 
 </LinearLayout>
