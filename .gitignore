@@ -5,3 +5,5 @@ android/MesiboSample/.idea
 **/.idea
 **/.sh
 **/.gradle
+.gitignore
+**/.gitignore
