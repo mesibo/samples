@@ -37,7 +37,10 @@
 		<p><strong>Note:</strong> Open your web-browser console to see all the incoming messages, message status, etc.</p>
     
 		<button type="button" id="btn1" class="btn btn-primary" onclick="sendMessage()">Send a Message</button>
-    		<button type="button" id="btn2" class="btn btn-success" onclick="sendFile()">Send a File</button>
+		<label class="btn btn-success" for="filefield" style="margin-top:10px;">
+		<input id="filefield" type=file name='filefield' class="d-none" onchange="sendFile()">
+		Send a File
+		</label>
     		<button type="button" id="btn3" class="btn btn-info" onclick="sendReadReceipt()">Send Read Receipt</button>
 		</div>
 
@@ -77,37 +80,66 @@
 		</div>
     <audio id="audioPlayer" autoplay="autoplay" controls="controls" style="visibility:hidden; height:5px;"></audio>
 		<p/>	
+		
+		<h3>Profile Update Demo</h3>
+		<p>The buttons below demonstrate how to update self profile and publish it.<p/>
+		<p><strong>Note:</strong> Open your web-browser console to see all the logs from the listener</p>
+		
+		<form class="border p-2 m-2">
+			<div class="form-group">
+				<label for="name">Name</label>
+				<input type="text" class="form-control" id="name" placeholder="Enter Name" maxlength="32">
+			</div>
+			<div class="form-group">
+				<label class="btn btn-success" for="profileimage" style="margin-top:10px;">
+					<input id="profileimage" type=file name='profileimage' class="d-none">
+					Select Profile Image
+				</label>
+			</div>
+		</form>
+
+		<p/>
+		<button type="button" id="btn1" class="btn btn-primary m-2" onclick="updateProfile()">Publish Profile</button>
+		<p/>	
+
+		<h3>Group Creation Demo</h3>
+		<p>The buttons below demonstrate how to create a group and add members.<p/>
+		<p><strong>Note:</strong> Open your web-browser console to see all the logs from the listener</p>
+
+		<button type="button" id="btn1" class="btn btn-primary" onclick="createGroup()">Create a Group</button>
+		<p/>	
+
 		<h3 style="marging-top: 20px; important">On-Premise</h3>
 		<p>If you prefer, you can run the entire Mesibo platform in your own premise OR private cloud. All the messages and calls go through your own data center and stay in your own database. Refer to Mesibo on-premise documentation to download Mesibo On-Premise and run it in your own data center!</strong>.</p>
-		
+
 		<div style="padding-top: 10px;">
-		<a href="https://mesibo.com/on-premise/" class="btn btn-info" role="button">Run Mesibo in your own premise</a>
+			<a href="https://mesibo.com/on-premise/" class="btn btn-info" role="button">Run Mesibo in your own premise</a>
 		</div>
 		<p/>	
 		<p/>	
-	<div class="container">
+		<div class="container">
 
-<!-- Modal -->
-<div class="modal fade" id="answerModal" tabindex="-1" role="dialog" aria-labelledby="answerModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="answerModalLabel">Incoming Call</h5>
-        <button type="button" class="close" data-dismiss="modal" onclick="hangup();" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" id="ansBody">
-        Incoming Call From
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="hangup();">Hang-up</button>
-        <button type="button" class="btn btn-success" data-dismiss="modal" onclick="answer();">Answer</button>
-      </div>
-    </div>
-  </div>
-</div>
-	</div>
+			<!-- Modal -->
+			<div class="modal fade" id="answerModal" tabindex="-1" role="dialog" aria-labelledby="answerModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="answerModalLabel">Incoming Call</h5>
+							<button type="button" class="close" data-dismiss="modal" onclick="hangup();" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body" id="ansBody">
+							Incoming Call From
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="hangup();">Hang-up</button>
+							<button type="button" class="btn btn-success" data-dismiss="modal" onclick="answer();">Answer</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
 	</div>
 
