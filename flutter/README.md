@@ -221,8 +221,8 @@ Next, create a MethodChannel and set a MethodCallHandler inside the `configureFl
 Define mesibo users as follows
 ```java
 //Refer to the Get-Started guide to create two users and their access tokens
-DemoUser mUser1 = new DemoUser("deb4b3969975eb6f461f06d047eed647a0a34a2b76ea2e551792de", "User-1", "flutter_demo_1");
-DemoUser mUser2 = new DemoUser("c085e11940ab171b45d2105e345104e5a8dd8a9a1edd8567eff1792df", "User-2", "flutter_demo_2");
+DemoUser mUser1 = new DemoUser("token-1-from-console", "User-1", "flutter_demo_1");
+DemoUser mUser2 = new DemoUser("token-2-from-console", "User-2", "flutter_demo_2");
 ```
 
 ### Running the sample application
