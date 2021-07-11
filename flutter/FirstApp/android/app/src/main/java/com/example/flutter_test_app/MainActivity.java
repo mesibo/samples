@@ -14,6 +14,7 @@ import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugins.GeneratedPluginRegistrant;
 
 import com.mesibo.api.Mesibo;
+import com.mesibo.api.MesiboProfile;
 import com.mesibo.calls.api.MesiboCall;
 import com.mesibo.messaging.MesiboUI;
 
@@ -37,11 +38,11 @@ public class MainActivity extends FlutterActivity implements Mesibo.ConnectionLi
     }
 
     //Refer to the Get-Started guide to create two users and their access tokens
-    DemoUser mUser1 = new DemoUser("xyz", "User-1", "flutter_demo_1");
-    DemoUser mUser2 = new DemoUser("abc", "User-2", "flutter_demo_2");
+    DemoUser mUser1 = new DemoUser("<token-1>>", "User-1", "flutter_demo_1");
+    DemoUser mUser2 = new DemoUser("<token-2>", "User-2", "flutter_demo_2");
 
     DemoUser mRemoteUser;
-    Mesibo.UserProfile mProfile;
+    MesiboProfile mProfile;
     Mesibo.ReadDbSession mReadSession;
 
     private String mMessage = null;
@@ -106,23 +107,20 @@ public class MainActivity extends FlutterActivity implements Mesibo.ConnectionLi
         Mesibo api = Mesibo.getInstance();
         api.init(getApplicationContext());
 
+
         Mesibo.addListener(this);
-//        Mesibo.setSecureConnection(true);
         Mesibo.setAccessToken(user.token);
         Mesibo.setDatabase("mydb", 0);
         Mesibo.start();
 
         mRemoteUser = remoteUser;
-        mProfile = new Mesibo.UserProfile();
-        mProfile.address = remoteUser.address;
-        mProfile.name = remoteUser.name;
-        Mesibo.setUserProfile(mProfile, false);
+        mProfile = Mesibo.getProfile(mRemoteUser.address);
 
         MesiboCall.getInstance().init(getApplicationContext());
 
         // Read receipts are enabled only when App is set to be in foreground
         Mesibo.setAppInForeground(this, 0, true);
-        mReadSession = new Mesibo.ReadDbSession(mRemoteUser.address, this);
+        mReadSession = mProfile.createReadSession(this);
         mReadSession.enableReadReceipt(true);
         mReadSession.read(100);
 
@@ -137,16 +135,12 @@ public class MainActivity extends FlutterActivity implements Mesibo.ConnectionLi
     }
 
     public void onSendMessage(View view) {
-        Mesibo.MessageParams p = new Mesibo.MessageParams();
-        p.peer = mRemoteUser.address;
-        p.flag = Mesibo.FLAG_READRECEIPT | Mesibo.FLAG_DELIVERYRECEIPT;
-
         if(mMessage.isEmpty()){
             mEventsSink.success("Invalid Message");
             return;
         }
 
-        Mesibo.sendMessage(p, Mesibo.random(), mMessage.toString().trim());
+        mProfile.sendMessage(Mesibo.random(), mMessage.toString().trim());
     }
 
     public void onLaunchMessagingUi(View view) {
@@ -154,11 +148,11 @@ public class MainActivity extends FlutterActivity implements Mesibo.ConnectionLi
     }
 
     public void onAudioCall(View view) {
-        MesiboCall.getInstance().callUi(this, mProfile.address, false);
+        MesiboCall.getInstance().callUi(this, mProfile.getAddress(), false);
     }
 
     public void onVideoCall(View view) {
-        MesiboCall.getInstance().callUi(this, mProfile.address, true);
+        MesiboCall.getInstance().callUi(this, mProfile.getAddress(), true);
     }
 
 
