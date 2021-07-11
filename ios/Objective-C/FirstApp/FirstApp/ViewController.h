@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *mAudioCallButton;
 @property (weak, nonatomic) IBOutlet UIButton *mVideoCallButton;
 
+@property (weak, nonatomic) IBOutlet UITextField *mName;
 
 
 @end

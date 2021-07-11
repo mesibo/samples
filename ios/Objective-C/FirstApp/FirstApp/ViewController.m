@@ -26,14 +26,15 @@
     
     //Refer to the Get-Started guide to create two users and their access tokens
     mUser1 = @{
-        @"token": @"xyz",\
-        @"name": @"User 1",\
+        @"token": @"<token-1>",
+        @"name": @"User 1",
         @"address": @"123"};
     
     mUser2 = @{
-        @"token": @"pqr",\
-        @"name": @"User 2",\
-        @"address": @"456"};
+        @"token": @"<token-2>",
+        @"name": @"User 2",
+        @"address": @"456"
+    };
     
     
     _mUiButton.enabled = NO;
@@ -48,7 +49,6 @@
     
     [MesiboInstance addListener:self];
 
-    [MesiboInstance setSecureConnection:YES];
     // set user authentication token obtained by creating user
     [MesiboInstance setAccessToken:token];
     [MesiboInstance setDatabase:@"mydb" resetTables:0];
@@ -102,7 +102,7 @@
     // Sshowing alerts for real-time messages (and not the
     // ones from the database)
     if(MESIBO_ORIGIN_REALTIME == params.origin && 0 == params.type) {
-        [self alert:message];
+        [self alert:@"New Message" message:message];
     }
 
 }
@@ -129,25 +129,72 @@
     [self mesiboInit:mUser2[@"token"] remoteUserAddress:mUser1[@"address"] remoteUserName:mUser1[@"name"]];
 }
 
-- (IBAction)onSendMessage:(id)sender {
+-(BOOL) isLoggedIn {
+        if(MESIBO_STATUS_ONLINE == [MesiboInstance getConnectionStatus]) return YES;
+        [self alert:@"Not Logged-In" message:@"Login with a valid token first"];
+        return NO;
+}
 
+- (IBAction)onSendMessage:(id)sender {
+    if(![self isLoggedIn]) return;
     uint32_t mid = [MesiboInstance random];
     [mProfile sendMessage:mid string:_mMessage.text];
     _mMessage.text = @"";
+    [_mMessage resignFirstResponder];
 }
 
 - (IBAction)onLaunchMessagingUIModule:(id)sender {
+    if(![self isLoggedIn]) return;
     //requires pod mesibo-ui
     [MesiboUI launchMessageViewController:self profile:mProfile];
 }
 
 /* ensure to grant background mode and microphone permissions */
 - (IBAction)onAudioCall:(id)sender {
+    if(![self isLoggedIn]) return;
     [MesiboCallInstance callUi:self address:mRemoteUser video:NO];
 }
 
 - (IBAction)onVideoCall:(id)sender {
+    if(![self isLoggedIn]) return;
     [MesiboCallInstance callUi:self address:mRemoteUser video:YES];
+}
+
+- (IBAction)updateProfile:(id)sender {
+    if(![self isLoggedIn]) return;
+    MesiboProfile *sp = [MesiboInstance getSelfProfile];
+    [sp setName:_mName.text];
+    [sp setStatus:@"I am using mesibo iOS first app"];
+    [sp save];
+    _mName.text = @"";
+    [_mName resignFirstResponder];
+}
+
+-(void) addMembers:(MesiboProfile *)profile {
+    NSMutableArray *members = [NSMutableArray new];
+    [members addObject:mRemoteUser];
+    
+    MesiboGroupProfile *gp = [profile getGroupProfile];
+    [gp addMembers:members permissions:MESIBO_MEMBERFLAG_ALL adminPermissions:0];
+}
+
+- (IBAction)createGroup:(id)sender {
+    if(![self isLoggedIn]) return;
+    [MesiboInstance createGroup:@"My First Group" flags:0 listener:self];
+    
+    //Mesibo_onGroupCreated  will be called when the group is created
+    
+}
+
+-(void) Mesibo_onGroupCreated:(MesiboProfile *)profile {
+    [self alert:@"New Group Created" message:[profile getName]];
+    
+    // add members to the group
+    [self addMembers:profile];
+}
+
+-(void) Mesibo_onProfileUpdated:(MesiboProfile *)profile {
+    [self alert:@"Profile Updated" message:[profile getName]];
 }
 
 -(BOOL) MesiboCall_onNotifyIncoming:(int)type profile:(MesiboProfile *)profile video:(BOOL)video {
@@ -174,9 +221,9 @@
     
 }
 
--(void) alert:(NSString *)message {
+-(void) alert:(NSString *)title message:(NSString *)message {
     
-    UIAlertController *avc = [UIAlertController alertControllerWithTitle:@"New Message" message:message preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *avc = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleActionSheet];
 
     [self presentViewController:avc animated:YES completion:nil];
 

@@ -1,0 +1,35 @@
+PODS:
+  - mesibo (1.5.3)
+  - mesibo-calls (1.5.3):
+    - mesibo
+    - mesibo-webrtc (= 1.4.0)
+  - mesibo-mediapicker (1.5.0)
+  - mesibo-ui (1.5.3):
+    - mesibo
+    - mesibo-mediapicker
+  - mesibo-webrtc (1.4.0):
+    - mesibo
+
+DEPENDENCIES:
+  - mesibo
+  - mesibo-calls
+  - mesibo-ui
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - mesibo
+    - mesibo-calls
+    - mesibo-mediapicker
+    - mesibo-ui
+    - mesibo-webrtc
+
+SPEC CHECKSUMS:
+  mesibo: 1db11c50815ac57092f868ffd91466b2359992a9
+  mesibo-calls: 796c55831f1701e7b376dae584839cddd6ef8858
+  mesibo-mediapicker: bc809ef6393a591b7bd96d7d11c8041716acbc9b
+  mesibo-ui: 7e8f4a3f3eeda77ad85b5a31123993d1b56bd5cd
+  mesibo-webrtc: bff3012986dd1fb02680a620b56eb3920c9d5bde
+
+PODFILE CHECKSUM: 52d4695c97b2e2619a807c095b3f02bfbebc5e2c
+
+COCOAPODS: 1.10.0

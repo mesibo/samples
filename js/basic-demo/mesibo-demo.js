@@ -203,6 +203,7 @@ function updateProfile() {
 }
 
 function createGroup() {
+	// createGroup function can take listener or function as the last parameter
 	api.createGroup("My Group From JS", 0, function(profile) {
 		console.log("group created");
 		addMembers(profile);

@@ -1,0 +1,11 @@
+CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO
+EXCLUDED_ARCHS[sdk=iphonesimulator*] = arm64
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/mesibo" "${PODS_ROOT}/mesibo-calls" "${PODS_ROOT}/mesibo-mediapicker" "${PODS_ROOT}/mesibo-ui" "${PODS_ROOT}/mesibo-webrtc"
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+OTHER_LDFLAGS = $(inherited) -ObjC -l"c++" -framework "AVFoundation" -framework "AVKit" -framework "AddressBook" -framework "AssetsLibrary" -framework "AudioToolBox" -framework "CoreLocation" -framework "CoreMedia" -framework "CoreTelephony" -framework "GLKit" -framework "MapKit" -framework "MediaPlayer" -framework "Metal" -framework "MetalKit" -framework "MobileCoreServices" -framework "Network" -framework "OpenGLES" -framework "Photos" -framework "SystemConfiguration" -framework "UIKit" -framework "VideoToolBox" -framework "WebRTC" -framework "mediapicker" -framework "mesibo" -framework "mesibocall" -framework "mesiboui"
+PODS_BUILD_DIR = ${BUILD_DIR}
+PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
+PODS_PODFILE_DIR_PATH = ${SRCROOT}/.
+PODS_ROOT = ${SRCROOT}/Pods
+PODS_XCFRAMEWORKS_BUILD_DIR = $(PODS_CONFIGURATION_BUILD_DIR)/XCFrameworkIntermediates
+USE_RECURSIVE_SCRIPT_INPUTS_IN_SCRIPT_PHASES = YES
