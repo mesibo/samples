@@ -175,15 +175,23 @@
     [members addObject:mRemoteUser];
     
     MesiboGroupProfile *gp = [profile getGroupProfile];
-    [gp addMembers:members permissions:MESIBO_MEMBERFLAG_ALL adminPermissions:0];
+    MesiboMemberPermissions *mp = [MesiboMemberPermissions new];
+    mp.flags = MESIBO_MEMBERFLAG_ALL;
+    mp.adminFlags = 0;
+    [gp addMembers:members permissions:mp];
 }
 
 - (IBAction)createGroup:(id)sender {
     if(![self isLoggedIn]) return;
-    [MesiboInstance createGroup:@"My First Group" flags:0 listener:self];
+    
+    MesiboGroupSettings *settings = [MesiboGroupSettings new];
+    settings.name = @"My First Group";
+    settings.flags = 0;
+    
+    [MesiboInstance createGroup:settings listener:self];
     
     //Mesibo_onGroupCreated  will be called when the group is created
-    
+   
 }
 
 -(void) Mesibo_onGroupCreated:(MesiboProfile *)profile {
@@ -191,6 +199,14 @@
     
     // add members to the group
     [self addMembers:profile];
+}
+
+-(void) Mesibo_onGroupJoined:(MesiboProfile *)groupProfile {
+    
+}
+
+-(void) Mesibo_onGroupError:(MesiboProfile *)groupProfile error:(uint32_t)error {
+    
 }
 
 -(void) Mesibo_onProfileUpdated:(MesiboProfile *)profile {

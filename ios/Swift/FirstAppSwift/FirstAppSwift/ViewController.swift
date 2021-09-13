@@ -197,7 +197,12 @@ class ViewController: UIViewController, MesiboDelegate {
         if !isLoggedIn() {
             return
         }
-        Mesibo.getInstance().createGroup("My First Group", flags: 0, listener: self)
+        
+        let gs:MesiboGroupSettings = MesiboGroupSettings();
+        gs.name = "My First Group";
+        gs.flags = 0;
+        
+        Mesibo.getInstance().createGroup(gs, listener: self)
         
     }
     
@@ -206,7 +211,10 @@ class ViewController: UIViewController, MesiboDelegate {
         members.append(mRemoteUser)
         
         let gp = profile?.getGroupProfile()
-        gp?.addMembers(members, permissions: UInt32(MESIBO_MEMBERFLAG_ALL), adminPermissions: 0)
+        let mp:MesiboMemberPermissions = MesiboMemberPermissions();
+        mp.flags = UInt32(MESIBO_MEMBERFLAG_ALL);
+        mp.adminFlags = 0;
+        gp?.addMembers(members, permissions:mp)
     }
     
     func mesibo_(onGroupCreated profile: MesiboProfile?) {
@@ -215,6 +223,15 @@ class ViewController: UIViewController, MesiboDelegate {
         // add members to the group
         addMembers(profile)
     }
+    
+    func mesibo_(onGroupJoined groupProfile: MesiboProfile!) {
+        
+    }
+    
+    func mesibo_(onGroupError groupProfile: MesiboProfile!, error: UInt32) {
+        
+    }
+        
     
     func mesibo_(onProfileUpdated profile: MesiboProfile?) {
         alert("Profile Updated", message: profile?.getName())

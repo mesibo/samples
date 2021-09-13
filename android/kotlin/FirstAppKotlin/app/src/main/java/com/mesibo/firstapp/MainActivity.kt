@@ -125,14 +125,20 @@ class MainActivity : AppCompatActivity(), Mesibo.ConnectionListener, Mesibo.Mess
 
     fun onCreateGroup(view: View?) {
         if (!isLoggedIn()) return
-        Mesibo.createGroup("My Group", 0, this)
+        var settings:MesiboGroupProfile.GroupSettings = MesiboGroupProfile.GroupSettings()
+        settings.name = "My Group"
+        settings.flags = 0
+        Mesibo.createGroup(settings, this)
     }
 
     fun addGroupMembers(profile: MesiboProfile) {
         if (!isLoggedIn()) return
         val gp = profile.groupProfile
         val members = arrayOf(mRemoteUser!!.address)
-        gp.addMembers(members, MesiboGroupProfile.MEMBERFLAG_ALL.toLong(), 0)
+        var mp: MesiboGroupProfile.MemberPermissions = MesiboGroupProfile.MemberPermissions();
+        mp.flags = MesiboGroupProfile.MEMBERFLAG_ALL.toLong()
+        mp.adminFlags = 0;
+        gp.addMembers(members, mp)
     }
 
     fun isLoggedIn(): Boolean {
@@ -202,5 +208,18 @@ class MainActivity : AppCompatActivity(), Mesibo.ConnectionListener, Mesibo.Mess
         profile: MesiboProfile,
         members: Array<out MesiboGroupProfile.Member>?
     ) {
+    }
+
+    override fun Mesibo_onGroupSettings(
+        p0: MesiboProfile?,
+        p1: MesiboGroupProfile.GroupSettings?,
+        p2: MesiboGroupProfile.MemberPermissions?,
+        p3: Array<out MesiboGroupProfile.GroupPin>?
+    ) {
+
+    }
+
+    override fun Mesibo_onGroupError(p0: MesiboProfile?, p1: Long) {
+
     }
 }

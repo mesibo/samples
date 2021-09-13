@@ -140,14 +140,20 @@ public class MainActivity extends AppCompatActivity implements Mesibo.Connection
 
     public void onCreateGroup(View view) {
         if(!isLoggedIn()) return;
-        Mesibo.createGroup("My Group", 0, this);
+        MesiboGroupProfile.GroupSettings settings = new MesiboGroupProfile.GroupSettings();
+        settings.name = "My Group";
+        settings.flags = 0;
+        Mesibo.createGroup(settings, this);
     }
 
     public void addGroupMembers(MesiboProfile profile) {
         if(!isLoggedIn()) return;
         MesiboGroupProfile gp = profile.getGroupProfile();
         String[] members = {mRemoteUser.address};
-        gp.addMembers(members, MesiboGroupProfile.MEMBERFLAG_ALL, 0);
+        MesiboGroupProfile.MemberPermissions mp = new MesiboGroupProfile.MemberPermissions();
+        mp.flags = MesiboGroupProfile.MEMBERFLAG_ALL;
+        mp.adminFlags = 0;
+        gp.addMembers(members, mp);
 
     }
 
@@ -228,6 +234,16 @@ public class MainActivity extends AppCompatActivity implements Mesibo.Connection
 
     @Override
     public void Mesibo_onGroupMembersRemoved(MesiboProfile profile, MesiboGroupProfile.Member[] members) {
+
+    }
+
+    @Override
+    public void Mesibo_onGroupSettings(MesiboProfile mesiboProfile, MesiboGroupProfile.GroupSettings groupSettings, MesiboGroupProfile.MemberPermissions memberPermissions, MesiboGroupProfile.GroupPin[] groupPins) {
+
+    }
+
+    @Override
+    public void Mesibo_onGroupError(MesiboProfile mesiboProfile, long l) {
 
     }
 
