@@ -111,19 +111,36 @@
                                     <action selector="onVideoCall:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CAV-Pq-Xtz"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fe3-K3-2em">
+                                <rect key="frame" x="189" y="417" width="93" height="30"/>
+                                <state key="normal" title="Get Members"/>
+                                <connections>
+                                    <action selector="GetGroupMembers:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uIH-PC-Mer"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B1m-OX-DUZ">
+                                <rect key="frame" x="328" y="417" width="40" height="30"/>
+                                <state key="normal" title="Leave"/>
+                                <connections>
+                                    <action selector="LeaveGroup:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EGY-0z-epT"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="xnb-SM-dcX" firstAttribute="top" secondItem="U86-kX-t0r" secondAttribute="top" id="5Ma-4E-cEe"/>
                             <constraint firstItem="x40-zh-trV" firstAttribute="top" secondItem="Qhq-fs-TMM" secondAttribute="bottom" constant="13.666666666666657" id="5QQ-AY-4U8"/>
+                            <constraint firstItem="Fe3-K3-2em" firstAttribute="top" secondItem="ab6-yH-lVC" secondAttribute="top" id="64H-NC-gAK"/>
                             <constraint firstItem="hh2-vH-R2j" firstAttribute="top" secondItem="f2i-tb-xhB" secondAttribute="bottom" constant="12" id="8LO-81-Xo2"/>
                             <constraint firstItem="YtK-Hq-fcg" firstAttribute="leading" secondItem="kfe-f6-hSH" secondAttribute="trailing" constant="66" id="CPg-5V-Kle"/>
                             <constraint firstItem="cCL-v1-vYn" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="25" id="E2P-0I-mpl"/>
                             <constraint firstItem="Fsd-GS-Sjs" firstAttribute="leading" secondItem="hh2-vH-R2j" secondAttribute="trailing" constant="45" id="Fhe-eN-FCh"/>
                             <constraint firstItem="ab6-yH-lVC" firstAttribute="top" secondItem="U86-kX-t0r" secondAttribute="bottom" constant="37" id="HxZ-RD-aPI"/>
                             <constraint firstItem="f2i-tb-xhB" firstAttribute="top" secondItem="cCL-v1-vYn" secondAttribute="bottom" constant="12" id="J8j-5K-eQV"/>
+                            <constraint firstItem="B1m-OX-DUZ" firstAttribute="top" secondItem="Fe3-K3-2em" secondAttribute="top" id="JPL-iH-ewf"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YtK-Hq-fcg" secondAttribute="trailing" constant="28" id="NpN-jW-ob0"/>
+                            <constraint firstItem="Fe3-K3-2em" firstAttribute="leading" secondItem="ab6-yH-lVC" secondAttribute="trailing" constant="60" id="R6S-BB-hfB"/>
                             <constraint firstItem="UgC-Cu-NdQ" firstAttribute="top" secondItem="hh2-vH-R2j" secondAttribute="bottom" constant="22" id="Ru1-W2-wA7"/>
                             <constraint firstItem="ph7-h1-Xvk" firstAttribute="leading" secondItem="Fsd-GS-Sjs" secondAttribute="trailing" constant="49" id="S3Q-B4-gxV"/>
                             <constraint firstItem="x40-zh-trV" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Ssh-da-eaJ"/>
@@ -140,6 +157,7 @@
                             <constraint firstItem="H1e-WY-Yx8" firstAttribute="top" secondItem="cCL-v1-vYn" secondAttribute="top" id="kaR-OZ-9oO"/>
                             <constraint firstItem="kfe-f6-hSH" firstAttribute="top" secondItem="0Pu-yZ-qNk" secondAttribute="bottom" constant="11.333333333333343" id="khb-2Y-3Vi"/>
                             <constraint firstItem="Qhq-fs-TMM" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="mRp-bl-S2T"/>
+                            <constraint firstItem="B1m-OX-DUZ" firstAttribute="leading" secondItem="Fe3-K3-2em" secondAttribute="trailing" constant="46" id="prX-xo-qgt"/>
                             <constraint firstItem="cCL-v1-vYn" firstAttribute="top" secondItem="x40-zh-trV" secondAttribute="bottom" constant="25" id="pw3-HG-qhX"/>
                             <constraint firstItem="U86-kX-t0r" firstAttribute="top" secondItem="hh2-vH-R2j" secondAttribute="bottom" constant="39" id="sFd-bW-926"/>
                             <constraint firstItem="YtK-Hq-fcg" firstAttribute="top" secondItem="kfe-f6-hSH" secondAttribute="top" id="vQM-5W-02S"/>

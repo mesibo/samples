@@ -25,6 +25,7 @@ class ViewController: UIViewController, MesiboDelegate {
     
     var mRemoteUser: String!
     var mProfile: MesiboProfile!
+    var mGroupProfile: MesiboProfile!
     var mReadSession: MesiboReadSession!
     
     //Refer to the Get-Started guide to create two users and their access tokens
@@ -72,8 +73,6 @@ class ViewController: UIViewController, MesiboDelegate {
         //set profile which is required by UI
         mProfile = Mesibo.getInstance()?.getProfile(address, groupid: 0)
         
-        var name: String = mProfile.getName();
-        var image: UIImage = mProfile.getThumbnail()
         
         
         //OPTIONAL, initialize calls
@@ -217,9 +216,28 @@ class ViewController: UIViewController, MesiboDelegate {
         gp?.addMembers(members, permissions:mp)
     }
     
+    @IBAction func GetGroupMembers(_ sender: Any) {
+        //var profile = Mesibo.getInstance()?.getGroupProfile(2340288);
+        //mGroupProfile = profile;
+        if(mGroupProfile == nil) {
+            return;
+        }
+        
+        mGroupProfile.getGroupProfile()?.getMembers(100, restart: false, listener: self)
+    }
+    
+    @IBAction func LeaveGroup(_ sender: Any) {
+        if(mGroupProfile == nil) {
+            return;
+        }
+        
+        mGroupProfile.getGroupProfile()?.leave();
+    }
+    
     func mesibo_(onGroupCreated profile: MesiboProfile?) {
         alert("New Group Created", message: profile?.getName())
         
+        mGroupProfile = profile
         // add members to the group
         addMembers(profile)
     }
@@ -228,8 +246,18 @@ class ViewController: UIViewController, MesiboDelegate {
         
     }
     
+    func mesibo_(onGroupLeft groupProfile: MesiboProfile!) {
+        alert("New Group Left", message: groupProfile?.getName())
+    }
+
+    
     func mesibo_(onGroupError groupProfile: MesiboProfile!, error: UInt32) {
         
+    }
+    
+    
+    func mesibo_(onGroupMembers groupProfile: MesiboProfile!, members: [Any]!) {
+        alert("members", message: "something")
     }
         
     
