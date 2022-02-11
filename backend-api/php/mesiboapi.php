@@ -1,25 +1,16 @@
 <?php
 
 require_once('mesiboconfig.php');
+require_once('json.php');
 
 $err = false;
-if(!isset($apikey))
+if(!isset($apptoken))
 	$err = true;
 
 if ($err) {
-	echo "ERROR: Please define your api key. If you don't have one then signup at https://mesibo.com to get one";
+	echo "ERROR: Please define your app token. If you don't have one then signup at https://mesibo.com to get one";
 	exit();	
 }
-
-/********************************************************************************
- This File contains all functions necessary for sending an API to perform the available
- Mesibo operations as mentioned in the documentation. 
- 
- IMPORTANT: All functions are dependent on the a base API URL 
-            http://api.tringme.com/api.php?  which is invoked to perform the operation.
-*********************************************************************************/
-$host = $_SERVER['HTTP_HOST'];
-$mesibobaseurl  = "https://api.mesibo.com/backend/?";
 
 /********************************************************************************
 Descripton: Performs the requested API operation 
@@ -32,10 +23,22 @@ Return Values: True- If operation is successful.
 *********************************************************************************/
 function MesiboAPI($parameters) {
 	global $apikey, $apilog, $file, $apptoken;
-	//$parameters['key']=$apikey;
+	global $mesibobaseurl;
+	global $jsonapi;
+
 	$parameters['token']=$apptoken;
-	$apiuri=CreateAPIURL($parameters);
-	$response = GetAPIResponse($apiuri);
+	$jsonbody = null;
+	$url = $mesibobaseurl;
+	if($jsonapi) {
+		$jsonbody = safe_json_encode($parameters);
+	} else {
+		$p = '';
+		CreateURLEncoded($parameters, $p);
+		$p = rtrim($p,'&');
+		$url= $url.'?'.$p;
+	}
+
+	$response = GetAPIResponse($url, $jsonbody);
 	return MesiboParseResponse($response);
 }
 
@@ -62,50 +65,50 @@ Parameters: $url - URL of the API being invoked.
 
 Return Values: Returns the response
 *********************************************************************************/
-function GetAPIResponse($url) {
-    
-	$opts = array(
-		'http'=>array(
-		'method'=>"GET",
-		'header'=>"Accept-language: en\r\n" .
-				"Cookie: foo=bar\r\n"
-					)
-		);
+function GetAPIResponse($url, $jsonbody) {
+	print "url=$url\n";
+	print "body=$jsonbody\n";
+	//return "";
+	$ch = curl_init();
+	curl_setopt($ch,CURLOPT_URL, $url);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);  
+	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+	curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch,CURLOPT_CONNECTTIMEOUT, 10);
+	curl_setopt($ch,CURLOPT_TIMEOUT, 20);
 
-	$context = stream_context_create($opts);
-	$response = 'FAILED';
-	$sock=fopen($url, 'r', false, $context);
-	if ($sock) {
-		$response='';
-		while (!feof($sock))
-			$response.=fgets($sock, 4096);
-
-		fclose($sock);
+	if($jsonbody) {
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonbody);
 	}
+
+	$response = curl_exec($ch);
+	curl_close ($ch);
+	print "response=$response\n";
 	return $response;
 }
 
 /********************************************************************************
-Descripton: Creates the request URL for the API being invoked with all the parameters and signature
-            appended to the URL as required. 
+Descripton: Creates URL encoded parameters
                                                                                                 
 Parameters: $params_array - Parameters                                 
-		    $privatekey - The private key.      
                                                                                          
-Return Values: The URL that is constructed.    
+Return Values: URL encoded parameters.    
 *********************************************************************************/
-function CreateAPIURL($params_array) {
-	global $mesibobaseurl;
-	
-	$uri = $mesibobaseurl;
-	if (isset($params_array['apiurl']))
-		$uri = $params_array['apiurl'];
-		
-	foreach($params_array as $key=>$val) {   
-		$uri .= "$key=" . urlencode($val) . '&';    
-	}
+function CreateURLEncoded($params_array, &$out) {
 
-	$uri .= "sig=none";        
-	return $uri;
+	foreach($params_array as $key=>$val) {   
+		if(is_array($val)) {
+			CreateURLEncoded($val, $out);
+			continue;
+		}
+		if($val === true) {
+			$val = 1;
+		} else if($val === false) {
+			$val = 0;
+		}
+		$out .= "$key=" . urlencode($val) . '&';    
+	}
 }
 
