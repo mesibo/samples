@@ -66,9 +66,6 @@ Parameters: $url - URL of the API being invoked.
 Return Values: Returns the response
 *********************************************************************************/
 function GetAPIResponse($url, $jsonbody) {
-	print "url=$url\n";
-	print "body=$jsonbody\n";
-	//return "";
 	$ch = curl_init();
 	curl_setopt($ch,CURLOPT_URL, $url);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);  
@@ -85,7 +82,6 @@ function GetAPIResponse($url, $jsonbody) {
 
 	$response = curl_exec($ch);
 	curl_close ($ch);
-	print "response=$response\n";
 	return $response;
 }
 
