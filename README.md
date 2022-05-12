@@ -45,6 +45,7 @@ Mesibo demo app is also built using the same sample code posted on GitHub here. 
 # Features!
 
   - One-on-one messaging and Group chat
+  - End-to-End Encryption
   - High quality voice and video calling
   - Rich messaging (text, picture, video, audio, other files)
   - Location sharing

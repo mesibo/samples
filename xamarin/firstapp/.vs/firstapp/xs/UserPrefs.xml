@@ -1,0 +1,45 @@
+﻿<Properties StartupConfiguration="{EC8D828F-1CB6-48A2-8421-FBF020138472}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="firstapp.Android/MainActivity.cs">
+    <Files>
+      <File FileName="firstapp/App.xaml" Line="8" Column="15" />
+      <File FileName="firstapp/MainPage.xaml" Line="41" Column="47" />
+      <File FileName="firstapp/MainPage.xaml.cs" Line="89" Column="66" />
+      <File FileName="firstapp/MesiboInterface.cs" />
+      <File FileName="firstapp.Android/mesiboDemo.cs" />
+      <File FileName="firstapp.iOS/Main.cs" Line="1" Column="1" />
+      <File FileName="firstapp.Android/Properties/AndroidManifest.xml" />
+      <File FileName="firstapp.iOS/mesiboDemo.cs" Line="62" Column="1" />
+      <File FileName="../../../../../Library/Frameworks/Mono.framework/External/xbuild/Xamarin/Android/Xamarin.Android.Legacy.targets" Line="647" Column="5" />
+      <File FileName="firstapp.Android/MainActivity.cs" Line="23" Column="79" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="firstapp" expanded="True">
+            <Node name="firstapp" expanded="True">
+              <Node name="App.xaml" expanded="True" />
+              <Node name="MainPage.xaml" expanded="True" />
+            </Node>
+            <Node name="firstapp.Android" expanded="True">
+              <Node name="Packages" expanded="True" />
+              <Node name="Resources" expanded="True" />
+              <Node name="MainActivity.cs" selected="True" />
+            </Node>
+            <Node name="firstapp.iOS" expanded="True">
+              <Node name="References" expanded="True" />
+              <Node name="Packages" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.firstapp.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget.50e0b2e7537529fa5b4a8672736fb9811b2e0b16" />
+  <MonoDevelop.Ide.ItemProperties.firstapp.Android PreferredExecutionTarget="Android.899X073UZ" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release|iPhone" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="firstapp.MainPage">
+
+    <StackLayout>
+        <Frame BackgroundColor="#00868b" Padding="16" CornerRadius="0">
+            <Label Text="mesibo first app!" HorizontalTextAlignment="Center" TextColor="White" FontSize="24"/>
+        </Frame>
+
+        
+
+        <Label x:Name="statusLabel" HorizontalTextAlignment="Center" Text="Login as user1 from one device and as user2 from another!" FontSize="16" Padding="10,0,10,0"/>
+
+    <StackLayout Margin="30,10,30,10" HorizontalOptions="CenterAndExpand">
+        
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+        <Button x:Name="loginButton1" Text="User1" Clicked="OnLoginUser1" Padding="20,0,20,0" BorderWidth="1" BorderRadius="5" BorderColor="#aaaaaa"/>
+        <Button x:Name="loginButton2" Text="User2" Clicked="OnLoginUser2" Padding="20,0,20,0" Margin="20,0,0,0" BorderWidth="1" BorderRadius="5" BorderColor="#cccccc"/>
+            </StackLayout>
+    </StackLayout>
+
+
+        <StackLayout x:Name="actionLayout">
+
+            <Label Text="Messaging and Calls" FontSize="Title" Padding="30,10,30,10"/>
+            <Label Text="Once the connection status is 1 (check above), you can start testing messages and calls!" FontSize="16" Padding="30,0,30,0"/>
+            <Label FontSize="16" Padding="30,24,30,0">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <FormattedString.Spans>
+                            <Span Text="Refer to Get Started Tutorial at "/>
+                            <Span Text="https://mesibo.com" FontAttributes="Bold"/>
+                        </FormattedString.Spans>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+
+            <StackLayout Margin="30,10,30,10">
+            <Button x:Name="messageButton" Text="Message" Clicked="OnMessage"  Padding="20,0,20,0" BorderWidth="1" BorderRadius="5" BorderColor="#aaaaaa" />
+            <Button x:Name="userListButton" Text="User List" Clicked="OnUserList" Padding="20,0,20,0" BorderWidth="1" BorderRadius="5" BorderColor="#aaaaaa"/>
+                </StackLayout>
+
+            <StackLayout Margin="30,10,30,10" HorizontalOptions="CenterAndExpand">
+                <StackLayout Orientation="Horizontal">
+                    <Button x:Name="audioCallButton" Text="Audio Call" Clicked="OnAudioCall" Padding="20,0,20,0" BorderWidth="1" BorderRadius="5" BorderColor="#aaaaaa"/>
+                    <Button x:Name="videoCallButton" Text="Video Call" Clicked="OnVideoCall" Padding="20,0,20,0" Margin="20,0,0,0" BorderWidth="1" BorderRadius="5" BorderColor="#cccccc" />
+        
+                </StackLayout>
+
+            </StackLayout>
+
+         </StackLayout>
+    </StackLayout>
+
+</ContentPage>
