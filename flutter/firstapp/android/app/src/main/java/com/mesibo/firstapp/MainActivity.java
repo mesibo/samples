@@ -64,6 +64,10 @@ public class MainActivity extends FlutterActivity implements FlutterPlugin, Mesi
         MesiboCall.getInstance().init(getApplicationContext());
     }
 
+    public void setPushToken(String token, Boolean voip) {
+        Mesibo.setPushToken(token);
+    }
+
     public void sendMessage(@NonNull String peer, @NonNull String message) {
         Log.d("sendMessage", peer + ":" + message);
     }

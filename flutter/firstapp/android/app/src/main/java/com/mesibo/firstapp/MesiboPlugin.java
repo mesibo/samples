@@ -29,6 +29,7 @@ public class MesiboPlugin {
   /** Generated interface from Pigeon that represents a handler of messages from Flutter.*/
   public interface MesiboPluginApi {
     void setup(@NonNull String token);
+    void setPushToken(@NonNull String token, @NonNull Boolean voip);
     void sendMessage(@NonNull String peer, @NonNull String message);
     void showUserList();
     void showMessages(@NonNull String peer);
@@ -55,6 +56,34 @@ public class MesiboPlugin {
                 throw new NullPointerException("tokenArg unexpectedly null.");
               }
               api.setup(tokenArg);
+              wrapped.put("result", null);
+            }
+            catch (Error | RuntimeException exception) {
+              wrapped.put("error", wrapError(exception));
+            }
+            reply.reply(wrapped);
+          });
+        } else {
+          channel.setMessageHandler(null);
+        }
+      }
+      {
+        BasicMessageChannel<Object> channel =
+            new BasicMessageChannel<>(binaryMessenger, "dev.flutter.pigeon.MesiboPluginApi.setPushToken", getCodec());
+        if (api != null) {
+          channel.setMessageHandler((message, reply) -> {
+            Map<String, Object> wrapped = new HashMap<>();
+            try {
+              ArrayList<Object> args = (ArrayList<Object>)message;
+              String tokenArg = (String)args.get(0);
+              if (tokenArg == null) {
+                throw new NullPointerException("tokenArg unexpectedly null.");
+              }
+              Boolean voipArg = (Boolean)args.get(1);
+              if (voipArg == null) {
+                throw new NullPointerException("voipArg unexpectedly null.");
+              }
+              api.setPushToken(tokenArg, voipArg);
               wrapped.put("result", null);
             }
             catch (Error | RuntimeException exception) {

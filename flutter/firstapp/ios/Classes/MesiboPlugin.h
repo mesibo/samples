@@ -14,6 +14,7 @@ NSObject<FlutterMessageCodec> *MesiboPluginMesiboPluginApiGetCodec(void);
 
 @protocol MesiboPluginMesiboPluginApi
 - (void)setupToken:(NSString *)token error:(FlutterError *_Nullable *_Nonnull)error;
+- (void)setPushTokenToken:(NSString *)token voip:(NSNumber *)voip error:(FlutterError *_Nullable *_Nonnull)error;
 - (void)sendMessagePeer:(NSString *)peer message:(NSString *)message error:(FlutterError *_Nullable *_Nonnull)error;
 - (void)showUserListWithError:(FlutterError *_Nullable *_Nonnull)error;
 - (void)showMessagesPeer:(NSString *)peer error:(FlutterError *_Nullable *_Nonnull)error;

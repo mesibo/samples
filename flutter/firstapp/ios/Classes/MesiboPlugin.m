@@ -88,6 +88,27 @@ void MesiboPluginMesiboPluginApiSetup(id<FlutterBinaryMessenger> binaryMessenger
   {
     FlutterBasicMessageChannel *channel =
       [[FlutterBasicMessageChannel alloc]
+        initWithName:@"dev.flutter.pigeon.MesiboPluginApi.setPushToken"
+        binaryMessenger:binaryMessenger
+        codec:MesiboPluginMesiboPluginApiGetCodec()        ];
+    if (api) {
+      NSCAssert([api respondsToSelector:@selector(setPushTokenToken:voip:error:)], @"MesiboPluginMesiboPluginApi api (%@) doesn't respond to @selector(setPushTokenToken:voip:error:)", api);
+      [channel setMessageHandler:^(id _Nullable message, FlutterReply callback) {
+        NSArray *args = message;
+        NSString *arg_token = GetNullableObjectAtIndex(args, 0);
+        NSNumber *arg_voip = GetNullableObjectAtIndex(args, 1);
+        FlutterError *error;
+        [api setPushTokenToken:arg_token voip:arg_voip error:&error];
+        callback(wrapResult(nil, error));
+      }];
+    }
+    else {
+      [channel setMessageHandler:nil];
+    }
+  }
+  {
+    FlutterBasicMessageChannel *channel =
+      [[FlutterBasicMessageChannel alloc]
         initWithName:@"dev.flutter.pigeon.MesiboPluginApi.sendMessage"
         binaryMessenger:binaryMessenger
         codec:MesiboPluginMesiboPluginApiGetCodec()        ];

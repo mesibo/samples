@@ -34,6 +34,11 @@
 
 }
 
+- (void)setPushTokenToken:(NSString *)token voip:(NSNumber *)voip error:(FlutterError *_Nullable *_Nonnull)error {
+    [MesiboInstance setPushToken:token voip:NO];
+}
+
+
 - (void)showMessagesPeer:(nonnull NSString *)peer error:(FlutterError * _Nullable __autoreleasing * _Nonnull)error {
     MesiboProfile *profile = [MesiboInstance getProfile:peer groupid:0];
     

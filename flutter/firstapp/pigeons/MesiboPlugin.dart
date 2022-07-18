@@ -7,6 +7,7 @@ class MessageParams {
 @HostApi()
 abstract class MesiboPluginApi {
 	void setup(String token);
+	void setPushToken(String token, bool voip);
 
 	void sendMessage(String peer, String message);
 
