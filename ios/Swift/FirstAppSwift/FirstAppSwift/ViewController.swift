@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  FirstAppSwift
 //
-//  Copyright © 2021 Mesibo. All rights reserved.
+//  Copyright © 2022 Mesibo. All rights reserved.
 //
 
 import UIKit
@@ -38,13 +38,13 @@ class ViewController: UIViewController, MesiboDelegate {
     var mUser2: [String: String] = [
         "name": "User 2",
         "address": "456",
-        "token": "<token-1>"
+        "token": "<token-2>"
     ];
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        // Perform any additional setup after loading the view.
         mAudioCallButton.isEnabled = false;
         mVideoCallButton.isEnabled = false;
         mUiButton.isEnabled = false;
@@ -52,12 +52,12 @@ class ViewController: UIViewController, MesiboDelegate {
     
     func mesiboInit(_ token: String?, remoteUserAddress address: String?, remoteUserName name: String?) {
         
-        Mesibo.getInstance()!.addListener(self)
+        Mesibo.getInstance().addListener(self)
         
         // set user authentication token obtained by creating user
-        Mesibo.getInstance()!.setAccessToken(token)
-        Mesibo.getInstance()!.setDatabase("mydb", resetTables: 0)
-        Mesibo.getInstance()!.start()
+        Mesibo.getInstance().setAccessToken(token)
+        Mesibo.getInstance().setDatabase("mydb", resetTables: 0)
+        Mesibo.getInstance().start()
         
         
         mLoginUser1.isEnabled = false
@@ -71,7 +71,7 @@ class ViewController: UIViewController, MesiboDelegate {
         mRemoteUser = address
         
         //set profile which is required by UI
-        mProfile = Mesibo.getInstance()?.getProfile(address, groupid: 0)
+        mProfile = Mesibo.getInstance().getProfile(address, groupid: 0)
         
         
         
@@ -82,14 +82,15 @@ class ViewController: UIViewController, MesiboDelegate {
         // will also send read receipts for db and real-time messages
         
         // set app mode in foreground for read-receipt to be sent
-        Mesibo.getInstance()!.setAppInForeground(self, screenId: 0, foreground: true)
+        Mesibo.getInstance().setAppInForeground(self, screenId: 0, foreground: true)
         
         mReadSession = mProfile.createReadSession(self)
         mReadSession.enableReadReceipt(true)
         mReadSession.read(100)
     }
     
-    public func mesibo_(onConnectionStatus status: Int32) {
+    func Mesibo_onConnectionStatus(status: Int) {
+
         // You will receive the connection status here
         
         print("Connection status: \(status)")
@@ -100,29 +101,23 @@ class ViewController: UIViewController, MesiboDelegate {
         
     }
     
-    func mesibo_(onMessage params: MesiboParams?, data: Data?) {
+    func Mesibo_onMessage(message: MesiboMessage) {
         
-        // You will receive messages here
-        var message: String? = nil
-        if let data = data {
-            message = String(data: data, encoding: .utf8)
+        if (message.isRealtimeMessage()) {
+            alert("New Message", message: message.message)
         }
-        
-        if MESIBO_ORIGIN_REALTIME == params?.origin && 0 == params?.type {
-            alert("New Message", message: message)
-        }
+    }
+    
+    func Mesibo_onMessageUpdate(message: MesiboMessage) {
         
     }
     
-    func mesibo_(on message: MesiboMessage?) {
-    }
-    
-    func mesibo_(onMessageStatus params: MesiboParams?) {
+    func Mesibo_onMessageStatus(message: MesiboMessage) {
         
-        var str: String? = nil
-        if let status = params?.status {
-            str = "Message Status: \(status)"
-        }
+        let status = message.getStatus()
+    
+        let str: String = "Message Status: \(status)"
+
         
         mMessageStatus.text = str
         
@@ -132,8 +127,10 @@ class ViewController: UIViewController, MesiboDelegate {
         if !isLoggedIn() {
             return
         }
-        let mid = Mesibo.getInstance()!.random()
-        mProfile!.sendMessage(mid, string: mMessage.text)
+        let msg = mProfile.newMessage();
+        msg.message = mMessage.text;
+        msg.send()
+        
         mMessage.text = ""
         mMessage.resignFirstResponder()
     }
@@ -169,7 +166,7 @@ class ViewController: UIViewController, MesiboDelegate {
         if !isLoggedIn() {
             return
         }
-        MesiboCall.getInstance().callUi(self, address: mRemoteUser, video: false)
+        MesiboCall.getInstance().callUi(self, profile: mProfile, video: false)
         
     }
     
@@ -177,7 +174,7 @@ class ViewController: UIViewController, MesiboDelegate {
         if !isLoggedIn() {
             return
         }
-        MesiboCall.getInstance().callUi(self, address: mRemoteUser, video: true)
+        MesiboCall.getInstance().callUi(self, profile: mProfile, video: true)
     }
     
     @IBAction func onProfileUpdate(_ sender: Any) {
@@ -185,9 +182,9 @@ class ViewController: UIViewController, MesiboDelegate {
             return
         }
         let sp = Mesibo.getInstance().getSelfProfile()
-        sp?.setName(mName.text)
-        sp?.setStatus("I am using mesibo iOS first app")
-        sp?.save()
+        sp.setName(mName!.text!)
+        sp.setStatus("I am using mesibo iOS first app")
+        sp.save()
         mName.text = ""
         mName.resignFirstResponder()
     }

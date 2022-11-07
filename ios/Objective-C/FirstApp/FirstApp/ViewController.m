@@ -2,7 +2,7 @@
 //  ViewController.m
 //  FirstApp
 //
-//  Copyright © 2021 Mesibo. All rights reserved.
+//  Copyright © 2022 Mesibo. All rights reserved.
 //
 
 #import "ViewController.h"
@@ -46,7 +46,7 @@
 }
 
 -(void) mesiboInit:(NSString *)token remoteUserAddress:(NSString *)address remoteUserName:(NSString *)name {
-    
+
     [MesiboInstance addListener:self];
 
     // set user authentication token obtained by creating user
@@ -94,26 +94,23 @@
         
 }
 
--(void) Mesibo_OnMessage:(MesiboParams *)params data:(NSData *)data {
-    
-    // You will receive messages here
-    NSString* message = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+-(void) Mesibo_OnMessage:(MesiboMessage *) msg {
     
     // Sshowing alerts for real-time messages (and not the
     // ones from the database)
-    if(MESIBO_ORIGIN_REALTIME == params.origin && 0 == params.type) {
-        [self alert:@"New Message" message:message];
+    if([msg isRealtimeMessage]) {
+        [self alert:@"New Message" message:msg.message];
     }
 
 }
 
--(void) Mesibo_OnMessage:(MesiboMessage *)message {
+-(void) Mesibo_OnMessageUpdate:(MesiboMessage *)msg {
     
 }
 
--(void) Mesibo_OnMessageStatus:(MesiboParams *)params {
+-(void) Mesibo_OnMessageStatus:(MesiboMessage *)msg {
 
-    NSString *str = [NSString stringWithFormat:@"Message Status: %d", params.status];
+    NSString *str = [NSString stringWithFormat:@"Message Status: %d", [msg getStatus]];
     
     _mMessageStatus.text = str;
     
@@ -137,8 +134,9 @@
 
 - (IBAction)onSendMessage:(id)sender {
     if(![self isLoggedIn]) return;
-    uint32_t mid = [MesiboInstance random];
-    [mProfile sendMessage:mid string:_mMessage.text];
+    MesiboMessage *msg = [mProfile newMessage];
+    msg.message = _mMessage.text;
+    [msg send];
     _mMessage.text = @"";
     [_mMessage resignFirstResponder];
 }
@@ -152,12 +150,12 @@
 /* ensure to grant background mode and microphone permissions */
 - (IBAction)onAudioCall:(id)sender {
     if(![self isLoggedIn]) return;
-    [MesiboCallInstance callUi:self address:mRemoteUser video:NO];
+    [MesiboCallInstance callUi:self profile:mProfile video:NO];
 }
 
 - (IBAction)onVideoCall:(id)sender {
     if(![self isLoggedIn]) return;
-    [MesiboCallInstance callUi:self address:mRemoteUser video:YES];
+    [MesiboCallInstance callUi:self profile:mProfile video:YES];
 }
 
 - (IBAction)updateProfile:(id)sender {
