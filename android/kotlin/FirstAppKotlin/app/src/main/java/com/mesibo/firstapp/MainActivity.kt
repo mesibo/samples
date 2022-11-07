@@ -6,11 +6,9 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.mesibo.api.Mesibo
+import com.mesibo.api.*
 import com.mesibo.api.Mesibo.GroupListener
 import com.mesibo.api.Mesibo.ProfileListener
-import com.mesibo.api.MesiboGroupProfile
-import com.mesibo.api.MesiboProfile
 import com.mesibo.calls.api.MesiboCall
 import com.mesibo.messaging.MesiboUI
 
@@ -28,8 +26,7 @@ class MainActivity : AppCompatActivity(), Mesibo.ConnectionListener, Mesibo.Mess
 
     internal var mRemoteUser: DemoUser? = null
 
-    var mProfile: MesiboProfile? = null
-    var mReadSession: Mesibo.ReadDbSession? = null
+    lateinit var mProfile: MesiboProfile;
     var mLoginButton1: View? = null
     var mLoginButton2: View? = null
 
@@ -47,23 +44,22 @@ class MainActivity : AppCompatActivity(), Mesibo.ConnectionListener, Mesibo.Mess
         mMessageStatus = findViewById(R.id.msgStatus)
         mConnStatus = findViewById(R.id.connStatus)
         mMessage = findViewById(R.id.message)
-        mName = findViewById(R.id.name)
+   //     mName = findViewById(R.id.name)
 
     }
 
     private fun mesiboInit(user: DemoUser, remoteUser: DemoUser) {
-        val api: Mesibo = Mesibo.getInstance()
+        val api = Mesibo.getInstance()
         api.init(applicationContext)
         Mesibo.addListener(this)
-        Mesibo.setSecureConnection(true)
         Mesibo.setAccessToken(user.token)
         Mesibo.setDatabase("mydb", 0)
         Mesibo.start()
 
         mRemoteUser = remoteUser
         mProfile = Mesibo.getProfile(remoteUser.address)
-        mProfile?.setName(remoteUser.name)
-        mProfile?.save()
+        mProfile.setName(remoteUser.name)
+        mProfile.save()
 
 
         // disable login buttons
@@ -72,9 +68,9 @@ class MainActivity : AppCompatActivity(), Mesibo.ConnectionListener, Mesibo.Mess
 
         // Read receipts are enabled only when App is set to be in foreground
         Mesibo.setAppInForeground(this, 0, true)
-        mReadSession = mProfile?.createReadSession(this)
-        mReadSession?.enableReadReceipt(true)
-        mReadSession?.read(100)
+        var readSession = mProfile.createReadSession(this)
+        readSession.enableReadReceipt(true)
+        readSession.read(100)
 
         /* initialize call with custom title */
 
@@ -95,23 +91,25 @@ class MainActivity : AppCompatActivity(), Mesibo.ConnectionListener, Mesibo.Mess
 
     fun onSendMessage(view: View?) {
         if (!isLoggedIn()) return
-        mProfile?.sendMessage(Mesibo.random(), mMessage!!.text.toString().trim { it <= ' ' })
-        mMessage!!.setText("")
+        val msg = mProfile.newMessage();
+
+        msg.message = mMessage!!.text.toString().trim { it <= ' ' };
+        msg.send()
     }
 
     fun onLaunchMessagingUi(view: View?) {
         if (!isLoggedIn()) return
-        MesiboUI.launchMessageView(this, mRemoteUser!!.address, 0)
+        MesiboUI.launchMessageView(this, mProfile)
     }
 
     fun onAudioCall(view: View?) {
         if (!isLoggedIn()) return
-        MesiboCall.getInstance().callUi(this, mProfile!!.getAddress(), false)
+        MesiboCall.getInstance().callUi(this, mProfile, false)
     }
 
     fun onVideoCall(view: View?) {
         if (!isLoggedIn()) return
-        MesiboCall.getInstance().callUi(this, mProfile!!.getAddress(), true)
+        MesiboCall.getInstance().callUi(this, mProfile, true)
     }
 
     fun onUpdateProfile(view: View?) {
@@ -156,22 +154,16 @@ class MainActivity : AppCompatActivity(), Mesibo.ConnectionListener, Mesibo.Mess
         mConnStatus!!.text = "Connection Status: $status"
     }
 
-    override fun Mesibo_onMessage(messageParams: Mesibo.MessageParams?, data: ByteArray?): Boolean {
-        try {
-            val message = String(data!!)
-            toast(message)
-        } catch (e: Exception) {
-        }
-        return true
+    override fun Mesibo_onMessage(msg: MesiboMessage) {
+
     }
 
-    override fun Mesibo_onMessageStatus(messageParams: Mesibo.MessageParams) {
-        mMessageStatus!!.text = "Message Status: " + messageParams.getStatus()
+    override fun Mesibo_onMessageUpdate(msg: MesiboMessage) {
     }
 
-    override fun Mesibo_onActivity(messageParams: Mesibo.MessageParams?, i: Int) {}
-    override fun Mesibo_onLocation(messageParams: Mesibo.MessageParams?, location: Mesibo.Location?) {}
-    override fun Mesibo_onFile(messageParams: Mesibo.MessageParams?, fileInfo: Mesibo.FileInfo?) {}
+    override fun Mesibo_onMessageStatus(msg: MesiboMessage) {
+        mMessageStatus!!.text = "Message Status: " + msg.getStatus()
+    }
 
     override fun Mesibo_onProfileUpdated(profile: MesiboProfile) {
         toast(profile.getName() + " has updated profile")

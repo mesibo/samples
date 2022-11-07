@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
@@ -13,7 +14,10 @@ import android.widget.Toast;
 import com.mesibo.api.Mesibo;
 
 import com.mesibo.api.MesiboGroupProfile;
+import com.mesibo.api.MesiboMessage;
+import com.mesibo.api.MesiboPresence;
 import com.mesibo.api.MesiboProfile;
+import com.mesibo.api.MesiboReadSession;
 import com.mesibo.api.MesiboSelfProfile;
 import com.mesibo.calls.api.MesiboCall;
 import com.mesibo.calls.api.MesiboCallActivity;
@@ -23,9 +27,10 @@ import java.security.Permission;
 
 
 public class MainActivity extends AppCompatActivity implements Mesibo.ConnectionListener,
-        Mesibo.MessageListener,
+        Mesibo.MessageListener, Mesibo.PresenceListener,
         Mesibo.ProfileListener, Mesibo.GroupListener {
 
+    final static String TAG="MesiboFirstApp";
     class DemoUser {
         public String token;
         public String name;
@@ -46,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements Mesibo.Connection
 
     DemoUser mRemoteUser;
     MesiboProfile mProfile;
-    Mesibo.ReadDbSession mReadSession;
+    MesiboReadSession mReadSession;
 
     View mLoginButton1, mLoginButton2;
     TextView mMessageStatus, mConnStatus;
@@ -88,7 +93,8 @@ public class MainActivity extends AppCompatActivity implements Mesibo.Connection
         Mesibo.setAppInForeground(this, 0, true);
         mReadSession = mProfile.createReadSession(this);
         mReadSession.enableReadReceipt(true);
-        mReadSession.read(100);
+        int result = mReadSession.read(100);
+        Log.d(TAG, "first read result: " + result);
 
         /* initialize call with custom title */
         MesiboCall.getInstance().init(this);
@@ -106,26 +112,73 @@ public class MainActivity extends AppCompatActivity implements Mesibo.Connection
         mesiboInit(mUser2, mUser1);
     }
 
+    public void sendTextMessage(String message) {
+        MesiboMessage msg = mProfile.newMessage();
+        msg.message = message;
+        msg.send();
+    }
+
+    public void sendRichMessage() {
+        MesiboMessage msg = new MesiboMessage(mProfile);
+        msg.message = "Hello from mesibo 2.0.0";
+        msg.title = "Message Title";
+        msg.setContent("https://www.youtube.com/watch?v=b29TOTpmFqY"); // file path, URL or Bitmap
+        msg.send();
+    }
+
+    public void sendRichMessageWithLocation() {
+        MesiboMessage msg = new MesiboMessage(mProfile);
+        msg.message = "Hello from mesibo 2.0.0";
+        msg.title = "Message Title";
+        msg.latitude = 1.3521;
+        msg.longitude = 103.8198;
+        msg.send();
+    }
+
+    public void sendRichMessageWithCustomFields() {
+        MesiboMessage msg = new MesiboMessage(mProfile);
+        msg.message = "Hello from mesibo 2.0.0";
+        msg.title = "Message Title";
+        msg.setString("Custom1", "some string value");
+        msg.setInt("Custom2", 123);
+        msg.send();
+    }
+
+    public void sendBinaryMessage(byte[] data) {
+        MesiboMessage msg = new MesiboMessage(mProfile);
+        msg.data = data;
+        msg.send();
+    }
+
+    public void sendTyping() {
+        mProfile.sendTyping();
+    }
+
     public void onSendMessage(View view) {
         if(!isLoggedIn()) return;
         String message = mMessage.getText().toString().trim();
-        mProfile.sendMessage(Mesibo.random(), message);
+        sendTextMessage(message);
         mMessage.setText("");
+
+        MesiboReadSession session = mProfile.createReadSession(this);
+        session.enableReadReceipt(true);
+        int result = session.read(100);
+        Log.d(TAG, "after message read result: " + result);
     }
 
     public void onLaunchMessagingUi(View view) {
         if(!isLoggedIn()) return;
-        MesiboUI.launchMessageView(this, mProfile.getAddress(), 0);
+        MesiboUI.launchMessageView(this, mProfile);
     }
 
     public void onAudioCall(View view) {
         if(!isLoggedIn()) return;
-        MesiboCall.getInstance().callUi(this, mProfile.getAddress(), false);
+        MesiboCall.getInstance().callUi(this, mProfile, false);
     }
 
     public void onVideoCall(View view) {
         if(!isLoggedIn()) return;
-        MesiboCall.getInstance().callUi(this, mProfile.getAddress(), true);
+        MesiboCall.getInstance().callUi(this, mProfile, true);
     }
 
     public void onUpdateProfile(View view) {
@@ -175,33 +228,31 @@ public class MainActivity extends AppCompatActivity implements Mesibo.Connection
     }
 
     @Override
-    public boolean Mesibo_onMessage(Mesibo.MessageParams messageParams, byte[] data) {
-        try {
-            String message = new String(data, "UTF-8");
-            toast("You have got a message: " + message);
-        } catch (Exception e) {
-        }
+    public void Mesibo_onMessage(MesiboMessage msg) {
+        toast("You have got a message: " + msg.message);
 
-        return true;
+        return;
     }
 
     @Override
-    public void Mesibo_onMessageStatus(Mesibo.MessageParams messageParams) {
-        mMessageStatus.setText("Message Status: " + messageParams.getStatus());
+    public void Mesibo_onMessageStatus(MesiboMessage msg) {
+        mMessageStatus.setText("Message Status: " + msg.getStatus());
     }
 
     @Override
-    public void Mesibo_onActivity(Mesibo.MessageParams messageParams, int i) {
-
+    public void Mesibo_onMessageUpdate(MesiboMessage msg) {
+        toast("You have got a message update: " + msg.message);
     }
 
     @Override
-    public void Mesibo_onLocation(Mesibo.MessageParams messageParams, Mesibo.Location location) {
-
+    public void Mesibo_onPresence(MesiboPresence presence) {
+        String name = presence.profile.getNameOrAddress("");
+        String typing = presence.profile.isTyping()?"Typing":"Not Typing";
+        toast("User " + name + " is " + typing);
     }
 
     @Override
-    public void Mesibo_onFile(Mesibo.MessageParams messageParams, Mesibo.FileInfo fileInfo) {
+    public void Mesibo_onPresenceRequest(MesiboPresence presence) {
 
     }
 
