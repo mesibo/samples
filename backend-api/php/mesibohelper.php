@@ -175,7 +175,7 @@ function MesiboGetMembers($groupid) {
 	return MesiboAPI($parameters);
 }    
 
-function MesiboMessage($from, $to, $groupid, $type, $expiry, $flag, $message, $forced=0) {  
+function MesiboMessage($from, $to, $groupid, $type, $expiry, $flag, $message) {  
 	$parameters=array();
 	$parameters['op']='message';
 	
@@ -186,7 +186,6 @@ function MesiboMessage($from, $to, $groupid, $type, $expiry, $flag, $message, $f
 	$m['type'] = $type;
 	$m['expiry'] = $expiry;
 	$m['flags'] = $flags;
-	$m['forced'] = $forced;
 	$m['message'] = $message;
 	
 	$parameters['message']=$m;

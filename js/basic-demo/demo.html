@@ -11,7 +11,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
     
     <script type="text/javascript" src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
-    <script type="text/javascript" src="https://api.mesibo.com/mesibo.js"></script>
+    <script type="text/javascript" src="https://api.mesibo.com/mesibo-v2.js"></script>
     <!--SCRIPTINCLUDEEND-->
     
     <script src="mesibo-demo.js"></script>
@@ -33,7 +33,7 @@
 		
 		<div style="marging-top: 20px;">
 		<h3>Messaging Demo</h3>
-		<p>The buttons below demonstrate how to send a message, file or read-receipt to the destination configured in <strong>mesibo-demo.js</strong>. Refer <span style="color: #00868b;">sendMessage</span>, <span style="color: #00868b;">sendFile</span> and <span style="color: #00868b;">sendReadReceipt</span> functions in <strong>mesibo-demo.js</strong> to learn more about the mesibo messaging APIs.<p/>
+		<p>The buttons below demonstrate how to send a message, file or read messages for the destination configured in <strong>mesibo-demo.js</strong>. Refer <span style="color: #00868b;">sendMessage</span>, <span style="color: #00868b;">sendFile</span> and <span style="color: #00868b;">readMessages</span> functions in <strong>mesibo-demo.js</strong> to learn more about the mesibo messaging APIs.<p/>
 		<p><strong>Note:</strong> Open your web-browser console to see all the incoming messages, message status, etc.</p>
     
 		<button type="button" id="btn1" class="btn btn-primary" onclick="sendMessage()">Send a Message</button>
@@ -41,7 +41,7 @@
 		<input id="filefield" type=file name='filefield' class="d-none" onchange="sendFile()">
 		Send a File
 		</label>
-    		<button type="button" id="btn3" class="btn btn-info" onclick="sendReadReceipt()">Send Read Receipt</button>
+    		<button type="button" id="btn3" class="btn btn-info" onclick="readMessages()">Read Messages</button>
 		</div>
 
 		<p/>	

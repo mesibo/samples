@@ -13,8 +13,8 @@ function MesiboListener(o) {
 	this.api = o;
 }
 
-MesiboListener.prototype.Mesibo_OnConnectionStatus = function(status, value) {
-	console.log("Mesibo_OnConnectionStatus: "  + status);
+MesiboListener.prototype.Mesibo_onConnectionStatus = function(status, value) {
+	console.log("Mesibo_onConnectionStatus: "  + status);
 	var s = document.getElementById("cstatus");
 	if(!s) return;
 	if(MESIBO_STATUS_ONLINE == status) {
@@ -47,17 +47,15 @@ MesiboListener.prototype.Mesibo_OnConnectionStatus = function(status, value) {
 	}
 }
 
-MesiboListener.prototype.Mesibo_OnMessageStatus = function(m) {
-	console.log("Mesibo_OnMessageStatus: from "  + m.peer + " status: " + m.status + " id: " + m.id);
+MesiboListener.prototype.Mesibo_onMessageStatus = function(m) {
+	console.log("Mesibo_onMessageStatus: from "  + m.peer + " status: " + m.status + " id: " + m.mid);
 }
 
-MesiboListener.prototype.Mesibo_OnMessage = function(m, data) {
-	var s = array2String(data, 0, data.byteLength);
-	console.log("Mesibo_OnMessage: from "  + m.peer + " id: " + m.id + " msg: " + s);
-	console.log(data);
+MesiboListener.prototype.Mesibo_onMessage = function(m) {
+	console.log("Mesibo_onMessage: from "  + m.peer + " id: " + m.mid + " msg: " + m.message);
 }
 
-MesiboListener.prototype.Mesibo_OnCall = function(callid, from, video) {
+MesiboListener.prototype.Mesibo_onCall = function(callid, from, video) {
 	console.log("Mesibo_onCall: " + (video?"Video":"Voice") + " call from: " + from);
 	if(video)
 		this.api.setupVideoCall("localVideo", "remoteVideo", true);
@@ -71,7 +69,7 @@ MesiboListener.prototype.Mesibo_OnCall = function(callid, from, video) {
 	$('#answerModal').modal({ show: true });
 }
 
-MesiboListener.prototype.Mesibo_OnCallStatus = function(callid, status) {
+MesiboListener.prototype.Mesibo_onCallStatus = function(callid, status) {
 	console.log("Mesibo_onCallStatus: " + status);
 	var v = document.getElementById("vcstatus");
 	var a = document.getElementById("acstatus");
@@ -121,43 +119,41 @@ MesiboListener.prototype.Mesibo_OnCallStatus = function(callid, status) {
 
 var api = new Mesibo();
 api.setAppName(demo_appid);
-api.setListener(new MesiboListener(api));
+var listener = new MesiboListener(api);
+api.setListener(listener);
 api.setCredentials(demo_user_token);
 api.setDatabase("mesibo");
 api.start();
 
-var message_index = 0;
 var profile = api.getProfile(demo_destination, 0);
 
 function sendMessage() {
-	profile.sendMessage(api.random(), message_index + ": Hello From JS");
-	message_index++;
+	var m = profile.newMessage();
+	m.message = "Hello From JS";
+	m.send();
 }
 
 function sendFile() {
-	var msg = {}; //create a rich message
-	
-	msg.message = 'Hello from js';
+	var m = profile.newMessage();
+	m.message = 'Hello from js';
+	m.title = 'Himalaya';
+	m.message = 'Everest';
 
 	// You can either specify file element id or enter details manually
 	if(true) {
-		msg.file = 'filefield'; // recommended approach
+		m.setContent('filefield'); // recommended approach
 	} else {
-
-		msg.filetype = MESIBO_FILETYPE_IMAGE;	
-		msg.size = 1023;	
-		msg.fileurl = 'https://cdn.pixabay.com/photo/2019/08/02/09/39/mugunghwa-4379251_1280.jpg'
-		msg.title = 'Himalaya';
+		m.setContent('https://cdn.pixabay.com/photo/2019/08/02/09/39/mugunghwa-4379251_1280.jpg');
+		m.setContentType(MESIBO_FILETYPE_IMAGE);	
+		m.title = 'Himalaya';
+		m.message = 'Everest';
 	}
 
-	profile.sendFile(api.random(), msg);
+	m.send();
 }
 
-function sendReadReceipt() {
-	var rs = profile.readDbSession(null, function(count) {
-
-	});
-
+function readMessages() {
+	var rs = profile.createReadSession(listener);
 	rs.enableReadReceipt(true);
 	rs.read(100);
 }
@@ -203,7 +199,6 @@ function updateProfile() {
 }
 
 function createGroup() {
-	// createGroup function can take listener or function as the last parameter
 	api.createGroup("My Group From JS", 0, function(profile) {
 		console.log("group created");
 		addMembers(profile);
