@@ -16,8 +16,15 @@ import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugins.GeneratedPluginRegistrant;
 
 import com.mesibo.api.Mesibo;
+
+import com.mesibo.api.MesiboGroupProfile;
+import com.mesibo.api.MesiboMessage;
+import com.mesibo.api.MesiboPresence;
 import com.mesibo.api.MesiboProfile;
+import com.mesibo.api.MesiboReadSession;
+import com.mesibo.api.MesiboSelfProfile;
 import com.mesibo.calls.api.MesiboCall;
+import com.mesibo.calls.api.MesiboCallActivity;
 import com.mesibo.messaging.MesiboUI;
 
 import java.util.Map;
@@ -77,15 +84,15 @@ public class MainActivity extends FlutterActivity implements FlutterPlugin, Mesi
     }
 
     public void showMessages(@NonNull String peer) {
-        MesiboUI.launchMessageView(this, peer, 0);
+        MesiboUI.launchMessageView(this, Mesibo.getProfile(peer));
     }
 
     public void audioCall(String peer) {
-        MesiboCall.getInstance().callUi(this, peer, false);
+        MesiboCall.getInstance().callUi(this, Mesibo.getProfile(peer), false);
     }
 
     public void videoCall(String peer) {
-        MesiboCall.getInstance().callUi(this, peer, true);
+        MesiboCall.getInstance().callUi(this, Mesibo.getProfile(peer), true);
     }
 
     @Override
@@ -101,54 +108,29 @@ public class MainActivity extends FlutterActivity implements FlutterPlugin, Mesi
     }
 
     @Override
-    public boolean Mesibo_onMessage(Mesibo.MessageParams messageParams, byte[] bytes) {
-
-
-        String message = "";
-        try {
-            message = new String(bytes, "UTF-8");
-
-            if(!message.isEmpty()) {
-                //mEventsSink.success("Mesibo Message Received : " + message);
-            }
-            //Toast.makeText(this, ""+message, Toast.LENGTH_SHORT).show();
-        } catch (Exception e) {
-            // return false;
-        }
+    public void Mesibo_onMessage(MesiboMessage msg) {
 
         Map<String, Object> args = new HashMap<>();
         try {
-            args.put("from", messageParams.peer);
-            args.put("message", message);
+            args.put("from", msg.peer);
+            args.put("message", msg.message);
         } catch (Error | RuntimeException exception) {
             args.put("error", "error");
         }
 
         invokeCallback("Mesibo_onMessage", args);
-
-        return false;
-
     }
 
     @Override
-    public void Mesibo_onMessageStatus(Mesibo.MessageParams messageParams) {
-
+    public void Mesibo_onMessageStatus(MesiboMessage msg) {
     }
 
     @Override
-    public void Mesibo_onActivity(Mesibo.MessageParams messageParams, int i) {
-
+    public void Mesibo_onMessageUpdate(MesiboMessage msg) {
     }
 
-    @Override
-    public void Mesibo_onLocation(Mesibo.MessageParams messageParams, Mesibo.Location location) {
 
-    }
 
-    @Override
-    public void Mesibo_onFile(Mesibo.MessageParams messageParams, Mesibo.FileInfo fileInfo) {
-
-    }
 
     void invokeCallback(String name, Object args) {
         channel.invokeMethod(name, args, new MethodChannel.Result() {

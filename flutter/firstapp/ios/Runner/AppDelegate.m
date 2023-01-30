@@ -50,19 +50,24 @@
 - (void)showUserListWithError:(FlutterError * _Nullable __autoreleasing * _Nonnull)error {
     FlutterViewController *vc = self.window.rootViewController;
     
+   
     [MesiboUI launchMesiboUIViewController:vc uidelegate:nil back:YES];
 }
 
 - (void)audioCallPeer:(nonnull NSString *)peer error:(FlutterError * _Nullable __autoreleasing * _Nonnull)error {
     FlutterViewController *vc = self.window.rootViewController;
     
-    [MesiboCallInstance callUi:vc address:peer video:NO];
+    MesiboProfile *profile = [MesiboInstance getProfile:peer groupid:0];
+    
+    [MesiboCallInstance callUi:vc profile:profile video:NO];
 }
 
 - (void)videoCallPeer:(nonnull NSString *)peer error:(FlutterError * _Nullable __autoreleasing * _Nonnull)error {
     FlutterViewController *vc = self.window.rootViewController;
     
-    [MesiboCallInstance callUi:vc address:peer video:YES];
+    MesiboProfile *profile = [MesiboInstance getProfile:peer groupid:0];
+    
+    [MesiboCallInstance callUi:vc profile:profile video:YES];
 }
 
 - (void)sendMessagePeer:(nonnull NSString *)peer message:(nonnull NSString *)message error:(FlutterError * _Nullable __autoreleasing * _Nonnull)error {
@@ -83,28 +88,22 @@
     
     NSLog(@"Connection status: %d", status);
 
-    NSString *str = [NSString stringWithFormat:@"Connection Status: %d", status];
-
-    //_mConnectionStatus.text = str;
-
 }
 
--(void) Mesibo_OnMessage:(MesiboParams *)params data:(NSData *)data {
-
-    // You will receive messages here
-    NSString* message = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-
+-(void) Mesibo_OnMessage:(MesiboMessage *) msg {
     
 
 }
 
--(void) Mesibo_OnMessage:(MesiboMessage *)message {
-
+-(void) Mesibo_OnMessageUpdate:(MesiboMessage *)msg {
+    
 }
 
--(void) Mesibo_OnMessageStatus:(MesiboParams *)params {
-
+-(void) Mesibo_OnMessageStatus:(MesiboMessage *)msg {
+    
 }
+
+
 
 
 @end
