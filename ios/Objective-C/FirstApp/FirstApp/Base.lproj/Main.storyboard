@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kfe-f6-hSH">
+                                <rect key="frame" x="25" y="108.33333333333333" width="150" height="29.999999999999986"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="mpq-Tn-1KH"/>
+                                </constraints>
+                                <state key="normal" title="Login as User 1"/>
+                                <connections>
+                                    <action selector="onLoginUser1:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Hyz-af-AA4"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YtK-Hq-fcg">
+                                <rect key="frame" x="250" y="108.33333333333333" width="150" height="29.999999999999986"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="50K-S6-uM4"/>
+                                </constraints>
+                                <state key="normal" title="Login as User2"/>
+                                <connections>
+                                    <action selector="onLoginUser2:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yl4-sd-Ner"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connection Status: -1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qhq-fs-TMM">
+                                <rect key="frame" x="131.66666666666669" y="158.33333333333334" width="164.66666666666669" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mesibo First App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Pu-yZ-qNk">
+                                <rect key="frame" x="150" y="73" width="128.33333333333337" height="20.333333333333329"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hh2-vH-R2j">
+                                <rect key="frame" x="248" y="259.33333333333331" width="150" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="RM8-HK-5wa"/>
+                                </constraints>
+                                <state key="normal" title="Show Messages"/>
+                                <connections>
+                                    <action selector="onShowMessages:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EAt-fa-kCK"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Qd-tg-M5p">
+                                <rect key="frame" x="30" y="259.33333333333331" width="150" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="OlO-Pk-Gyd"/>
+                                </constraints>
+                                <state key="normal" title="Show Users List"/>
+                                <connections>
+                                    <action selector="onShowUsersList:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5zj-xA-Hl5"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H1e-WY-Yx8">
+                                <rect key="frame" x="30" y="199.33333333333334" width="150" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="ERr-St-1JH"/>
+                                </constraints>
+                                <state key="normal" title="Send a Message"/>
+                                <connections>
+                                    <action selector="onSendMessage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="B5O-sW-08K"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ph7-h1-Xvk">
+                                <rect key="frame" x="248" y="319.33333333333331" width="150" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="8ft-EV-L1g"/>
+                                </constraints>
+                                <state key="normal" title="Video Call"/>
+                                <connections>
+                                    <action selector="onVideoCall:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kSA-B9-MNK"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fe3-K3-2em">
+                                <rect key="frame" x="139" y="379.33333333333331" width="150" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="dw2-UG-vgP"/>
+                                </constraints>
+                                <state key="normal" title="Group Call"/>
+                                <connections>
+                                    <action selector="onGroupCall:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6T1-4m-Je2"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xnb-SM-dcX">
+                                <rect key="frame" x="248" y="199.33333333333334" width="150" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="tIW-D0-ocN"/>
+                                </constraints>
+                                <state key="normal" title="Set Profile Info"/>
+                                <connections>
+                                    <action selector="onSetProfile:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PUA-RX-dEB"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fsd-GS-Sjs">
+                                <rect key="frame" x="30" y="319.33333333333331" width="150" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="xa6-rk-v9t"/>
+                                </constraints>
+                                <state key="normal" title="Audio Call"/>
+                                <connections>
+                                    <action selector="onAudioCall:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vXu-4C-5fK"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dkc-tM-rmj">
+                                <rect key="frame" x="248" y="439.33333333333331" width="150" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="afW-ae-0vx"/>
+                                </constraints>
+                                <state key="normal" title="Phone Number Info"/>
+                                <connections>
+                                    <action selector="onPhoneNumberInfo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hDp-Ky-VSh"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nG6-x5-Vpt">
+                                <rect key="frame" x="30" y="439.33333333333331" width="150" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="Kds-R7-a8k"/>
+                                </constraints>
+                                <state key="normal" title="Phone Contact Sync"/>
+                                <connections>
+                                    <action selector="onPhoneContactsSync:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Sas-dF-zG2"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="H1e-WY-Yx8" firstAttribute="top" secondItem="Qhq-fs-TMM" secondAttribute="bottom" constant="20" id="03y-jL-c9m"/>
+                            <constraint firstItem="nG6-x5-Vpt" firstAttribute="top" secondItem="Fe3-K3-2em" secondAttribute="bottom" constant="30" id="7Up-XP-17C"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hh2-vH-R2j" secondAttribute="trailing" constant="30" id="9J2-Jr-QQF"/>
+                            <constraint firstItem="Fsd-GS-Sjs" firstAttribute="top" secondItem="8Qd-tg-M5p" secondAttribute="bottom" constant="30" id="BAf-xq-S47"/>
+                            <constraint firstItem="Fsd-GS-Sjs" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="Gev-Sj-mEz"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="xnb-SM-dcX" secondAttribute="trailing" constant="30" id="Jdg-pA-d6d"/>
+                            <constraint firstItem="8Qd-tg-M5p" firstAttribute="top" secondItem="hh2-vH-R2j" secondAttribute="top" id="Joe-e2-CCX"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YtK-Hq-fcg" secondAttribute="trailing" constant="28" id="NpN-jW-ob0"/>
+                            <constraint firstItem="Qhq-fs-TMM" firstAttribute="top" secondItem="YtK-Hq-fcg" secondAttribute="bottom" constant="20" id="W8s-H8-AAa"/>
+                            <constraint firstItem="8Qd-tg-M5p" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="XpX-8O-Pew"/>
+                            <constraint firstItem="8Qd-tg-M5p" firstAttribute="top" secondItem="H1e-WY-Yx8" secondAttribute="bottom" constant="30" id="ZzD-ts-C4p"/>
+                            <constraint firstItem="0Pu-yZ-qNk" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="aO0-1n-9FS"/>
+                            <constraint firstItem="Fsd-GS-Sjs" firstAttribute="top" secondItem="ph7-h1-Xvk" secondAttribute="top" id="cFK-WC-11b"/>
+                            <constraint firstItem="0Pu-yZ-qNk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="26" id="dfq-Sv-o3t"/>
+                            <constraint firstItem="nG6-x5-Vpt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="eNj-Bv-DUr"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YtK-Hq-fcg" secondAttribute="trailing" constant="28" id="gcx-oB-LMM"/>
+                            <constraint firstItem="kfe-f6-hSH" firstAttribute="top" secondItem="0Pu-yZ-qNk" secondAttribute="bottom" constant="15" id="khb-2Y-3Vi"/>
+                            <constraint firstItem="Qhq-fs-TMM" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="mRp-bl-S2T"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dkc-tM-rmj" secondAttribute="trailing" constant="30" id="mj7-Bq-G2v"/>
+                            <constraint firstItem="H1e-WY-Yx8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="pSx-VB-vO9"/>
+                            <constraint firstItem="nG6-x5-Vpt" firstAttribute="top" secondItem="dkc-tM-rmj" secondAttribute="top" id="qZ2-Ay-eQV"/>
+                            <constraint firstItem="Fe3-K3-2em" firstAttribute="top" secondItem="Fsd-GS-Sjs" secondAttribute="bottom" constant="30" id="uQJ-CN-VzQ"/>
+                            <constraint firstItem="H1e-WY-Yx8" firstAttribute="top" secondItem="xnb-SM-dcX" secondAttribute="top" id="vD1-Ti-dvg"/>
+                            <constraint firstItem="YtK-Hq-fcg" firstAttribute="top" secondItem="kfe-f6-hSH" secondAttribute="top" id="vQM-5W-02S"/>
+                            <constraint firstItem="kfe-f6-hSH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="25" id="x40-zE-3Pe"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ph7-h1-Xvk" secondAttribute="trailing" constant="30" id="zrU-dW-W1b"/>
+                            <constraint firstItem="Fe3-K3-2em" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="zxU-WS-bPm"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mConnectionStatus" destination="Qhq-fs-TMM" id="AZ9-sV-BeS"/>
+                        <outlet property="mLoginUser1" destination="kfe-f6-hSH" id="Kcv-Gq-qXf"/>
+                        <outlet property="mLoginUser2" destination="YtK-Hq-fcg" id="pV1-Mb-ZAj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="128.97196261682242" y="103.67170626349893"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

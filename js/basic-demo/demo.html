@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>mesibo - Messaging, Voice and Video Call API Demo</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    
+    <script type="text/javascript" src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+    <script type="text/javascript" src="https://api.mesibo.com/mesibo-v2.js"></script>
+    <!--SCRIPTINCLUDEEND-->
+    
+    <script src="mesibo-demo.js"></script>
+
+</head>
+<body>
+	<div class="container" style="padding: 10px;">
+	<div class="border-bottom my-3">
+		<h2><span style="color: #00868b;">mesibo</span> - Messaging, Voice and Video Call API Demo</h2>
+		</div>
+		<h3>Instructions</h3>
+		<p>Before using this demo, you need to create a user token, edit <strong>mesibo-demo.js</strong>, set the token and other required parameters.</p><p>Refer <a href="https://mesibo.com/documentation/tutorials/first-app/">First Tutorial</a> to know how to create a user token.</p>
+		
+		<h3>Connection Status</h3>
+		<p>
+		The button below shows you the mesibo connection status. Refer function <span style="color: #00868b;">DemoNotify.prototype.Mesibo_OnConnectionStatus</span> in <strong>mesibo-demo.js</strong> to learn how Mesibo informs your app about the connection status.
+		<p/>
+		<button type="button" class="btn btn-danger" id="cstatus">You are offline</button> 
+		
+		<div style="marging-top: 20px;">
+		<h3>Messaging Demo</h3>
+		<p>The buttons below demonstrate how to send a message, file or read messages for the destination configured in <strong>mesibo-demo.js</strong>. Refer <span style="color: #00868b;">sendMessage</span>, <span style="color: #00868b;">sendFile</span> and <span style="color: #00868b;">readMessages</span> functions in <strong>mesibo-demo.js</strong> to learn more about the mesibo messaging APIs.<p/>
+		<p><strong>Note:</strong> Open your web-browser console to see all the incoming messages, message status, etc.</p>
+    
+		<button type="button" id="btn1" class="btn btn-primary" onclick="sendMessage()">Send a Message</button>
+		<label class="btn btn-success" for="filefield" style="margin-top:10px;">
+		<input id="filefield" type=file name='filefield' class="d-none" onchange="sendFile()">
+		Send a File
+		</label>
+    		<button type="button" id="btn3" class="btn btn-info" onclick="readMessages()">Read Messages</button>
+		</div>
+
+		<p/>	
+		<h3 style="marging-top: 20px; important">Video Call Demo</h3>
+		<p>The buttons below demonstrate how to make a video call to the destination configured in <strong>mesibo-demo.js</strong>.</p>
+		<p>Refer <span style="color: #00868b;">video_call</span>,  <span style="color: #00868b;">DemoNotify.prototype.Mesibo_OnCall</span>, and  <span style="color: #00868b;">DemoNotify.prototype.Mesibo_OnCallStatus</span> functions in <strong>mesibo-demo.js</strong> to learn more about the mesibo video call APIs.<p/>
+		
+		<div class="row" style="background-color: #f1f1f1;">
+			<div class="col-6" style="padding: 10px;">
+    			<video id="localVideo" playsinline autoplay muted></video>
+
+
+			</div>
+			<div class="col-6" style="padding: 10px;">
+    			<video id="remoteVideo" playsinline autoplay></video>
+			</div>
+		</div>
+		<div style="padding-top: 30px;">
+		<button type="button" class="btn btn-primary" onclick="video_call()">Call</button> 
+		<button type="button" class="btn btn-danger" onclick="hangup()">Hangup</button>
+    		<button type="button" class="btn btn-info" onclick="video_mute_toggle()">Toggle Video Mute</button>
+    		<button type="button" class="btn btn-warning" onclick="audio_mute_toggle()">Toggle Audio Mute</button>
+		<button type="button" class="btn btn-info" id="vcstatus" style="float:right;">Call Status: </button>
+		</div>
+	
+		<p/>	
+		<h3 style="marging-top: 20px; important">Voice Call</h3>
+		<p>The buttons below demonstrate how to make a voice call to the destination configured in <strong>mesibo-demo.js</strong>.</p>
+		<p>Refer <span style="color: #00868b;">voice_call</span>,  <span style="color: #00868b;">DemoNotify.prototype.Mesibo_OnCall</span>, and  <span style="color: #00868b;">DemoNotify.prototype.Mesibo_OnCallStatus</span> functions in <strong>mesibo-demo.js</strong> to learn more about the mesibo video call APIs.<p/>
+		
+		<div style="padding-top: 30px;">
+		<button type="button" class="btn btn-primary" onclick="voice_call()">Call</button> 
+		<button type="button" class="btn btn-danger" onclick="hangup()">Hangup</button>
+    		<button type="button" class="btn btn-warning" onclick="audio_mute_toggle()">Toggle Audio Mute</button>
+		<button type="button" class="btn btn-info" id="acstatus" style="float:right;">Call Status: </button>
+		</div>
+    <audio id="audioPlayer" autoplay="autoplay" controls="controls" style="visibility:hidden; height:5px;"></audio>
+		<p/>	
+		
+		<h3>Profile Update Demo</h3>
+		<p>The buttons below demonstrate how to update self profile and publish it.<p/>
+		<p><strong>Note:</strong> Open your web-browser console to see all the logs from the listener</p>
+		
+		<form class="border p-2 m-2">
+			<div class="form-group">
+				<label for="name">Name</label>
+				<input type="text" class="form-control" id="name" placeholder="Enter Name" maxlength="32">
+			</div>
+			<div class="form-group">
+				<label class="btn btn-success" for="profileimage" style="margin-top:10px;">
+					<input id="profileimage" type=file name='profileimage' class="d-none">
+					Select Profile Image
+				</label>
+			</div>
+		</form>
+
+		<p/>
+		<button type="button" id="btn1" class="btn btn-primary m-2" onclick="updateProfile()">Publish Profile</button>
+		<p/>	
+
+		<h3>Group Creation Demo</h3>
+		<p>The buttons below demonstrate how to create a group and add members.<p/>
+		<p><strong>Note:</strong> Open your web-browser console to see all the logs from the listener</p>
+
+		<button type="button" id="btn1" class="btn btn-primary" onclick="createGroup()">Create a Group</button>
+		<p/>	
+
+		<h3 style="marging-top: 20px; important">On-Premise</h3>
+		<p>If you prefer, you can run the entire Mesibo platform in your own premise OR private cloud. All the messages and calls go through your own data center and stay in your own database. Refer to Mesibo on-premise documentation to download Mesibo On-Premise and run it in your own data center!</strong>.</p>
+
+		<div style="padding-top: 10px;">
+			<a href="https://mesibo.com/on-premise/" class="btn btn-info" role="button">Run Mesibo in your own premise</a>
+		</div>
+		<p/>	
+		<p/>	
+		<div class="container">
+
+			<!-- Modal -->
+			<div class="modal fade" id="answerModal" tabindex="-1" role="dialog" aria-labelledby="answerModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="answerModalLabel">Incoming Call</h5>
+							<button type="button" class="close" data-dismiss="modal" onclick="hangup();" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body" id="ansBody">
+							Incoming Call From
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="hangup();">Hang-up</button>
+							<button type="button" class="btn btn-success" data-dismiss="modal" onclick="answer();">Answer</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</body>
+</html>
+

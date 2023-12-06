@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+  <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  <script type="text/javascript" src="https://api.mesibo.com/mesibo-v2.js"></script>
+  <script type="text/javascript" src="mesibo-demo.js"></script>
+
+  <body>
+    
+    <div class="mx-1 my-1"  id="mydiv"></div>
+    
+    <br>
+    
+    <div class="row" style="background-color: #f1f1f1;">
+	    <div class="col-6" style="padding: 10px;">
+		    <video id="localVideo" playsinline autoplay muted></video>
+	    </div>
+	    <div class="col-6" style="padding: 10px;">
+		    <video id="remoteVideo" playsinline autoplay></video>
+	    </div>
+    </div>
+    
+    <div id="calldiv"></div>
+    
+    <div style="padding-top: 30px;">
+	    <button type="button" class="mx-1 my-1 btn btn-danger" onclick="hangup()">Hangup</button>
+	    <button type="button" class="mx-1 my-1 btn btn-info" id="vcstatus" style="float:right;">Call Status: </button>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="answerModal" tabindex="-1" role="dialog" aria-labelledby="answerModalLabel" aria-hidden="true">
+	    <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+			    <div class="modal-header">
+				    <h5 class="modal-title" id="answerModalLabel">Incoming Call</h5>
+				    <button type="button" class="close" data-dismiss="modal" onclick="hangup();" aria-label="Close">
+					    <span aria-hidden="true">&times;</span>
+				    </button>
+			    </div>
+			    <div class="modal-body" id="ansBody">
+				    Incoming Call From
+			    </div>
+			    <div class="modal-footer">
+				    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="hangup();">Hang-up</button>
+				    <button type="button" class="btn btn-success" data-dismiss="modal" onclick="answer();">Answer</button>
+			    </div>
+		    </div>
+	    </div>
+    </div>
+
+
+    <script type="text/babel">
+      class DemoMessage extends React.Component {
+      	
+	constructor(props) {
+                super(props);
+	}
+
+	testMessage() {
+		sendMessage();
+	}
+        
+	render() {
+	  return <button class="mx-1 my-1 btn btn-primary" onClick={this.testMessage}>Send Message</button>
+        }
+      }
+      
+      class DemoVideo extends React.Component {
+      	
+	constructor(props) {
+                super(props);
+	}
+	testVideoCall() {
+		video_call();
+	}
+	
+        render() {
+	  return <button class="mx-1 my-1 btn btn-primary" onClick={this.testVideoCall}>Call</button>
+	}
+      }
+      
+      ReactDOM.render(<DemoMessage/>, document.getElementById('mydiv'));
+      ReactDOM.render(<DemoVideo/>, document.getElementById('calldiv'));
+    </script>
+  </body>
+</html>
