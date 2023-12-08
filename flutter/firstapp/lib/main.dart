@@ -70,8 +70,8 @@ class _HomeWidgetState extends State<HomeWidget> implements MesiboConnectionList
 
    https://mesibo.com/documentation/tutorials/get-started/
  **************************************************************************************************/
-  DemoUser user1 = DemoUser("user-auth-token-for-user-1", '<user2-address>');
-  DemoUser user2 = DemoUser("user-auth-token-for-user-2", '<user1-address>');
+  DemoUser user1 = DemoUser("user-access-token-for-user-1", 'user-1-address');
+  DemoUser user2 = DemoUser("user-access-token-for-user-2", 'user-2-address');
 
 
   String remoteUser = "";
