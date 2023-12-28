@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 
 // you can use mesibo.gradle to get latest mesibo version automatically
 // you can remove this line and supply version manually if requires
-apply from: "https://api.mesibo.com/mesibo.gradle"
+apply from: "https://cdn.mesibo.com/android/mesibo.gradle"
 
 
 android {
