@@ -167,7 +167,7 @@
     if(![self isLoggedIn]) return;
     MesiboProfile *sp = [MesiboInstance getSelfProfile];
     [sp setName:@"Joe from iOS"];
-    [sp setStatus:@"I am using mesibo iOS first app"];
+    [sp setString:@"status" value:@"I am using mesibo iOS first app"];
     [sp save];
 }
 

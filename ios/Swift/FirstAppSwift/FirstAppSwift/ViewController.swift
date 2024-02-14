@@ -207,7 +207,7 @@ class ViewController: UIViewController, MesiboDelegate {
         }
         let sp = Mesibo.getInstance().getSelfProfile()
         sp.setName("Joe from Swift")
-        sp.setStatus("I am using mesibo iOS first app")
+        sp.setString("status", value:"I am using mesibo iOS first app")
         sp.save()
     }
     
