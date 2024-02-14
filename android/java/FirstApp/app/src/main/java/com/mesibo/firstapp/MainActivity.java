@@ -227,9 +227,10 @@ public class MainActivity extends AppCompatActivity implements Mesibo.Connection
         if(!isLoggedIn()) return;
         MesiboSelfProfile profile = Mesibo.getSelfProfile();
         if(null == profile) return;
+        profile.reset();
         String name = "Joe from Android";
         profile.setName(name);
-        profile.setStatus("I am using mesibo");
+        profile.setString("status", "I am using mesibo");
         profile.save();
     }
 

@@ -5,6 +5,7 @@ android/MesiboSample/.idea
 **/.idea
 **/.sh
 **/.gradle
+**/local.properties
 .gitignore
 **/.gitignore
 **/.lock

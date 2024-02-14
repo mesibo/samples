@@ -202,8 +202,9 @@ class MainActivity : AppCompatActivity(), ConnectionListener, MessageListener, P
         if (!isLoggedIn) return
         val profile = Mesibo.getSelfProfile() ?: return
         val name = "Joe from Android"
-        profile.name = name
-        profile.status = "I am using mesibo"
+        profile.reset();
+        profile.setName(name);
+        profile.setString("status", "I am using mesibo");
         profile.save()
     }
 

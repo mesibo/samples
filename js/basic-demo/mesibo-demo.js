@@ -217,7 +217,7 @@ function updateProfile() {
 	var sp = api.getSelfProfile();
 	var n = document.getElementById("name");
 	sp.setName(n.value);
-	sp.setStatus("My status");
+	sp.setString("status", "My status");
 	
 	// profileimage is in demo.html
 	sp.setImage("profileimage");
