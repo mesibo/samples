@@ -8,7 +8,7 @@ apply from: "https://cdn.mesibo.com/android/mesibo.gradle"
 
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 34
     buildToolsVersion "30.0.2"
 
     compileOptions {
@@ -19,7 +19,7 @@ android {
     defaultConfig {
         applicationId "com.mesibo.firstapp"
         minSdkVersion 19
-        targetSdkVersion 30
+        targetSdkVersion 34
         versionCode 1
         versionName "1.0"
 
