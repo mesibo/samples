@@ -43,11 +43,11 @@ class MainActivity : AppCompatActivity(), ConnectionListener, MessageListener, P
      * https://mesibo.com/documentation/tutorials/get-started/
      */
     var mUser1:DemoUser = DemoUser(
-        "<token-1>",
+        "Token-1",
         "User-1",
         "123"
     )
-    var mUser2:DemoUser = DemoUser("<token-2>", "User-2", "456")
+    var mUser2:DemoUser = DemoUser("Token-2", "User-2", "456")
     var mRemoteUser:DemoUser? = null
     var mProfile: MesiboProfile? = null
     var mReadSession: MesiboReadSession? = null

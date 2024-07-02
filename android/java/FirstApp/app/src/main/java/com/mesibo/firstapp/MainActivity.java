@@ -59,8 +59,8 @@ public class MainActivity extends AppCompatActivity implements Mesibo.Connection
      https://mesibo.com/documentation/tutorials/get-started/
      **************************************************************************************************/
 
-    DemoUser mUser1 = new DemoUser("<token-1>", "User-1", "123");
-    DemoUser mUser2 = new DemoUser("<token-2>", "User-2", "456");
+    DemoUser mUser1 = new DemoUser("Token-1", "User-1", "123");
+    DemoUser mUser2 = new DemoUser("Token-2", "User-2", "456");
 
     DemoUser mRemoteUser;
     MesiboProfile mProfile;

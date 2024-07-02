@@ -7,7 +7,6 @@ apply from: "https://cdn.mesibo.com/android/mesibo.gradle"
 
 android {
     compileSdkVersion 34
-    buildToolsVersion "30.0.2"
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -30,6 +29,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    namespace 'com.mesibo.firstapp'
 }
 
 dependencies {
