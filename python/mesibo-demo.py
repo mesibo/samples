@@ -3,10 +3,10 @@
 # first-app.py
 #
 # Usage:
-# Refer to https://mesibo.com/documentation/tutorials/get-started/ to learn more
+# Refer to https://docs.mesibo.com/tutorials/get-started/ to learn more
 # Install mesibo python package using python -m pip install mesibo
-# Create an application at https://mesibo.com/console
-# Create a user and Obtain the token and app id for the user and set it
+# Create an application at https://console.mesibo.com
+# Create a user, and obtain the token or the user and set it
 # Run the script 
 #
 # $ python3 mesibo-demo.py
@@ -15,6 +15,7 @@
 # Use Ctrl+Z or pkill to stop the script
 #
 
+import sys
 import mesibo
 from mesibo import MesiboListener
 
@@ -24,9 +25,18 @@ class PyMesiboListener(MesiboListener):
         """A status = mesibo.MESIBO_STATUS_ONLINE means the listener 
         successfully connected to the mesibo server
         """
-        print("## Mesibo_onConnectionStatus: ", status)
-        if(status == mesibo.MESIBO_STATUS_AUTHFAIL):
-            exit(1) 
+        if(status == mesibo.MESIBO_STATUS_ONLINE):
+            print("\n## Mesibo_onConnectionStatus: online")
+        elif(status == mesibo.MESIBO_STATUS_OFFLINE):
+            print("\n## Mesibo_onConnectionStatus: offline")
+        elif(status == mesibo.MESIBO_STATUS_CONNECTING):
+            print("\n## Mesibo_onConnectionStatus: connecting")
+        elif(status == mesibo.MESIBO_STATUS_CONNECTFAILURE):
+            print("\n## Mesibo_onConnectionStatus: connection failed")
+        elif(status == mesibo.MESIBO_STATUS_AUTHFAIL):
+            print("\n## Mesibo_onConnectionStatus: authfail")
+        else:
+            print("\n## Mesibo_onConnectionStatus: ", status)
         return 0
 
     def Mesibo_onMessage(self, msg):
@@ -34,6 +44,12 @@ class PyMesiboListener(MesiboListener):
         or reading database messages
         msg: Message Object 
         """
+        
+        if(msg.isOutgoing()):
+            print(f"\n ------------- Outgoing Message: ID: {msg.mid} ---------------");
+        elif(msg.isIncoming()):
+            print(f"\n ------------- Incoming Message: ID: {msg.mid} ---------------");
+            
         try:
             if(msg.isRichMessage()):
                 print("\n ## message:", msg.message)
@@ -43,11 +59,11 @@ class PyMesiboListener(MesiboListener):
                 print("\n ## url:", msg.file.url)
                 #print("\n ## tn:", msg.file.thumbnail)
             else:    
-                print("\n ## Received data:", msg.data)
+                print("\n ## Received text message or data:", msg.data)
         except:
             pass
         
-        print("\n ## Mesibo_onMessage: ", msg)
+        #print("\n ## Mesibo_onMessage: ", msg)
         return 0
 
     def Mesibo_onMessageUpdate(self, msg):
@@ -60,11 +76,27 @@ class PyMesiboListener(MesiboListener):
         """Invoked when the status 
         of an outgoing or sent message is changed.
         """
-        print("## Mesibo_onMessageStatus", msg)
+        if(msg.isSent()):
+            print(f"## Mesibo_onStatus: ID: {msg.mid} status:sent\n")
+        elif(msg.isDelivered()):
+            print(f"## Mesibo_onStatus: ID: {msg.mid} status:delivered\n")
+        elif(msg.isReadByPeer()):
+            print(f"## Mesibo_onStatus: ID: {msg.mid} status:read by peer\n")
         return 0
 
     def Mesibo_onPresence(self, msg):
-        print("## Mesibo_onPresence", msg)
+        if(msg.isTyping()):
+            print(f"## Mesibo_onPresence: {msg.peer} is typing")
+        elif(msg.isTypingCleared()):
+            print(f"## Mesibo_onPresence: {msg.peer} has stopped typing")
+        elif(msg.isOnline()):
+            print(f"## Mesibo_onPresence: {msg.peer} is online")
+        elif(msg.hasJoined()):
+            print(f"## Mesibo_onPresence: {msg.peer} has joined")
+        elif(msg.hasLeft()):
+            print(f"## Mesibo_onPresence: {msg.peer} has left")
+        else:
+            print("## Mesibo_onPresence: ", msg.presence)
         return 0 
 
 
@@ -81,10 +113,9 @@ api = mesibo.getInstance()
 # You can override it by setting mesibo.MESIBO_READAS_BYTES or mesibo.MESIBO_READAS_UNICODE
 # mesibo.readDataAs(mesibo.MESIBO_READAS_AUTO)
 
-
 # Enable or disable End-to-end-encryption
 e2ee = api.e2ee();
-e2ee.enable(1)
+#e2ee.enable(1)
 
 # Set Listener
 listener = PyMesiboListener()
@@ -105,13 +136,15 @@ api.setDatabase("mesibo", 0)
 # Start mesibo, 
 api.start()
 
-input("Press Enter to to send a message...\n")
-msg = api.newMessage("destination")
-msg.title = "Hello"
-msg.message = "Hello message"
-#msg.setContent("pic1.jpg")
-#msg.setContent("https://mesibo.com")
-msg.send()
+#input("Press Enter to to send a message...\n")
+while 1:
+    text1 = input('===> Enter your message: ').strip()
+    #msg = api.newMessage("18005551111")
+    msg = api.newMessage("destination")
+    msg.message = text1
+    #msg.setLatitude(37.4275)
+    #msg.setLongitude(122.1697)
+    msg.send()
 
 #e2ee.getPublicCertificate("/root/pycert.cert")
 #print("fingerPrint: " + e2ee.getFingerprint("destination"))
