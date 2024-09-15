@@ -139,8 +139,7 @@ api.start()
 #input("Press Enter to to send a message...\n")
 while 1:
     text1 = input('===> Enter your message: ').strip()
-    #msg = api.newMessage("18005551111")
-    msg = api.newMessage("destination")
+    msg = api.newMessage("18005551111")
     msg.message = text1
     #msg.setLatitude(37.4275)
     #msg.setLongitude(122.1697)
