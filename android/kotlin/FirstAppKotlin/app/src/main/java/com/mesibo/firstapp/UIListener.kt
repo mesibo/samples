@@ -15,7 +15,7 @@ import android.view.MenuItem
 import com.mesibo.calls.api.MesiboCall
 
 /* Messaging UI customization listener
-  Refer to the https://mesibo.com/documentation/ui-modules/ for details
+  Refer to the https://docs.mesibo.com/ui-modules/ for details
 */
 class UIListener : MesiboUIListener {
     override fun MesiboUI_onInitScreen(screen: MesiboScreen): Boolean {

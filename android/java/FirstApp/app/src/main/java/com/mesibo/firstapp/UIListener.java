@@ -12,7 +12,7 @@ import com.mesibo.messaging.MesiboUI;
 import com.mesibo.messaging.MesiboUIListener;
 
 /* Messaging UI customization listener
-  Refer to the https://mesibo.com/documentation/ui-modules/ for details
+  Refer to the https://docs.mesibo.com/ui-modules/ for details
 */
 
 public class UIListener implements MesiboUIListener {
