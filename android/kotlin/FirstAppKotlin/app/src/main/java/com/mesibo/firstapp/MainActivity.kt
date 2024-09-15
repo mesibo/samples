@@ -28,7 +28,7 @@ import com.mesibo.messaging.MesiboUI.MesiboUserListScreenOptions
  * projects. Please refer to the tutorial link below for details on getting started, obtaining
  * authentication tokens and other implementation specifics.
  *
- * https://mesibo.com/documentation/tutorials/get-started/
+ * https://docs.mesibo.com/tutorials/get-started/
  *
  * You MUST create tokens and initialize them for user1 and user2 in the code below.
  *
@@ -254,6 +254,32 @@ class MainActivity : AppCompatActivity(), ConnectionListener, MessageListener, P
             toast(mLoginPrompt)
             return false
         }
+
+    fun initLocation() {
+        val locationConfig = MesiboLocationConfig();
+        locationConfig.minDistance = 250;
+
+        val locationManager = MesiboLocationManager.getInstance()
+        //locationManager.addListener(this)
+        locationManager.start(locationConfig)
+    }
+
+    fun getLocation() {
+        val profile:MesiboProfile = MesiboProfile.getProfile(mRemoteUser?.address);
+        val profileLocation = profile.location();
+
+        val location:MesiboLocation = profileLocation.get();
+
+    }
+
+    fun searchLocation() {
+        val profileSearch:MesiboProfileSearch = MesiboProfileSearch();
+        profileSearch.setListener(null);
+        profileSearch.setDistance(1000); // 1000 meters
+        profileSearch.setMaxAge(3600); // 1 hour
+        profileSearch.search();
+    }
+
 
     fun toast(message: String?) {
         val toast = Toast.makeText(applicationContext, message, Toast.LENGTH_LONG)

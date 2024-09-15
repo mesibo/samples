@@ -13,10 +13,17 @@ import androidx.core.content.ContextCompat;
 
 import com.mesibo.api.Mesibo;
 import com.mesibo.api.MesiboGroupProfile;
+import com.mesibo.api.MesiboLocation;
+import com.mesibo.api.MesiboLocationConfig;
+import com.mesibo.api.MesiboLocationListener;
+import com.mesibo.api.MesiboLocationManager;
 import com.mesibo.api.MesiboMessage;
 import com.mesibo.api.MesiboPhoneContact;
 import com.mesibo.api.MesiboPresence;
 import com.mesibo.api.MesiboProfile;
+import com.mesibo.api.MesiboProfileLocation;
+import com.mesibo.api.MesiboProfileSearch;
+import com.mesibo.api.MesiboProfileSearchListener;
 import com.mesibo.api.MesiboReadSession;
 import com.mesibo.api.MesiboSelfProfile;
 import com.mesibo.calls.api.MesiboCall;
@@ -29,7 +36,7 @@ import com.mesibo.messaging.MesiboUiDefaults;
  projects. Please refer to the tutorial link below for details on getting started, obtaining
  authentication tokens and other implementation specifics.
 
- https://mesibo.com/documentation/tutorials/get-started/
+ https://docs.mesibo.com/tutorials/get-started/
 
  You MUST create tokens and initialize them for user1 and user2 in the code below.
 
@@ -273,6 +280,28 @@ public class MainActivity extends AppCompatActivity implements Mesibo.Connection
         String name = contact.name;
         String phone = contact.formattedPhoneNumber;
         String country = contact.country;
+    }
+
+    public void initLocation() {
+        MesiboLocationConfig locationConfig = new MesiboLocationConfig();
+        locationConfig.minDistance = 250;
+
+        MesiboLocationManager locationManager = MesiboLocationManager.getInstance();
+        //locationManager.addListener(this);
+        locationManager.start(locationConfig);
+    }
+
+    public void getLocation() {
+        MesiboProfileLocation profileLocation = mProfile.location();
+        MesiboLocation location = profileLocation.get();
+    }
+
+    public void searchLocation() {
+        MesiboProfileSearch profileSearch = new MesiboProfileSearch();
+        profileSearch.setListener(null);
+        profileSearch.setDistance(1000); // 1000 meters
+        profileSearch.setMaxAge(3600); // within last hour
+        profileSearch.search();
     }
 
     boolean isLoggedIn() {

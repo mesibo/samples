@@ -1,29 +1,29 @@
 package com.mesibo.firstapp
 
-import android.content.Context
-import android.view.Menu
-import android.view.MenuItem
-import com.mesibo.api.Mesibo
-import com.mesibo.api.MesiboProfile
-import com.mesibo.calls.api.MesiboCall
-import com.mesibo.messaging.MesiboRecycleViewHolder
-import com.mesibo.messaging.MesiboUI
-import com.mesibo.messaging.MesiboUI.MesiboMessageScreen
-import com.mesibo.messaging.MesiboUI.MesiboRow
+import com.mesibo.messaging.MesiboUIListener
 import com.mesibo.messaging.MesiboUI.MesiboScreen
 import com.mesibo.messaging.MesiboUI.MesiboUserListScreen
-import com.mesibo.messaging.MesiboUIListener
+import com.mesibo.messaging.MesiboUI.MesiboMessageScreen
+import com.mesibo.messaging.MesiboUI.MesiboRow
+import com.mesibo.messaging.MesiboRecycleViewHolder
+import com.mesibo.api.MesiboProfile
+import com.mesibo.firstapp.R
+import com.mesibo.messaging.MesiboUI
+import android.app.Activity
+import android.content.Context
+import android.view.MenuItem
+import com.mesibo.calls.api.MesiboCall
 
 /* Messaging UI customization listener
- Refer to the https://mesibo.com/documentation/ui-modules/ for details
+  Refer to the https://mesibo.com/documentation/ui-modules/ for details
 */
 class UIListener : MesiboUIListener {
     override fun MesiboUI_onInitScreen(screen: MesiboScreen): Boolean {
         if (screen.userList) {
-            lastUserListContext = screen.parent
+            mLastUserListContext = screen.parent
             initUserListScreen(screen as MesiboUserListScreen)
         } else {
-            lastMessagingContext = screen.parent
+            mLastMessagingContext = screen.parent
             initMessageListScreen(screen as MesiboMessageScreen)
         }
         return false
@@ -53,79 +53,57 @@ class UIListener : MesiboUIListener {
     }
 
     fun userListScreenMenuHandler(context: Context?, item: Int) {
-        if (item == MENU_E2EE) {
+        if (item == R.id.action_settings) {
+        } else if (item == R.id.action_menu_e2ee) {
             MesiboUI.showEndToEndEncryptionInfoForSelf(context)
+        } else if (item == R.id.mesibo_share) {
         }
     }
 
     fun initUserListScreen(screen: MesiboUserListScreen) {
-        screen.menu.clear()
-
-
+        (screen.parent as Activity).menuInflater.inflate(R.menu.menu_userlist, screen.menu)
         val menuhandler = MenuItem.OnMenuItemClickListener { item ->
             userListScreenMenuHandler(screen.parent, item.itemId)
             true
         }
-
-        /* Creating menu dynamically - alternatively you can also inflate menus from XML resource files */
-        var menuItem = screen.menu.add(0, R.id.mesibo_contacts, Menu.NONE, "New Message")
-        menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
-        menuItem.setIcon(MesiboUI.MESIBO_DEFAULTICON_MESSAGE)
-
-        //menuItem.setOnMenuItemClickListener(menuhandler);
-        menuItem = screen.menu.add(0, MENU_E2EE, Menu.NONE, "End-toEnd Encryption")
-        menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER)
-        menuItem.setOnMenuItemClickListener(menuhandler)
+        screen.menu.findItem(R.id.action_menu_e2ee).setOnMenuItemClickListener(menuhandler)
     }
 
     fun messageListScreenMenuHandler(context: Context?, item: Int, profile: MesiboProfile?) {
         if (null == profile) {
             return
         }
-
-        if (MENU_AUDIOCALL == item) {
+        if (R.id.action_call == item) {
             if (!MesiboCall.getInstance().callUi(context, profile, false)) MesiboCall.getInstance()
                 .callUiForExistingCall(context)
-        } else if (MENU_VIDEOCALL == item) {
+        } else if (R.id.action_videocall == item) {
             if (!MesiboCall.getInstance().callUi(context, profile, true)) MesiboCall.getInstance()
                 .callUiForExistingCall(context)
-        } else if (MENU_E2EE == item) {
+        } else if (R.id.action_e2e == item) {
             MesiboUI.showEndToEndEncryptionInfo(context, profile.getAddress(), profile.groupid)
         }
     }
 
     fun initMessageListScreen(screen: MesiboMessageScreen) {
-        screen.menu.clear()
+        (screen.parent as Activity).menuInflater.inflate(R.menu.menu_messaging, screen.menu)
 
+        /* different item for group calls */if (null != screen.profile && screen.profile.isGroup) {
+            var menuItem = screen.menu.findItem(R.id.action_call)
+            if (!screen.profile.isActive) menuItem.isVisible = false
+            menuItem.setIcon(R.drawable.ic_mesibo_groupcall_audio)
+            // MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_NEVER);
+            menuItem = screen.menu.findItem(R.id.action_videocall)
+            menuItem.setIcon(R.drawable.ic_mesibo_groupcall_video)
+            if (!screen.profile.isActive) menuItem.isVisible = false
+            //MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_NEVER);
+        }
         val menuhandler = MenuItem.OnMenuItemClickListener { item ->
             messageListScreenMenuHandler(screen.parent, item.itemId, screen.profile)
             true
         }
-
-        /* Creating menu dynamically - alternatively you can also inflate menus from XML resource files */
-        // set group call icons
-        if (null != screen.profile) {
-            var menuItem = screen.menu.add(0, MENU_AUDIOCALL, Menu.NONE, "Audio Call")
-            menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
-
-            if (screen.profile.isGroup && !screen.profile.isActive) menuItem.setVisible(false)
-            menuItem.setIcon(if (screen.profile.isGroup) MesiboCall.MESIBO_DEFAULTICON_GROUPAUDIOCALL else MesiboCall.MESIBO_DEFAULTICON_AUDIOCALL)
-            menuItem.setOnMenuItemClickListener(menuhandler)
-
-            // MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_NEVER);
-            menuItem = screen.menu.add(0, MENU_VIDEOCALL, Menu.NONE, "Video Call")
-            menuItem.setIcon(if (screen.profile.isGroup) MesiboCall.MESIBO_DEFAULTICON_GROUPVIDEOCALL else MesiboCall.MESIBO_DEFAULTICON_VIDEOCALL)
-            if (screen.profile.isGroup && !screen.profile.isActive) menuItem.setVisible(false)
-            menuItem.setOnMenuItemClickListener(menuhandler)
-            menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
-
-            if (Mesibo.e2ee().isEnabled) {
-                menuItem = screen.menu.add(0, MENU_E2EE, Menu.NONE, "End-toEnd Encryption")
-                menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER)
-                menuItem.setOnMenuItemClickListener(menuhandler)
-            }
-        }
-
+        screen.menu.findItem(R.id.action_call).setOnMenuItemClickListener(menuhandler)
+        screen.menu.findItem(R.id.action_videocall).setOnMenuItemClickListener(menuhandler)
+        screen.menu.findItem(R.id.action_e2e).setOnMenuItemClickListener(menuhandler)
         screen.titleArea.setOnClickListener {
             MesiboUI.showBasicProfileInfo(
                 screen.parent,
@@ -135,15 +113,11 @@ class UIListener : MesiboUIListener {
     }
 
     companion object {
-        var lastUserListContext: Context? = null
-            private set
-        var lastMessagingContext: Context? = null
-            private set
-
-        // define some menu IDs for dynamic menus on userlist and message screen
-        private const val MENU_AUDIOCALL = Menu.FIRST
-        private const val MENU_VIDEOCALL = Menu.FIRST + 1
-        private const val MENU_E2EE = Menu.FIRST + 2
-        private const val MENU_MESSAGE = Menu.FIRST + 3
+        private var mLastUserListContext: Context? = null
+        private var mLastMessagingContext: Context? = null
+        val lastUserListContext: Context?
+            get() = mLastUserListContext
+        val lastMessagingContext: Context?
+            get() = mLastMessagingContext
     }
 }

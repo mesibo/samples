@@ -46,6 +46,4 @@ dependencies {
     implementation "com.mesibo.api:calls:${project.MesiboVersion_Calls}"
 
 
-
-
 }
