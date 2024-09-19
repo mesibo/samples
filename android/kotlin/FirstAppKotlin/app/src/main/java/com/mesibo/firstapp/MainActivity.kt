@@ -365,7 +365,7 @@ class MainActivity : AppCompatActivity(), ConnectionListener, MessageListener, P
         mesiboProfile: MesiboProfile,
         groupSettings: GroupSettings,
         memberPermissions: MemberPermissions,
-        groupPins: Array<GroupPin>
+        groupPins: Array<GroupPin>?
     ) {
     }
 
