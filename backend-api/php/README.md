@@ -1,13 +1,24 @@
-# Mesibo Backend API Library using PHP
-This repository contains source code for Mesibo backend API library written in php.
+# Mesibo Backend API Library for PHP
 
-Refer to [Backend API Documentation](https://mesibo.com/documentation/api/backend-api/)
+This repository contains sample source code for Mesibo Backend API library written in PHP.
 
-There are two implementation, old `form` based implementation and the latest `json` based implementation. You can set jsonapi flag in mesiboconfig.php to select one. 
+Refer to [Backend API Documentation](https://docs.mesibo.com/api/backend-api/) for complete API reference.
 
-### Setup
-* Create your own mesibo account to get mesibo API key and App token. You may also read [tutorial](https://mesibo.com/documentation/tutorials/get-started/) on how to get mesibo API key and App token. 
-* edit mesiboconfig.php and enter API Key, App token.
+## Prerequisites
 
+- PHP 7.0 or higher
+- cURL extension enabled
+- SSL support
+
+## Setup
+
+1. **Get your App Token**
+   - Create your mesibo account at [mesibo.com](https://mesibo.com)
+   - Login to [Mesibo Console](https://console.mesibo.com)
+   - Create an application and get your App Token
+   - See [Getting Started Tutorial](https://docs.mesibo.com/tutorials/get-started/) for detailed instructions
+
+2. **Configure the library**
+   - Edit `mesiboconfig.php` and enter your App Token:
 
 
