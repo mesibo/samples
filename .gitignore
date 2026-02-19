@@ -1,0 +1,17 @@
+./android/MesiboSample/.gradle
+android/MesiboSample/.idea
+./android/MesiboSample/app/build
+**/build
+**/.idea
+**/.sh
+**/.gradle
+**/local.properties
+.gitignore
+**/.gitignore
+**/.lock
+**/._*
+**/.swp
+old
+upload.sh
+cleanup.sh
+
