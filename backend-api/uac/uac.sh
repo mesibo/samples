@@ -1,12 +1,13 @@
 #!/bin/bash
 
-#===========================================
+#==================================================================================
 # mesibo UAC (User Access Control) Configuration Script
-#===========================================
+#==================================================================================
 # 
 # This script helps you create and manage UAC configurations for mesibo.
 # UAC allows you to assign different feature sets to different user segments
-# (free/premium users, doctors/patients, etc.) instead of managing each user individually.
+# (free/premium users, doctors/patients, etc.) instead of managing each user 
+# individually.
 #
 # Documentation: https://docs.mesibo.com/api/backend-api/user-access-control-uac/
 #
@@ -21,7 +22,7 @@
 #
 # 4. Run: ./uac.sh
 #
-#===========================================
+#==================================================================================
 
 # Configuration
 # IMPORTANT: Update these values before running the script
