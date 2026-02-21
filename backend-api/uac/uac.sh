@@ -34,7 +34,7 @@ APP_TOKEN="APP TOKEN"  # Your app token from mesibo console
 #===========================================
 
 # Basic Settings
-UAC_ID=10
+UAC_ID=3
 UAC_NAME="Test UAC"
 UAC_UPDATE=0           # Set to 1 to update existing
 PEERS=0                # 0=All, 1=Specific peers, 2=Contacts only, 3=Favorites only
