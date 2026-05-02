@@ -102,8 +102,8 @@ class PyMesiboListener(MesiboListener):
 
 # Get access token and app id by creating a mesibo user
 # See https://mesibo.com/documentation/tutorials/get-started/
-ACCESS_TOKEN = "<user-access-token>"
-APP_ID = "com.mesibo.firstapp"
+ACCESS_TOKEN = "MIIbqwAJbrEQXBVJdinnI1wsIeNjLYsEvahnDtXs4rfadgr98lokCzRaLL42hBLw3hCxQCAH6H0HUpjcc2fes1_XTXlTcXVYd1_XTXlkw5VpxzvBYjGQJISfI-OYbrmw_qnccq_0NaDJbb7y"
+APP_ID = "sgutd1svvqw46b1u54dhhtjovr5v5ayk9zjmt345ad8z45fqadxam3sq6qgj2g0c"
 
 # Create a Mesibo Instance
 api = mesibo.getInstance()
