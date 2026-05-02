@@ -12,7 +12,7 @@
  */
   
 // App Token is obtained by signing up at mesibo.com
-$apptoken = "USE YOUR APP TOKEN";
+$apptoken = "sgutd1svvqw46b1u54dhhtjovr5v5ayk9zjmt345ad8z45fqadxam3sq6qgj2g0c";
 
 // Change this if you are running mesibo on-premise and hosting backend APIs on your server
 // https://docs.mesibo.com/on-premise/
