@@ -2,6 +2,7 @@ package com.mesibo.firstapp;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.mesibo.api.Mesibo;
@@ -61,13 +63,23 @@ public class MainActivity extends AppCompatActivity implements Mesibo.Connection
     }
 
     /**************************************************************************************************
-     Please refer to the tutorial link below for details on obtaining user authentication tokens.
+     Set the tokens of the two users here: create the users in the mesibo console with the
+     addresses below and the App ID com.mesibo.firstapp, and copy their tokens. Install the app on
+     two devices, and log in as User-1 on one and as User-2 on the other.
 
-     https://mesibo.com/documentation/tutorials/get-started/
+     https://docs.mesibo.com/tutorials/get-started/
      **************************************************************************************************/
+    static final String USER1_TOKEN = "<token-1>";
+    static final String USER1_ADDRESS = "123";
+    static final String USER2_TOKEN = "<token-2>";
+    static final String USER2_ADDRESS = "456";
 
-    DemoUser mUser1 = new DemoUser("Token-1", "User-1", "123");
-    DemoUser mUser2 = new DemoUser("Token-2", "User-2", "456");
+    static boolean areTokensSet() {
+        return !USER1_TOKEN.startsWith("<") && !USER2_TOKEN.startsWith("<");
+    }
+
+    DemoUser mUser1 = new DemoUser(USER1_TOKEN, "User-1", USER1_ADDRESS);
+    DemoUser mUser2 = new DemoUser(USER2_TOKEN, "User-2", USER2_ADDRESS);
 
     DemoUser mRemoteUser;
     MesiboProfile mProfile;
@@ -86,9 +98,20 @@ public class MainActivity extends AppCompatActivity implements Mesibo.Connection
         mLoginButton2 = findViewById(R.id.login2);
 
         mConnStatus = findViewById(R.id.connStatus);
+
+        // Android 13 and later: needed for the incoming call and message notifications
+        if (Build.VERSION.SDK_INT >= 33 && ContextCompat.checkSelfPermission(this,
+                Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, 1);
+        }
     }
 
     private void mesiboInit(DemoUser user, DemoUser remoteUser) {
+        if(!areTokensSet()) {
+            toast("Set USER1_TOKEN and USER2_TOKEN in MainActivity first");
+            return;
+        }
+
         Mesibo api = Mesibo.getInstance();
         api.init(getApplicationContext());
 
@@ -120,12 +143,10 @@ public class MainActivity extends AppCompatActivity implements Mesibo.Connection
         MesiboUI.setListener(new UIListener());
 
         /**************************************************************************************************
-         override default UI text, colors, etc.Refer to the documentation
+         OPTIONAL - override the default texts, colors, etc. of the messaging UI (the same names on
+         Android and iOS). Refer to the documentation
 
-         https://mesibo.com/documentation/ui-modules/
-
-         Also refer to the header file for complete list of parameters (applies to both Android/iOS)
-         https://github.com/mesibo/mesiboframeworks/blob/main/mesiboui.framework/Headers/MesiboUI.h#L170
+         https://docs.mesibo.com/ui-modules/setting-defaults/
          **************************************************************************************************/
         MesiboUiDefaults defs = MesiboUI.getUiDefaults();
         defs.showMissedCalls = true;
@@ -241,7 +262,7 @@ public class MainActivity extends AppCompatActivity implements Mesibo.Connection
         profile.save();
     }
 
-    /* Group Management - https://mesibo.com/documentation/api/group-management/ */
+    /* Group Management - https://docs.mesibo.com/api/group-management/ */
     public void onCreateGroup(View view) {
         if(!isLoggedIn()) return;
         MesiboGroupProfile.GroupSettings settings = new MesiboGroupProfile.GroupSettings();
@@ -261,7 +282,6 @@ public class MainActivity extends AppCompatActivity implements Mesibo.Connection
 
     }
 
-    private int REQUEST_CODE = 111;
     public void onSyncContacts(View view) {
         if(!isLoggedIn()) return;
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) ==
@@ -328,14 +348,14 @@ public class MainActivity extends AppCompatActivity implements Mesibo.Connection
     @Override
     public void Mesibo_onMessage(MesiboMessage msg) {
 
-        /* Messaging documentation https://mesibo.com/documentation/api/messaging/ */
+        /* Messaging documentation https://docs.mesibo.com/api/messaging/ */
         if(msg.isIncoming()) {
 
-            /* Profile documentation https://mesibo.com/documentation/api/users-and-profiles/ */
+            /* Profile documentation https://docs.mesibo.com/api/users-and-profiles/ */
             MesiboProfile sender = msg.profile;
 
             // check if this message belongs to a group
-            /* Group Management - https://mesibo.com/documentation/api/group-management/ */
+            /* Group Management - https://docs.mesibo.com/api/group-management/ */
             if(msg.isGroupMessage()) {
                 MesiboProfile group = msg.groupProfile;
             }

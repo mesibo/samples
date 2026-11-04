@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">First Mesibo App</string>
+
+    <!-- welcome screen (shown until the tokens are set) -->
+    <string name="welcome_title">Welcome to your first mesibo app</string>
+    <string name="welcome_about">This demo shows you how to add messaging, voice and video calls to your apps in just a few lines of code.</string>
+    <string name="welcome_setup">To use this demo, log in to the mesibo console, create two users, set their tokens in MainActivity, and run the app on two phones.</string>
+    <string name="welcome_tutorial">Refer to the tutorial for instructions:</string>
+    <string name="welcome_tutorial_link">https://docs.mesibo.com/tutorials/get-started/</string>
+    <string name="welcome_start">Continue</string>
+    <string name="welcome_tokens_missing_title">Tokens not set</string>
+    <string name="welcome_tokens_missing">You have not set the tokens in the code yet. Set USER1_TOKEN and USER2_TOKEN in MainActivity, and run the app again.</string>
 </resources>

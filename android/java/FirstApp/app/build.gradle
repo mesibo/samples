@@ -1,26 +1,24 @@
 apply plugin: 'com.android.application'
 
-// you can use mesibo.gradle to get latest mesibo version automatically
-// you can remove this line and supply version manually if requires
+// mesibo versions and settings (getMesiboVersion, getMesiboProperty), always the latest.
+// You can remove this line and set the versions yourself.
 apply from: "https://cdn.mesibo.com/android/mesibo.gradle"
 
-
 android {
-    compileSdkVersion 34
+    namespace 'com.mesibo.firstapp'
+    compileSdk getMesiboProperty("Mesibo_compileSdkVersion", null, true) as int
+
+    defaultConfig {
+        applicationId "com.mesibo.firstapp"
+        minSdk getMesiboProperty("Mesibo_minSdkVersion", null, true) as int
+        targetSdk getMesiboProperty("Mesibo_targetSdkVersion", null, true) as int
+        versionCode 1
+        versionName "1.0"
+    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-    defaultConfig {
-        applicationId "com.mesibo.firstapp"
-        minSdkVersion 19
-        targetSdkVersion 34
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -29,22 +27,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    namespace 'com.mesibo.firstapp'
 }
 
 dependencies {
-    implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'com.android.support.constraint:constraint-layout:2.0.1'
-    implementation 'com.google.android.material:material:1.0.0+'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'com.google.android.material:material:1.12.0'
 
-    implementation "com.mesibo.api:mesibo:${project.MesiboVersion_Api}"
-    implementation "com.mesibo.api:ui:${project.MesiboVersion_Ui}"
-    implementation "com.mesibo.api:calls:${project.MesiboVersion_Calls}"
-
-
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
+    implementation "com.mesibo.api:mesibo:${getMesiboVersion("Api")}"
+    implementation "com.mesibo.api:ui:${getMesiboVersion("Ui")}"
+    implementation "com.mesibo.api:calls:${getMesiboVersion("Calls")}"
 }

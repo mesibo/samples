@@ -2,12 +2,14 @@ package com.mesibo.firstapp
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.mesibo.api.*
 import com.mesibo.api.Mesibo.ConnectionListener
@@ -15,9 +17,10 @@ import com.mesibo.api.Mesibo.GroupListener
 import com.mesibo.api.Mesibo.MessageListener
 import com.mesibo.api.Mesibo.PresenceListener
 import com.mesibo.api.Mesibo.ProfileListener
+import com.mesibo.api.Mesibo.log
 import com.mesibo.api.MesiboGroupProfile.*
 import com.mesibo.calls.api.MesiboCall
-import com.mesibo.firstapp.R
+import com.mesibo.calls.api.MesiboCall.IncomingListener
 import com.mesibo.messaging.MesiboUI
 import com.mesibo.messaging.MesiboUI.MesiboMessageScreenOptions
 import com.mesibo.messaging.MesiboUI.MesiboUserListScreenOptions
@@ -34,20 +37,19 @@ import com.mesibo.messaging.MesiboUI.MesiboUserListScreenOptions
  *
  */
 class MainActivity : AppCompatActivity(), ConnectionListener, MessageListener, PresenceListener,
-    ProfileListener, GroupListener {
+    ProfileListener, GroupListener, IncomingListener {
     inner class DemoUser(var token: String, var name: String, var address: String)
 
     /**************************************************************************************************
-     * Please refer to the tutorial link below for details on obtaining user authentication tokens.
+     * Set the tokens of the two users in USER1_TOKEN and USER2_TOKEN (companion object below):
+     * create the users in the mesibo console with those addresses and the App ID
+     * com.mesibo.firstapp, and copy their tokens. Install the app on two devices, and log in as
+     * User-1 on one and as User-2 on the other.
      *
-     * https://mesibo.com/documentation/tutorials/get-started/
+     * https://docs.mesibo.com/tutorials/get-started/
      */
-    var mUser1:DemoUser = DemoUser(
-        "Token-1",
-        "User-1",
-        "123"
-    )
-    var mUser2:DemoUser = DemoUser("Token-2", "User-2", "456")
+    var mUser1: DemoUser = DemoUser(USER1_TOKEN, "User-1", USER1_ADDRESS)
+    var mUser2: DemoUser = DemoUser(USER2_TOKEN, "User-2", USER2_ADDRESS)
     var mRemoteUser:DemoUser? = null
     var mProfile: MesiboProfile? = null
     var mReadSession: MesiboReadSession? = null
@@ -61,14 +63,26 @@ class MainActivity : AppCompatActivity(), ConnectionListener, MessageListener, P
         mLoginButton1 = findViewById(R.id.login1)
         mLoginButton2 = findViewById(R.id.login2)
         mConnStatus = findViewById(R.id.connStatus)
+
+        // Android 13 and later: needed for the incoming call and message notifications
+        if (Build.VERSION.SDK_INT >= 33 && ContextCompat.checkSelfPermission(this,
+                Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.POST_NOTIFICATIONS), 1)
+        }
     }
 
-    private fun mesiboInit(user: MainActivity.DemoUser, remoteUser: MainActivity.DemoUser) {
+    private fun mesiboInit(user: DemoUser, remoteUser: DemoUser) {
+        if (!areTokensSet()) {
+            toast("Set USER1_TOKEN and USER2_TOKEN in MainActivity first")
+            return
+        }
+
         val api = Mesibo.getInstance()
         api.init(applicationContext)
         Mesibo.addListener(this)
         Mesibo.setAccessToken(user.token)
         Mesibo.setDatabase("mydb")
+        MesiboCall.getInstance().setListener(this)
         Mesibo.start()
         mRemoteUser = remoteUser
         mProfile = Mesibo.getProfile(remoteUser.address)
@@ -92,12 +106,10 @@ class MainActivity : AppCompatActivity(), ConnectionListener, MessageListener, P
             UIListener()
         )
         /**************************************************************************************************
-         * override default UI text, colors, etc.Refer to the documentation
+         * OPTIONAL - override the default texts, colors, etc. of the messaging UI (the same names on
+         * Android and iOS). Refer to the documentation
          *
-         * https://mesibo.com/documentation/ui-modules/
-         *
-         * Also refer to the header file for complete list of parameters (applies to both Android/iOS)
-         * https://github.com/mesibo/mesiboframeworks/blob/main/mesiboui.framework/Headers/MesiboUI.h#L170
+         * https://docs.mesibo.com/ui-modules/setting-defaults/
          */
         val defs = MesiboUI.getUiDefaults()
         defs.showMissedCalls = true
@@ -208,7 +220,7 @@ class MainActivity : AppCompatActivity(), ConnectionListener, MessageListener, P
         profile.save()
     }
 
-    /* Group Management - https://mesibo.com/documentation/api/group-management/ */
+    /* Group Management - https://docs.mesibo.com/api/group-management/ */
     fun onCreateGroup(view: View?) {
         if (!isLoggedIn) return
         val settings = GroupSettings()
@@ -298,14 +310,14 @@ class MainActivity : AppCompatActivity(), ConnectionListener, MessageListener, P
 
     override fun Mesibo_onMessage(msg: MesiboMessage) {
 
-        /* Messaging documentation https://mesibo.com/documentation/api/messaging/ */
+        /* Messaging documentation https://docs.mesibo.com/api/messaging/ */
         if (msg.isIncoming) {
 
-            /* Profile documentation https://mesibo.com/documentation/api/users-and-profiles/ */
+            /* Profile documentation https://docs.mesibo.com/api/users-and-profiles/ */
             val sender = msg.profile
 
             // check if this message belongs to a group
-            /* Group Management - https://mesibo.com/documentation/api/group-management/ */
+            /* Group Management - https://docs.mesibo.com/api/group-management/ */
             if (msg.isGroupMessage) {
                 val group = msg.groupProfile
             }
@@ -365,7 +377,7 @@ class MainActivity : AppCompatActivity(), ConnectionListener, MessageListener, P
         mesiboProfile: MesiboProfile,
         groupSettings: GroupSettings,
         memberPermissions: MemberPermissions,
-        groupPins: Array<GroupPin>?
+        groupPins: Array<out GroupPin?>?
     ) {
     }
 
@@ -376,7 +388,54 @@ class MainActivity : AppCompatActivity(), ConnectionListener, MessageListener, P
         toast(profile.name + " has updated profile")
     }
 
+    override fun MesiboCall_OnIncoming(
+        profile: MesiboProfile,
+        video: Boolean,
+        waiting: Boolean
+    ): MesiboCall.CallProperties? {
+        //if (!video) return null // return null to reject the call, e.g. to accept video calls only
+
+        // call properties of the incoming call (a voice or video call, as the caller made it)
+        val cp = MesiboCall.getInstance().createCallProperties(video)
+
+        // optional parameters
+        if (video) cp.video.bitrate = 2000 // bitrate in kbps
+
+        return cp
+    }
+
+    override fun MesiboCall_OnShowUserInterface(
+        call: MesiboCall.Call,
+        properties: MesiboCall.CallProperties
+    ): Boolean {
+        return false // the default call screen
+    }
+
+    override fun MesiboCall_OnError(properties: MesiboCall.CallProperties, error: Int) {
+        log("MesiboCall_OnError: $error")
+    }
+
+    override fun MesiboCall_onNotify(
+        type: Int,
+        profile: MesiboProfile,
+        video: Boolean,
+        ts: MesiboDateTime
+    ): Boolean {
+        return false // the default notification, e.g. of a missed call
+    }
+
     companion object {
         const val TAG = "MesiboFirstApp"
+
+        // set the tokens of the two users (see the comment above mUser1)
+        const val USER1_TOKEN = "<token-1>"
+        const val USER1_ADDRESS = "123"
+        const val USER2_TOKEN = "<token-2>"
+        const val USER2_ADDRESS = "456"
+
+        @JvmStatic
+        fun areTokensSet(): Boolean {
+            return !USER1_TOKEN.startsWith("<") && !USER2_TOKEN.startsWith("<")
+        }
     }
 }
