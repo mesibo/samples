@@ -1,17 +1,42 @@
-./android/MesiboSample/.gradle
-android/MesiboSample/.idea
-./android/MesiboSample/app/build
-**/build
-**/.idea
-**/.sh
-**/.gradle
-**/local.properties
+# ==========================================
+# System & General Files
+# ==========================================
+.DS_Store
+._*
+*.swp
+*.lock
 .gitignore
-**/.gitignore
-**/.lock
-**/._*
-**/.swp
-old
+
+# ==========================================
+# Xcode & iOS
+# ==========================================
+# Automatically ignores xcuserdata everywhere (root and subdirectories)
+xcuserdata/
+
+DerivedData/
+*.hmap
+*.ipa
+*.dSYM/
+*.dSYM.zip
+
+# Playgrounds & Swift PM
+timeline.xctimeline
+playground.xcworkspace
+.swiftpm/xcode/xcuserdata/
+
+# ==========================================
+# Android & Gradle (Universal Rules)
+# ==========================================
+# Automatically ignores these folders anywhere they appear in the project
+.gradle/
+.idea/
+build/
+local.properties
+
+# ==========================================
+# Project Specific Exclusions
+# ==========================================
+old/
 upload.sh
 cleanup.sh
 

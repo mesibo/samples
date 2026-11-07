@@ -1,129 +1,121 @@
+//
+//  UIListener.m
+//  FirstApp
+//
+//  Messaging UI customization listener.
+//  Refer to https://docs.mesibo.com/ui-modules/ for details.
+//
+
 #import "UIListener.h"
+#import <mesibocall/MesiboCall.h>
+#import <objc/runtime.h>
 
-#import "MesiboCall/MesiboCall.h"
-
-/* Messaging UI customization listener
-  Refer to the https://mesibo.com/documentation/ui-modules/ for details
-*/
+// tags of the call buttons we add, to find and replace them
+#define CALLBUTTON_VIDEO        9001
+#define CALLBUTTON_VOICE        9002
+#define CALLBUTTON_INPROGRESS   9003
 
 @implementation UIListener
 
-- (id)init {
-    self = [super init];
-    if (!self) return self;
-    [MesiboUI setListener:self];
+- (instancetype)init {
+    if ((self = [super init]))
+        [MesiboUI setListener:self];
     return self;
 }
 
 
-- (MesiboCell *)MesiboUI_onGetCustomRow:(MesiboScreen * _Nonnull)screen row:(MesiboRow * _Nonnull)row {
-    return nil;
-}
+#pragma mark - MesiboUIListener
 
-- (CGFloat)MesiboUI_onGetCustomRowHeight:(MesiboScreen * _Nonnull)screen row:(MesiboRow * _Nonnull)row {
-    return -1;
-}
-
-- (BOOL)MesiboUI_onInitScreen:(MesiboScreen * _Nonnull)screen {
-    if(screen.userList) {
-        MesiboUserListScreen *us = (MesiboUserListScreen *)screen;
-        if(USERLIST_MODE_MESSAGES == us.mode)
-            [self initilizeUserListScreen:us];
-        
-        return YES;
+/** a screen was created: add buttons and menu items */
+- (BOOL)MesiboUI_onInitScreen:(MesiboScreen *)screen {
+    if (MESIBO_SCREEN_USERLIST == screen.type) {
+        // the chat list: add your own buttons or "more" menu items here
+        // (screen.buttons, screen.menu)
+        return NO;
     }
-    
-    MesiboMessageScreen *ms = (MesiboMessageScreen *)screen;
-    [self initilizeMessagingScreen:ms];
-    return YES;
+
+    if (MESIBO_SCREEN_MESSAGES == screen.type)
+        [self updateCallButtons:screen];
+
+    return NO;
 }
 
-- (BOOL)MesiboUI_onUpdateRow:(MesiboScreen * _Nonnull)screen row:(MesiboRow * _Nonnull)row last:(BOOL)last {
-    if(screen.userList) {
-        MesiboUserListScreen *us = (MesiboUserListScreen *)screen;
-        
-        // modify colors as suitable to your app
-        
-        return YES;
-    }
-    
-    MesiboMessageScreen *ms = (MesiboMessageScreen *)screen;
-    // modify colors, etc. as suitable to your app
-    return YES;
+/** an open screen is refreshed (+[MesiboUI updateScreens]), e.g. when a call starts or ends */
+- (void)MesiboUI_onUpdateScreen:(MesiboScreen *)screen {
+    [self updateCallButtons:screen];
 }
 
-- (BOOL)MesiboUI_onClickedRow:(MesiboScreen * _Nonnull)screen row:(MesiboRow * _Nonnull)row { 
+/** a row was bound: change colors etc. as suitable for your app */
+- (BOOL)MesiboUI_onUpdateRow:(MesiboScreen *)screen row:(MesiboRow *)row last:(BOOL)last {
+    return NO;
+}
+
+/** a row was tapped: return YES if you handled it */
+- (BOOL)MesiboUI_onClickedRow:(MesiboScreen *)screen row:(MesiboRow *)row {
     return NO;
 }
 
 
-- (BOOL)MesiboUI_onShowScreen:(MesiboScreen * _Nonnull)screen { 
-    return NO;
+#pragma mark - call buttons
+
+- (UIBarButtonItem *)callButton:(NSString *)symbol tag:(NSInteger)tag label:(NSString *)label screen:(MesiboScreen *)screen {
+    UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithImage:[UIImage systemImageNamed:symbol]
+                                                               style:UIBarButtonItemStylePlain
+                                                              target:self
+                                                              action:@selector(onCallButton:)];
+    button.tag = tag;
+    button.accessibilityLabel = label;
+
+    // remember the screen, for the action
+    objc_setAssociatedObject(button, @selector(onCallButton:), screen, OBJC_ASSOCIATION_ASSIGN);
+    return button;
 }
 
+/** video and voice call buttons in chats; during a call, a button to return to it */
+- (void)updateCallButtons:(MesiboScreen *)screen {
+    // remove the buttons we added before
+    NSIndexSet *ours = [screen.buttons indexesOfObjectsPassingTest:^BOOL(UIBarButtonItem *button, NSUInteger index, BOOL *stop) {
+        return button.tag >= CALLBUTTON_VIDEO && button.tag <= CALLBUTTON_INPROGRESS;
+    }];
+    [screen.buttons removeObjectsAtIndexes:ours];
 
--(void) initilizeUserListScreen:(MesiboUserListScreen *)screen {
-    /* add custom buttons to User list screen */
-    UIButton *button =  [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *image = [MesiboUI imageNamed:MESIBO_DEFAULTICON_MESSAGE];
-    [button setImage:image forState:UIControlStateNormal];
-    [button setFrame:CGRectMake(0, 0, 44, 44)];
-    [button setTag:MESIBOUI_TAG_NEWMESSAGE];
-    
-    screen.buttons = @[button];
-}
+    if (MESIBO_SCREEN_MESSAGES != screen.type)
+        return;
 
--(void) initilizeMessagingScreen:(MesiboMessageScreen *)screen {
+    if ([MesiboCallInstance isAnyCallInProgress]) {
+        UIBarButtonItem *button = [self callButton:@"phone.connection" tag:CALLBUTTON_INPROGRESS label:@"Call in progress" screen:screen];
+        button.tintColor = UIColor.systemGreenColor;
+        [screen.buttons addObject:button];
+        return;
+    }
+
+    // no calls in groups the user has left
     MesiboProfile *profile = screen.profile;
-    if(!profile) return;
-    
-    if([profile isGroup] && ![profile isActive]) return;
-        
-    UIButton *button =  [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *image = [MesiboUI imageNamed:[profile isGroup]?MESIBO_DEFAULTICON_GROUPAUDIOCALL:MESIBO_DEFAULTICON_AUDIOCALL];
-    [button setImage:image forState:UIControlStateNormal];
-    [button setFrame:CGRectMake(0, 0, 44, 44)];
-    [MesiboUI addTarget:self screen:screen view:button action:@selector(onAudioCall:)];
-        
-    UIButton *vbutton =  [UIButton buttonWithType:UIButtonTypeCustom];
-    image = [MesiboUI imageNamed:[profile isGroup]?MESIBO_DEFAULTICON_GROUPVIDEOCALL:MESIBO_DEFAULTICON_VIDEOCALL];
-    [vbutton setImage:image forState:UIControlStateNormal];
-    [vbutton setFrame:CGRectMake(0, 0, 44, 44)];
-    [MesiboUI addTarget:self screen:screen view:vbutton action:@selector(onVideoCall:)];
-        
-    screen.buttons = @[vbutton, button];
-    
-    [MesiboUI addTarget:self screen:screen view:screen.titleArea action:@selector(onShowProfile:)];
+    if (nil == profile || ([profile isGroup] && ![profile isActive]))
+        return;
+
+    // shown left to right in the order added
+    BOOL group = [profile isGroup];
+    [screen.buttons addObject:[self callButton:(group ? @"video.badge.plus" : @"video") tag:CALLBUTTON_VIDEO
+                                         label:(group ? @"Group video call" : @"Video call") screen:screen]];
+    [screen.buttons addObject:[self callButton:(group ? @"phone.badge.plus" : @"phone") tag:CALLBUTTON_VOICE
+                                         label:(group ? @"Group voice call" : @"Voice call") screen:screen]];
 }
 
--(void) makeCall:(id)parent profile:(MesiboProfile *)profile video:(BOOL)video {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [MesiboCallInstance callUi:parent profile:profile video:video];
-    });
-}
--(void) onAudioCall:(id)sender {
-    
-    MesiboMessageScreen *screen = (MesiboMessageScreen *) [MesiboUI getParentScreen:sender];
-    [self makeCall:screen.parent profile:screen.profile video:NO];
-}
+- (void)onCallButton:(UIBarButtonItem *)sender {
+    MesiboScreen *screen = objc_getAssociatedObject(sender, @selector(onCallButton:));
+    if (nil == screen.parent)
+        return;
 
--(void) onVideoCall:(id)sender {
-    MesiboMessageScreen *screen = (MesiboMessageScreen *) [MesiboUI getParentScreen:sender];
-    [self makeCall:screen.parent profile:screen.profile video:YES];
-}
+    if (CALLBUTTON_INPROGRESS == sender.tag) {
+        [MesiboCallInstance showCallInProgress:screen.parent];
+        return;
+    }
 
--(void)onShowProfile:(id)sender {
-    MesiboMessageScreen *screen = (MesiboMessageScreen *) [MesiboUI getParentScreen:sender];
-    [MesiboUI showBasicProfileInfo:screen.parent profile:screen.profile];
-}
+    if (nil == screen.profile)
+        return;
 
-
--(void)onShowSettings:(id)sender {
-    
-    MesiboUserListScreen *screen = (MesiboUserListScreen *) [MesiboUI getParentScreen:sender];
-    
-    // show your app settings - refer to the messenger code for sample
-    
+    [MesiboCallInstance callUi:screen.parent profile:screen.profile video:(CALLBUTTON_VIDEO == sender.tag)];
 }
 
 @end

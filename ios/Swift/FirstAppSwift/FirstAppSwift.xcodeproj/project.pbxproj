@@ -7,17 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		09615C3E6C66467BAFD033D0 /* mesibo in Frameworks */ = {isa = PBXBuildFile; productRef = 54050AEC2891487FB10085D2 /* mesibo */; };
+		4AB4E2ACCFEB4968839D4A10 /* MesiboUI in Frameworks */ = {isa = PBXBuildFile; productRef = 2F3A72A9CA14463DA29C49BF /* MesiboUI */; };
+		38C729B5B7874795B408EE10 /* MesiboCall in Frameworks */ = {isa = PBXBuildFile; productRef = B5147220C3984F84B4D09F96 /* MesiboCall */; };
 		883B1B5F250533D400C598ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883B1B5E250533D400C598ED /* AppDelegate.swift */; };
 		883B1B63250533D400C598ED /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883B1B62250533D400C598ED /* ViewController.swift */; };
 		883B1B66250533D400C598ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 883B1B64250533D400C598ED /* Main.storyboard */; };
 		883B1B68250533D600C598ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 883B1B67250533D600C598ED /* Assets.xcassets */; };
 		883B1B6B250533D600C598ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 883B1B69250533D600C598ED /* LaunchScreen.storyboard */; };
 		88FB3A59299A37810090F118 /* UIListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FB3A58299A37810090F118 /* UIListener.swift */; };
-		DCD925A92FD456EE24B82174 /* libPods-FirstAppSwift.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8566A573837207787A0AE67 /* libPods-FirstAppSwift.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		354DD971F7CB26EDE8B4F37A /* Pods-FirstAppSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirstAppSwift.debug.xcconfig"; path = "Target Support Files/Pods-FirstAppSwift/Pods-FirstAppSwift.debug.xcconfig"; sourceTree = "<group>"; };
 		883B1B5B250533D300C598ED /* FirstAppSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirstAppSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		883B1B5E250533D400C598ED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		883B1B62250533D400C598ED /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -26,8 +27,6 @@
 		883B1B6A250533D600C598ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		883B1B6C250533D600C598ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88FB3A58299A37810090F118 /* UIListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIListener.swift; sourceTree = "<group>"; };
-		B239B0214262B80F88420253 /* Pods-FirstAppSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirstAppSwift.release.xcconfig"; path = "Target Support Files/Pods-FirstAppSwift/Pods-FirstAppSwift.release.xcconfig"; sourceTree = "<group>"; };
-		B8566A573837207787A0AE67 /* libPods-FirstAppSwift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FirstAppSwift.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,7 +34,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DCD925A92FD456EE24B82174 /* libPods-FirstAppSwift.a in Frameworks */,
+				09615C3E6C66467BAFD033D0 /* mesibo in Frameworks */,
+				4AB4E2ACCFEB4968839D4A10 /* MesiboUI in Frameworks */,
+				38C729B5B7874795B408EE10 /* MesiboCall in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -45,7 +46,6 @@
 		28F5E01F9738F96BDCB1A4D6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B8566A573837207787A0AE67 /* libPods-FirstAppSwift.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -55,7 +55,6 @@
 			children = (
 				883B1B5D250533D300C598ED /* FirstAppSwift */,
 				883B1B5C250533D300C598ED /* Products */,
-				B768B04B9A32B11F68AB13F7 /* Pods */,
 				28F5E01F9738F96BDCB1A4D6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -82,15 +81,6 @@
 			path = FirstAppSwift;
 			sourceTree = "<group>";
 		};
-		B768B04B9A32B11F68AB13F7 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				354DD971F7CB26EDE8B4F37A /* Pods-FirstAppSwift.debug.xcconfig */,
-				B239B0214262B80F88420253 /* Pods-FirstAppSwift.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -98,17 +88,20 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 883B1B6F250533D600C598ED /* Build configuration list for PBXNativeTarget "FirstAppSwift" */;
 			buildPhases = (
-				22EFBB6CB7FC630A3FE447A4 /* [CP] Check Pods Manifest.lock */,
 				883B1B57250533D300C598ED /* Sources */,
 				883B1B58250533D300C598ED /* Frameworks */,
 				883B1B59250533D300C598ED /* Resources */,
-				F61CAAE7A0DE6AD55FA5E1F1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = FirstAppSwift;
+			packageProductDependencies = (
+				54050AEC2891487FB10085D2 /* mesibo */,
+				2F3A72A9CA14463DA29C49BF /* MesiboUI */,
+				B5147220C3984F84B4D09F96 /* MesiboCall */,
+			);
 			productName = FirstAppSwift;
 			productReference = 883B1B5B250533D300C598ED /* FirstAppSwift.app */;
 			productType = "com.apple.product-type.application";
@@ -137,6 +130,9 @@
 				Base,
 			);
 			mainGroup = 883B1B52250533D300C598ED;
+			packageReferences = (
+				DD3451DF6FCD4ECBB1C7F18D /* XCRemoteSwiftPackageReference "mesibo-ios-sdk" */,
+			);
 			productRefGroup = 883B1B5C250533D300C598ED /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -160,45 +156,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		22EFBB6CB7FC630A3FE447A4 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-FirstAppSwift-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F61CAAE7A0DE6AD55FA5E1F1 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FirstAppSwift/Pods-FirstAppSwift-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FirstAppSwift/Pods-FirstAppSwift-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FirstAppSwift/Pods-FirstAppSwift-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -284,7 +241,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -338,7 +295,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -350,13 +307,13 @@
 		};
 		883B1B70250533D600C598ED /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 354DD971F7CB26EDE8B4F37A /* Pods-FirstAppSwift.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HXKDD24ZQ6;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = FirstAppSwift/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -370,13 +327,13 @@
 		};
 		883B1B71250533D600C598ED /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B239B0214262B80F88420253 /* Pods-FirstAppSwift.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HXKDD24ZQ6;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = FirstAppSwift/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -410,6 +367,34 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+/* Begin XCRemoteSwiftPackageReference section */
+		DD3451DF6FCD4ECBB1C7F18D /* XCRemoteSwiftPackageReference "mesibo-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mesibo/mesibo-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.10.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		54050AEC2891487FB10085D2 /* mesibo */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD3451DF6FCD4ECBB1C7F18D /* XCRemoteSwiftPackageReference "mesibo-ios-sdk" */;
+			productName = mesibo;
+		};
+		2F3A72A9CA14463DA29C49BF /* MesiboUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD3451DF6FCD4ECBB1C7F18D /* XCRemoteSwiftPackageReference "mesibo-ios-sdk" */;
+			productName = MesiboUI;
+		};
+		B5147220C3984F84B4D09F96 /* MesiboCall */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD3451DF6FCD4ECBB1C7F18D /* XCRemoteSwiftPackageReference "mesibo-ios-sdk" */;
+			productName = MesiboCall;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 883B1B53250533D300C598ED /* Project object */;
 }

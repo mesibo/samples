@@ -1,10 +1,13 @@
 //
 //  UIListener.h
-//  TestMesiboUI
-
+//  FirstApp
+//
+//  Messaging UI customization listener.
+//  Refer to https://mesibo.com/documentation/ui-modules/ for details.
+//
 
 #import <Foundation/Foundation.h>
-#import "MesiboUI/MesiboUI.h"
+#import <mesiboui/MesiboUI.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
