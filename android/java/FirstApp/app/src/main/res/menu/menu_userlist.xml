@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- items added to the chat list by UIListener; the list has its own search and new chat button -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_menu_e2ee"
+        android:title="End-to-end encryption"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_menu_customize"
+        android:title="Customize"
+        app:showAsAction="never" />
+
+</menu>
